@@ -9,7 +9,7 @@
 
   <body>
   	<div class = "container" style = "padding-top: 50px;">
-			<form id = "formId" action = "/socket" method = "post">
+			<form id = "formId" action = "/timeScheduler" method = "post">
 				{{ csrf_field() }}
 				<input id = "methodName" type="hidden" name="_method" value="POST">
 				<div class = "form-group col-lg-12">

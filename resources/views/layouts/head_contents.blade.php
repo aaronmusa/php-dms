@@ -24,7 +24,7 @@
 	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
 
 
-    <script type="text/javascript" src="public/assets/js/custom-js.js"></script>
+<!--     <script type="text/javascript" src="public/assets/js/custom-js.js"></script> -->
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 

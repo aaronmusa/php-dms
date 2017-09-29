@@ -73,7 +73,7 @@
 		    	var deleteBtnData = $(this).data('id');
 
 		    	$.ajax({
-	                url: 'socket/' + deleteBtnData,
+	                url: 'timeScheduler/' + deleteBtnData,
 	                type: 'POST',
 	                data: {
 	                	"_token": "{{ csrf_token() }}",
@@ -100,7 +100,7 @@
 	                	"end_time": end_time
 	                };
 		    	$.ajax({
-	                url: 'socket/'+ updateBtnData ,
+	                url: 'timeScheduler/'+ updateBtnData ,
 	                type: 'POST',
 	                data: data,
 	                success: function(result) {

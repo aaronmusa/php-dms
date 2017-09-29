@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSocketsTable extends Migration
+class CreateTimeSchedulersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateSocketsTable extends Migration
      */
     public function up()
     {
-        Schema::create('sockets', function (Blueprint $table) {
+        Schema::create('time_schedulers', function (Blueprint $table) {
             $table->increments('id');
             $table->time('start_time');
             $table->time('end_time');
@@ -28,6 +28,6 @@ class CreateSocketsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sockets');
+        Schema::dropIfExists('time_schedulers');
     }
 }

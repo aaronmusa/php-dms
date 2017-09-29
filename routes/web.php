@@ -15,7 +15,9 @@
 //     return view('welcome');
 // });
 
-Route::resource('socket', 'SocketController', ['only' => ['index','store', 'update', 'destroy']]);
+// Route::resource('socket', 'SocketController', ['only' => ['index','store', 'update', 'destroy']]);
+
+Route::resource('timeScheduler', 'TimeSchedulerController', ['only' => ['index','store', 'update', 'destroy']]);
 
 // Route::post('/index','SocketController@registerTime');
 

@@ -5,12 +5,12 @@
 	<input type = "hidden" name = "id" value = "{{ $log->id }}">
 	<div class='form-group col-sm-4'>
 		<h4 style = "display:block;" >{{ $log->id }}</h4>
-		<input type="text" id = "startTime{{ $log->id }}" class = "startTime form-control" value = "{{ $log->start_time }}" />
+		<input type="text" id = "start_time{{ $log->id }}" class = "startTime form-control" value = "{{ $log->start_time }}" />
 	</div>
 	<!-- end time -->
 	<div class='form-group col-sm-4'>
 		<h4 style = "visibility:hidden;" >{{ $log->id }}</h4>
-		<input type="text" id = "endTime{{ $log->id }}" class = "endTime form-control" value = "{{ $log->end_time }}" />
+		<input type="text" id = "end_time{{ $log->id }}" class = "endTime form-control" value = "{{ $log->end_time }}" />
 	</div>
 	<div class='form-group col-sm-4'>
 		<h4 style = "visibility:hidden;" >{{ $log->id }}</h4>

@@ -34,15 +34,15 @@
 		    	}
 		    	var startTime = '<div class = "col-lg-9">'+
 		    					'<div id="startTime' + addButtonCounter + '" class="form-group col-sm-4">'+
-		    					'<h4 id = "newEntryHeader'+ addButtonCounter +'" >New Entry # '+ addButtonCounter +'</h4>'+
+		    					'<h4 class = "newEntryHeader'+ addButtonCounter +'" >New Entry # '+ addButtonCounter +'</h4>'+
 								'<input value = "'+ time +'" type="text" name="times[][start_time]" class = "startTime form-control" />'+
 								'</div>'+
 								'<div id="endTime' + addButtonCounter + '" class = "form-group col-sm-4">'+
-								'<h4 style = "visibility:hidden;" id = "newEntryHeader'+ addButtonCounter +'" >New Entry # '+ addButtonCounter +'</h4>'+
+								'<h4 style = "visibility:hidden;" class = "newEntryHeader'+ addButtonCounter +'" >New Entry # '+ addButtonCounter +'</h4>'+
 								'<input value = "'+ time +'" type="text"  name="times['+ counter +'][end_time]" class = "endTime form-control" />'+
 								'</div>'+
-								'<div id = "xBtn'+ addButtonCounter +'" class="form-group col-sm-4">'+
-								'<h4 style = "visibility:hidden;" id = "newEntryHeader'+ addButtonCounter +'" >New Entry # '+ addButtonCounter +'</h4>'+
+								'<div class = "xBtn'+ addButtonCounter +'" class="form-group col-sm-4">'+
+								'<h4 style = "visibility:hidden;" class = "newEntryHeader'+ addButtonCounter +'" >New Entry # '+ addButtonCounter +'</h4>'+
 								'<button  style = "visibility:hidden;" value = "'+ addButtonCounter +'" class = "btn btn-danger">X</button>'+
 								'</div>'+
 								'</div>';
@@ -57,10 +57,11 @@
 
 		    $('.removeBtn').on('click',function(){
 		    	counter--;
+
 		    	$('#startTime'+ addButtonCounter).remove();
 		    	$('#endTime'+ addButtonCounter).remove();
-		    	$('#xBtn'+ addButtonCounter).remove();
-		    	$('#newEntryHeader'+ addButtonCounter).remove();
+		    	$('.xBtn'+ addButtonCounter).remove();
+		    	//$('.newEntryHeader'+ addButtonCounter).remove();
 		    	addButtonCounter--;
 		    	if (addButtonCounter <= 0) {
 		    		$('.removeBtn').hide();
@@ -90,8 +91,8 @@
 
 		    $(".updateBtn").on('click',function(){
 		    	var updateBtnData = $(this).data('id');
-		    	var start_time = $("#startTime"+updateBtnData).val();
-		    	var end_time = $("#endTime"+updateBtnData).val();
+		    	var start_time = $("#start_time"+updateBtnData).val();
+		    	var end_time = $("#end_time"+updateBtnData).val();
 
 		    	var data = {
 	                	"_token": "{{ csrf_token() }}",

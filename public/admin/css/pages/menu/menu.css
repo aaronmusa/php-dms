@@ -1,0 +1,44 @@
+.sortable { 
+	list-style-type: none; 
+	margin: 0; 
+	padding: 0; 
+	width: 60%; 
+	padding-bottom: 10px;
+}
+
+.sortable.sortable-submenu{
+	width: 100%; 
+}
+
+.sortable-submenu > li {
+    height: auto;
+	margin: 0 3px 0 3px;
+    padding: 0.4em;
+    padding-left: 2.5em;
+}
+
+.sortable-menu > li { 
+    /* font-size: 1.4em;
+    background: #cdcdcd; */
+    cursor: move;
+}
+
+.expand-collapse {
+	cursor: pointer !important;
+}
+
+.list-group-info {
+	padding: 5px 15px;
+    margin-bottom: -1px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(221, 221, 221);
+}
+
+.list-group-item {
+	padding: 5px 15px !important;
+}
+
+
+.btn-group button {
+	margin-bottom: 0 !important;
+}

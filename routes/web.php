@@ -24,3 +24,7 @@ Route::resource('timeScheduler', 'TimeSchedulerController', ['only' => ['index',
 // //Route::post('/index','SocketController@getAjax');
 
 // Route::post('/index','SocketController@getAjax');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

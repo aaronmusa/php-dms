@@ -1,7 +1,7 @@
 <!-- start time -->
 
 
-<div class = "col-lg-9">
+<div class = "col-sm-12">
 	<input type = "hidden" name = "id" value = "{{ $log->id }}">
 	<div class='form-group col-sm-4'>
 		<h4 style = "display:block;" >{{ $log->id }}</h4>
@@ -15,7 +15,7 @@
 	<div class='form-group col-sm-4'>
 		<h4 style = "visibility:hidden;" >{{ $log->id }}</h4>
 		<button type = "button" value = "{{ $log->id }}" data-id = "{{ $log->id }}" class = "deleteBtn btn btn-danger">X</button>
-		<button type = "button" data-id = "{{ $log->id }}" value = "{{ $log->id }}" class = "updateBtn btn btn-warning">UPDATE</button>
+		<button type = "button" data-id = "{{ $log->id }}" value = "{{ $log->id }}" class = "updateBtn btn btn-warning">Update</button>
 	</div>
 </div>
 

@@ -26,14 +26,13 @@ class SocketController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
-
+        //dd($request->times);
         foreach($request->times as $time) {
             $socket = Socket::create($time);
             $socket->save();
         }
 
-        return redirect('/');
+        return redirect('/socket');
     }
 
     /**
@@ -44,13 +43,13 @@ class SocketController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Socket $socket)
-    {
-        $socket = Socket::find($request->id);
-            $socket->start_time   = $request->input('start_time');
-            $nerd->end_time       = $request->input('end_time');
-            $nerd->save();
+    {   
 
-            return view('/');
+        $socket = Socket::find($socket->id);
+        $socket->update($request->all());
+        $socket->save();
+
+        return redirect('/socket');
     }
 
     /**
@@ -61,9 +60,10 @@ class SocketController extends Controller
      */
     public function destroy(Socket $socket)
     {
+
         $socket = Socket::find($socket->id);
         $socket->delete();
-        
-        return view('/');
+
+        return redirect('/socket');
     }
 }

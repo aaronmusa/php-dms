@@ -51,7 +51,7 @@
 		    	//$("#timePickerContainer").append(endTime);
 
 		    	integrateDatePicker();
-		    	
+		    	$(document).scrollTop($(document).height());
 		    	counter++;
 		    });
 

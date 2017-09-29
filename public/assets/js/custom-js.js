@@ -1,49 +1,72 @@
 	<script type="text/javascript">
 		$(function() {
 
-			var counter = 0;
 			var addButtonCounter = 0;
+			var counter = 0;
 
 
 			function integrateDatePicker() {
-				$('.startTime').daterangepicker({
-			        singleDatePicker: true,
-			        timePicker: true,
-			        showDropdowns: true,
-			        locale: {
-		        		format: 'HH:mm:ss'
-		    		}
-			    });
 
-			    $('.endTime').daterangepicker({
-			        singleDatePicker: true,
-			        timePicker: true,
-			        showDropdowns: true,
-			        locale: {
-		        		format: 'HH:mm:ss'
-		    		}
-			    });
+			    $('.startTime').datetimepicker({
+
+			        format: 'HH:mm:ss'
+
+			    }); 
+			    $('.endTime').datetimepicker({
+
+			        format: 'HH:mm:ss'
+
+			    }); 
+
 			}
 
 		    $(".addBtn").on('click',function(){
-		    	counter++;
-
-		    	var startTime = '<div class="form-group col-sm-4">'+
-								'<input type="text" id="startTime' + counter + '" name="times[][start_time]" class = "startTime form-control" />'+
-								'</div>';
-				var endTime =   '<div class = "form-group col-sm-4">'+
-								'<input type="text" id="endTime' + counter + '" name="times['+ addButtonCounter +'][end_time]" class = "endTime form-control" />'+
+		    	var dt = new Date;
+		    	var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+		    	addButtonCounter++;
+		    	if (addButtonCounter > 0) {
+		    		$('.removeBtn').attr('style','visibility:visible',);
+		    		$("#submitBtn").attr('style','visibility:visible;');
+		    	}
+		    	else{
+		    		$('.removeBtn').attr('visibility','hidden');
+		    		$("#submitBtn").attr('style','visibility:hidden;');
+		    	}
+		    	var startTime = '<div class = "col-lg-9">'+
+		    					'<div id="startTime' + addButtonCounter + '" class="form-group col-sm-4">'+
+		    					'<h4 class = "newEntryHeader'+ addButtonCounter +'" >New Entry # '+ addButtonCounter +'</h4>'+
+								'<input value = "'+ time +'" type="text" name="times[][start_time]" class = "startTime form-control" />'+
 								'</div>'+
-								'<div class="form-group col-sm-4">'+
-								'<button value = "'+ addButtonCounter +'" class = "removeBtn btn btn-danger">X</button>'+
+								'<div id="endTime' + addButtonCounter + '" class = "form-group col-sm-4">'+
+								'<h4 style = "visibility:hidden;" class = "newEntryHeader'+ addButtonCounter +'" >New Entry # '+ addButtonCounter +'</h4>'+
+								'<input value = "'+ time +'" type="text"  name="times['+ counter +'][end_time]" class = "endTime form-control" />'+
+								'</div>'+
+								'<div class = "xBtn'+ addButtonCounter +'" class="form-group col-sm-4">'+
+								'<h4 style = "visibility:hidden;" class = "newEntryHeader'+ addButtonCounter +'" >New Entry # '+ addButtonCounter +'</h4>'+
+								'<button  style = "visibility:hidden;" value = "'+ addButtonCounter +'" class = "btn btn-danger">X</button>'+
+								'</div>'+
 								'</div>';
 
-		    	$(".datepickerContainer").append(startTime);
-		    	$(".datepickerContainer").append(endTime);
+		    	$("#timePickerContainer").append(startTime);
+		    	//$("#timePickerContainer").append(endTime);
 
 		    	integrateDatePicker();
-		    	$("#submitBtn").attr('style','visibility:visible;');
-		    	addButtonCounter++;
+		    	$(document).scrollTop($(document).height());
+		    	counter++;
+		    });
+
+		    $('.removeBtn').on('click',function(){
+		    	counter--;
+
+		    	$('#startTime'+ addButtonCounter).remove();
+		    	$('#endTime'+ addButtonCounter).remove();
+		    	$('.xBtn'+ addButtonCounter).remove();
+		    	//$('.newEntryHeader'+ addButtonCounter).remove();
+		    	addButtonCounter--;
+		    	if (addButtonCounter <= 0) {
+		    		$('.removeBtn').hide();
+		    		$("#submitBtn").hide();
+		    	}
 		    });
 
 
@@ -51,7 +74,7 @@
 		    	var deleteBtnData = $(this).data('id');
 
 		    	$.ajax({
-	                url: 'socket/' + deleteBtnData,
+	                url: 'timeScheduler/' + deleteBtnData,
 	                type: 'POST',
 	                data: {
 	                	"_token": "{{ csrf_token() }}",
@@ -61,15 +84,15 @@
 	             		location.reload();
 	                },
 	                error: function(xhr, ajaxOptions, thrownError) {
-	                    
+
 	                }
 	            });
 		    });
 
 		    $(".updateBtn").on('click',function(){
 		    	var updateBtnData = $(this).data('id');
-		    	var start_time = $("#startTime"+updateBtnData).val();
-		    	var end_time = $("#endTime"+updateBtnData).val();
+		    	var start_time = $("#start_time"+updateBtnData).val();
+		    	var end_time = $("#end_time"+updateBtnData).val();
 
 		    	var data = {
 	                	"_token": "{{ csrf_token() }}",
@@ -78,17 +101,19 @@
 	                	"end_time": end_time
 	                };
 		    	$.ajax({
-	                url: 'socket/'+ updateBtnData ,
+	                url: 'timeScheduler/'+ updateBtnData ,
 	                type: 'POST',
 	                data: data,
 	                success: function(result) {
 	             		location.reload();
 	                },
 	                error: function(xhr, ajaxOptions, thrownError) {
-	                    
+	              
 	                }
 	            });
 		    });
+
+
 
 		    integrateDatePicker();
 		});

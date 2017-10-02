@@ -32,7 +32,7 @@
 		// 	socket.send(message);
 		// }
 
-		var host = 'ws://127.0.0.1:8080';
+		var host = 'ws://www.htechcorp.net:8080';
 		var socket = null;
 
 		try {
@@ -215,7 +215,7 @@
 
 		    $('#fbLiveSwitcher').click(function(){
 		    	var videoStreamingUrl = '{"live_url": "'+ "{{$urlStorage}}" +'" }';
-		    	sendMessage(videoStreamingUrl);
+		    	//sendMessage(videoStreamingUrl);
 		    	sendMessage("FBLIVE");
 		    });
 		    $('#dmsSwitcher').click(function(){

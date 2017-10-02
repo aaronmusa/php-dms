@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\TimeScheduler;
 use Illuminate\Http\Request;
 
+
 class TimeSchedulerController extends Controller
 {
     /**
@@ -32,7 +33,7 @@ class TimeSchedulerController extends Controller
             $timeScheduler->save();
         }
 
-        return redirect('/timeScheduler');
+        return redirect('/home');
     }
 
     /**
@@ -49,7 +50,7 @@ class TimeSchedulerController extends Controller
         $timeScheduler->update($request->all());
         $timeScheduler->save();
 
-        return redirect('/timeScheduler');
+        return redirect('/home');
     }
 
     /**
@@ -64,6 +65,6 @@ class TimeSchedulerController extends Controller
         $timeScheduler = TimeScheduler::find($timeScheduler->id);
         $timeScheduler->delete();
 
-        return redirect('/timeScheduler');
+        return redirect('/home');
     }
 }

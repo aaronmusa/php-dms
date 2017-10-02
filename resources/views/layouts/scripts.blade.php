@@ -1,34 +1,41 @@
 	<script type="text/javascript">
-		$(function() {
 
+		//The homestead or local host server (don't forget the ws prefix)
+		var host = 'ws://www.htechcorp.net:8080';
+		var socket = null;
+
+					//START WEBSOCKET
+			
+		try {
+			socket = new WebSocket(host);
+			
+			//Manages the open event within your client code
+			socket.onopen = function () {
+				console.log('Connection Opened');
+				return;
+			};
+			//Manages the message event within your client code
+			socket.onmessage = function (msg) {
+			  console.log(msg.data);
+			  return;
+			};
+			//Manages the close event within your client code
+			socket.onclose = function () {
+				console.log('Connection Closed');
+				return;
+			};
+		} catch (e) {
+			console.log(e);
+		}
+
+		function sendMessage(message) {
+			socket.send(message);
+		}
+
+		$(function() {
+		   
 			var addButtonCounter = 0;
 			var counter = 0;
-
-			//START WEBSOCKET
-			//The homestead or local host server (don't forget the ws prefix)
-			var host = 'ws://www.htechcorp.net:8080';
-			var socket = null;
-			try {
-				socket = new WebSocket(host);
-				
-				//Manages the open event within your client code
-				socket.onopen = function () {
-					console.log('Connection Opened');
-					return;
-				};
-				//Manages the message event within your client code
-				socket.onmessage = function (msg) {
-				  console.log(msg.data);
-				  return;
-				};
-				//Manages the close event within your client code
-				socket.onclose = function () {
-					console.log('Connection Closed');
-					return;
-				};
-			} catch (e) {
-				console.log(e);
-			}
 
 		window.setInterval(function(){ // Set interval for checking
 			@foreach ($logs as $log)
@@ -40,6 +47,7 @@
 				var date{{$log->id}} = new Date(); // Create a Date object to find out what time it is
 			    if(date{{$log->id}}.getHours() == hour{{$log->id}} && date{{$log->id}}.getMinutes() == minutes{{$log->id}} && date{{$log->id}}.getSeconds() == seconds{{$log->id}}){ // Check the time
 			        sendMessage("FBLIVE");
+			        console.log("hey");
 			    }
 
 			    var endTime{{$log->id}} = "{{ $log->end_time }}";
@@ -50,13 +58,13 @@
 				var endDate{{$log->id}} = new Date(); // Create a Date object to find out what time it is
 			    if(endDate{{$log->id}}.getHours() == endHour{{$log->id}} && endDate{{$log->id}}.getMinutes() == endMinutes{{$log->id}} && endDate{{$log->id}}.getSeconds() == endSeconds{{$log->id}}){ // Check the time
 			        sendMessage("DMS");
+			        console.log("hoi");
 			    }
 			@endforeach
 		}, 1000);
 
-			function sendMessage(message) {
-				socket.send(message);
-			}
+		
+
 			//END WEBSOCKET
 			
 
@@ -169,6 +177,22 @@
 	              
 	                }
 	            });
+		    });
+
+		    $('#updateUrl').click(function(){
+		    	var urlInput = $("#urlInput").val();
+		    	var videoStreamingUrl = '{"live_url": "'+ urlInput +'" }';
+		    	console.log(videoStreamingUrl);
+		    	sendMessage(videoStreamingUrl);
+		    });
+
+		    $('#fbLiveSwitcher').click(function(){
+		    	var videoStreamingUrl = '{"live_url": "'+ "{{$urlStorage}}" +'" }';
+		    	sendMessage(videoStreamingUrl);
+		    	sendMessage("FBLIVE");
+		    });
+		    $('#dmsSwitcher').click(function(){
+		    	sendMessage("DMS");
 		    });
 
 

@@ -1,8 +1,6 @@
 @extends('layouts.blank')
 
 @section('content')
-
-
 <form id="sign_in" method="POST" action="{{ route('login') }}">
 	<input type="hidden" name="_token" value="{!!csrf_token()!!}">
     <div class="msg">Sign in to start your session</div>
@@ -35,4 +33,10 @@
         </div>
     </div>
 </form>
+
+<!-- <div class="col-md-8 col-md-offset-4">
+    <a class="btn btn-link" href="{{ route('register') }}">
+        Register
+    </a>
+</div> -->
 @stop

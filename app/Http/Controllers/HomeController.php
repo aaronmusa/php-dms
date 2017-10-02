@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\TimeScheduler;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 
@@ -26,6 +27,12 @@ class HomeController extends Controller
     public function index()
     {
         $logs = TimeScheduler::all();
-        return view('index', compact('logs'));
+        
+        $urlStorage = Storage::get('video-streaming-url.txt');
+        $exists = Storage::disk('local')->exists('video-streaming-url.txt');
+        if (!$exists) {
+            $urlStorage = "";
+        }
+        return view('index', compact('logs','urlStorage'));
     }
 }

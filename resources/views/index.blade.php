@@ -8,6 +8,7 @@
   </head>
 
   <body style = "background-color: #2196F3;">
+  	
 	<div class = "container" style = "padding-top: 10px">
 		<div class = "form-group col-lg-12">
 			<div class = "col-lg-9">
@@ -26,12 +27,26 @@
 		<div class = "form-group col-lg-12">
 			<div class = "col-lg-9">
 				<div class='col-sm-2'>
+					<label for="url">Switcher:</label>
+				</div>
+				<div class='col-sm-4'>
+					<button class = "btn btn-info" type = "button" id = "fbLiveSwitcher" value = "FBLIVE">FBLIVE</button>
+					<button class = "btn btn-basic" type = "button" id = "dmsSwitcher" value = "DMS">DMS</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class = "container" style = "padding-top:20px;">
+		<div class = "form-group col-lg-12">
+			<div class = "col-lg-9">
+				<div class='col-sm-2'>
 					<label for="url">URL:</label>
 				</div>
-				<form = method = "POST" action = "/url">
+				<form method = "POST" action = "/video-streaming-url">
 					{{ csrf_field() }}
 					<div class='col-sm-4'>
-						<input class = "form-control" type = "text"/>
+						<input name = "videoStreamingUrl" id = "urlInput" class = "form-control" type = "text" value = @if ($urlStorage != '')"{{ $urlStorage }}@endif" />
 					</div>
 					<div class='col-sm-4'>
 						<button type = "submit" id = "updateUrl" class = "btn btn-warning">Update</button>
@@ -79,7 +94,7 @@
 		<!-- error -->
 		@include ('layouts.errors')
 	</div>
-	<script src="{{ asset('js/app.js') }}"></script>
+<!-- 	<script src="{{ asset('js/app.js') }}"></script> -->
    <!-- Script -->
    	@include ('layouts.scripts')
 

@@ -28,3 +28,5 @@ Route::resource('timeScheduler', 'TimeSchedulerController', ['only' => ['index',
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::post('video-streaming-url','VideoStreamingUrl@setUrl');

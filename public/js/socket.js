@@ -1,6 +1,6 @@
 //START WEBSOCKET
 //The homestead or local host server (don't forget the ws prefix)
-var host = 'ws://127.0.0.1:80';
+var host = 'ws://127.0.0.1:8080';
 var socket = null;
 try {
     socket = new WebSocket(host);

@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
+
 class StartSocketServer extends Command
 {
     /**
@@ -37,9 +38,9 @@ class StartSocketServer extends Command
      */
     public function handle()
     {
-        $ip = "120.0.0.1";
-        $porta = "80";
-        $websocket = new \Hoa\Websocket\Server(new \Hoa\Socket\Server('ws://127.0.0.1:80'));
+        $ip = "www.net";
+        $porta = "8080";
+        $websocket = new \Hoa\Websocket\Server(new \Hoa\Socket\Server('ws://127.0.0.1:8080'));
 
         $websocket->on('open', function (\Hoa\Event\Bucket $bucket) {
             echo "Connection Opened\n";

@@ -43,7 +43,7 @@
 				<div class='col-sm-2'>
 					<label for="url">URL:</label>
 				</div>
-				<form method = "POST" action = "/video-streaming-url">
+				<form method = "POST" action = "video-streaming-url">
 					{{ csrf_field() }}
 					<div class='col-sm-4'>
 						<input name = "videoStreamingUrl" id = "urlInput" class = "form-control" type = "text" value = @if ($urlStorage != '') "{{ $urlStorage }}" 
@@ -63,7 +63,7 @@
 	</form>
 
   	<div class = "container" style = "padding-top: 30px;">
-			<form id = "formId" action = "/timeScheduler" method = "post">
+			<form id = "formId" action = "timeScheduler" method = "post">
 				{{ csrf_field() }}
 				<input id = "methodName" type="hidden" name="_method" value="POST">
 				<div  class = "form-group col-lg-19">

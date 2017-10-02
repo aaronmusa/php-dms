@@ -1,1 +1,0 @@
-var baseUrl = window.location.protocol + '//' + window.location.hostname + '/res/';

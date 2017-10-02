@@ -15,8 +15,11 @@
 //     return view('welcome');
 // });
 
-Route::resource('/', 'SocketController', ['only' => ['index','store', 'update', 'destroy']]);
-
+Route::resource('socket', 'SocketController', ['only' => ['index','store', 'update', 'destroy']]);
+Route::get('chat', function() {
+	dd(phpinfo());
+	return view('chat');
+});
 // Route::post('/index','SocketController@registerTime');
 
 // //Route::post('/index','SocketController@getAjax');

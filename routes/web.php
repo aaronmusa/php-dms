@@ -15,13 +15,25 @@
 //     return view('welcome');
 // });
 
-Route::resource('socket', 'SocketController', ['only' => ['index','store', 'update', 'destroy']]);
+
+// Route::resource('socket', 'SocketController', ['only' => ['index','store', 'update', 'destroy']]);
 Route::get('chat', function() {
-	dd(phpinfo());
+
 	return view('chat');
 });
+
+// Route::resource('socket', 'SocketController', ['only' => ['index','store', 'update', 'destroy']]);
+
+Route::resource('timeScheduler', 'TimeSchedulerController', ['only' => ['index','store', 'update', 'destroy']]);
+
 // Route::post('/index','SocketController@registerTime');
 
 // //Route::post('/index','SocketController@getAjax');
 
 // Route::post('/index','SocketController@getAjax');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::post('video-streaming-url','VideoStreamingUrl@setUrl');

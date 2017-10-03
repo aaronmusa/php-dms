@@ -7,7 +7,7 @@
 
   </head>
 
-  <body style = "background-color: #2196F3;">
+  <body style = "background-color: #a1c4fd;">
   	
 	<div class = "container" style = "padding-top: 10px">
 		<div class = "form-group col-lg-12">

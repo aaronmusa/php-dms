@@ -6,9 +6,12 @@ use Illuminate\Http\Request;
 use App\TimeScheduler;
 use Illuminate\Support\Facades\Storage;
 
+use Config;
+
 class HomeController extends Controller
 
 {
+
     /**
      * Create a new controller instance.
      *
@@ -27,6 +30,8 @@ class HomeController extends Controller
     public function index()
     {
         $logs = TimeScheduler::all();
+        $websocketUrl = Config::get('websocket.url');
+
         // foreach ($logs as $log => $values){
         //     $data['time_management'][$log] = [
         //         'id' => $values->id,
@@ -44,6 +49,6 @@ class HomeController extends Controller
         else{
             $urlStorage = Storage::get('video-streaming-url.txt');
         }
-        return view('index', compact('logs','urlStorage'));
+        return view('index', compact('logs','urlStorage', 'websocketUrl'));
     }
 }

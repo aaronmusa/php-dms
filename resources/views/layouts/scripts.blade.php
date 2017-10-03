@@ -1,6 +1,6 @@
 	<script type="text/javascript">
 
-		var host = 'ws://www.htechcorp.net:8080';
+		var host =  $("#websocketUrl").val();
 		var socket = null;
 
 		try {

@@ -79,7 +79,7 @@
 				</div>
 				<div id = "timePickerContainer" class = "form-group container">
 					@foreach ($logs as $log)
-						@include ('layouts.datePickers')
+						@include ('layouts.datepickers')
 					@endforeach
 				</div>
 			<!-- button -->

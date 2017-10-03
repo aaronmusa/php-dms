@@ -1,5 +1,0 @@
-<?php
-
-return [
-	'url' => 'ws://www.htechcorp.net:8080'
-];

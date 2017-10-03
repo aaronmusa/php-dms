@@ -11,29 +11,19 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
-Route::get('chat', function() {
-	return view('chat');
+
+Route::get('/', function() {
+	return view('login.login');
 });
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-// Route::resource('socket', 'SocketController', ['only' => ['index','store', 'update', 'destroy']]);
-
-Route::resource('timeScheduler', 'TimeSchedulerController', ['only' => ['index','store', 'update', 'destroy']]);
-
-// Route::post('/index','SocketController@registerTime');
-
-// //Route::post('/index','SocketController@getAjax');
-
-// Route::post('/index','SocketController@getAjax');
 
 Auth::routes();
+Route::group(array('prefix' => '', 'before' => 'auth'), function() {
 
-Route::get('/home', 'HomeController@index')->name('home');
+	Route::resource('timeScheduler', 'TimeSchedulerController', ['only' => ['index','store', 'update', 'destroy']]);
 
-Route::post('video-streaming-url','VideoStreamingUrl@setUrl');
+	Route::get('/home', 'HomeController@index')->name('home');
+
+	Route::post('video-streaming-url','VideoStreamingUrl@setUrl');
+
+});

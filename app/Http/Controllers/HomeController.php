@@ -28,10 +28,15 @@ class HomeController extends Controller
     {
         $logs = TimeScheduler::all();
         // foreach ($logs as $log => $values){
-        //     $data['items'][$log] = []
-           
+        //     $data['time_management'][$log] = [
+        //         'id' => $values->id,
+        //         'start_time' => $values->start_time,
+        //         'end_time' => $values->end_time
+
+        //     ];
         // }
-        
+        // dd(json_encode($data));
+
         $exists = Storage::disk('local')->exists('video-streaming-url.txt');
         if (!$exists) {
             $urlStorage = "";

@@ -27,7 +27,10 @@ class HomeController extends Controller
     public function index()
     {
         $logs = TimeScheduler::all();
-        
+        // foreach ($logs as $log => $values){
+        //     $data['items'][$log] = []
+           
+        // }
         
         $exists = Storage::disk('local')->exists('video-streaming-url.txt');
         if (!$exists) {

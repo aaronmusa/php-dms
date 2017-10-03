@@ -15,9 +15,9 @@ class TimeSchedulerController extends Controller
      */
     public function index()
     {
-        $logs = TimeScheduler::all();
-        dd($logs);
-        return view('index', compact('logs'));
+        // $logs = TimeScheduler::all();
+        // dd($logs);
+        // return view('index', compact('logs'));
     }
 
     /**

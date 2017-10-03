@@ -8,7 +8,7 @@
   </head>
 
   <body style = "background-color: #a1c4fd;">
-  	
+  	<input type = "hidden" id = "logs" value = "{{$logs}}">
 	<div class = "container" style = "padding-top: 10px">
 		<div class = "form-group col-lg-12">
 			<div class = "col-lg-9">
@@ -30,7 +30,7 @@
 					<label for="url">Switcher:</label>
 				</div>
 				<div class='col-sm-4'>
-					<button class = "btn btn-info" type = "button" id = "fbLiveSwitcher" value = "FBLIVE">FBLIVE</button>
+					<button class = "btn btn-info" type = "button" id = "fbLiveSwitcher" value = "VIDEO SREAM">FBLIVE</button>
 					<button class = "btn btn-basic" type = "button" id = "dmsSwitcher" value = "DMS">DMS</button>
 				</div>
 			</div>
@@ -50,6 +50,7 @@
 						@endif >
 					</div>
 					<div class='col-sm-4'>
+						<input type = "hidden" id = "urlStorage" value = "{{$urlStorage}}">
 						<button type = "submit" id = "updateUrl" class = "btn btn-warning">Update</button>
 					</div>
 				</form>

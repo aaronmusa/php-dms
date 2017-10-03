@@ -1,37 +1,5 @@
 	<script type="text/javascript">
 
-		//The homestead or local host server (don't forget the ws prefix)
-		// var host = 'ws://www.htechcorp.net:8080';
-		// var socket = null;
-
-		// 			//START WEBSOCKET
-			
-		// try {
-		// 	socket = new WebSocket(host);
-			
-		// 	//Manages the open event within your client code
-		// 	socket.onopen = function () {
-		// 		console.log('Connection Opened');
-		// 		return;
-		// 	};
-		// 	//Manages the message event within your client code
-		// 	socket.onmessage = function (msg) {
-		// 	  console.log(msg.data);
-		// 	  return;
-		// 	};
-		// 	//Manages the close event within your client code
-		// 	socket.onclose = function () {
-		// 		console.log('Connection Closed');
-		// 		return;
-		// 	};
-		// } catch (e) {
-		// 	console.log(e);
-		// }
-
-		// function sendMessage(message) {
-		// 	socket.send(message);
-		// }
-
 		var host = 'ws://www.htechcorp.net:8080';
 		var socket = null;
 
@@ -41,6 +9,10 @@
 		    //Manages the open event within your client code
 		    socket.onopen = function () {
 		        console.log('Connection Opened');
+		        var timeManagementJson = '{time_management:'+'{!! json_encode($logs) !!}'+'}';
+		        sendMessage(timeManagementJson);
+		       	
+		        
 		        return;
 		    };
 		    //Manages the message event within your client code
@@ -60,9 +32,16 @@
 		function sendMessage(message) {
 			socket.send(message);
 		}
+		// function replacer(key, value) {
+		//   return value.replace(/\\/g, '');
+		// }
 
 		$(function() {
-		   
+
+			// var logs = $('#logs').val();
+			// console.log(JSON.stringify("'"+ logs + "'", replacer));
+			// 			console.log(logs);
+
 			var addButtonCounter = 0;
 			var counter = 0;
 
@@ -214,7 +193,8 @@
 		    });
 
 		    $('#fbLiveSwitcher').click(function(){
-		    	var videoStreamingUrl = '{"live_url": "'+ "{{$urlStorage}}" +'" }';
+		    	var urlStorage = $('#urlStorage').val();
+		    	var videoStreamingUrl = '{"live_url": "'+ urlStorage +'" }';
 		    	//sendMessage(videoStreamingUrl);
 		    	sendMessage("FBLIVE");
 		    });

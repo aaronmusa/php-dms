@@ -29,7 +29,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $logs = TimeScheduler::all();
+        $timeLogs = TimeScheduler::all();
+        $timeManagement = json_encode(array("time_management" => $timeLogs));
+
         $websocketUrl = Config::get('websocket.url');
 
         // foreach ($logs as $log => $values){
@@ -49,6 +51,6 @@ class HomeController extends Controller
         else{
             $urlStorage = Storage::get('video-streaming-url.txt');
         }
-        return view('index', compact('logs','urlStorage', 'websocketUrl'));
+        return view('index', compact('timeLogs', 'timeManagement', 'urlStorage', 'websocketUrl'));
     }
 }

@@ -8,7 +8,7 @@
   </head>
 
   <body style = "background-color: #a1c4fd;">
-  	<input type = "hidden" id = "logs" value = "{{$logs}}">
+  	<input type = "hidden" id = "timeLogs" value = "{{$timeManagement}}">
   	<input type = "hidden" id = "websocketUrl" value = "{{$websocketUrl}}">
 
 	<div class = "container" style = "padding-top: 10px">
@@ -80,7 +80,7 @@
 					</div>
 				</div>
 				<div id = "timePickerContainer" class = "form-group container">
-					@foreach ($logs as $log)
+					@foreach ($timeLogs as $log)
 						@include ('layouts.datepickers')
 					@endforeach
 				</div>
@@ -101,12 +101,5 @@
 <!-- 	<script src="{{ asset('js/app.js') }}"></script> -->
    <!-- Script -->
    	@include ('layouts.scripts')
-   <script src="{{asset('assets/js/server.js')}}"></script>
-
-   	<script language="javascript">
-	  var localTime = new Date();
-	  document.write("Local machine time is: " + localTime + "<br>");
-	  document.write("Server time is: " + date);
-  </script>
   </body>
 </html>

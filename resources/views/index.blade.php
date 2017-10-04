@@ -33,7 +33,7 @@
 					<label for="url">Time:</label>
 				</div>
 				<div class='col-sm-4'>
-					<label for='time'></label>
+					<label for='time'>00:00:00</label>
 				</div>
 			</div>
 		</div>

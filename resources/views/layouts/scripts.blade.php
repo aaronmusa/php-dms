@@ -5,30 +5,38 @@
 
 		var timeManagementJson = $('#timeLogs').val();
 		var timeLogs = JSON.parse(timeManagementJson);
+		var connected = false;
 
-		try {
-		    socket = new WebSocket(host);
-		    
-		    //Manages the open event within your client code
-		    socket.onopen = function () {
-		        console.log('Connection Opened');	 
-
-		        sendMessage(timeManagementJson);
-		        return;
-		    };
-		    //Manages the message event within your client code
-		    socket.onmessage = function (msg) {
-		      console.log(msg.data);
-		      return;
-		    };
-		    //Manages the close event within your client code
-		    socket.onclose = function () {
-		        console.log('Connection Closed');
-		        return;
-		    };
-		} catch (e) {
-		    console.log(e);
+		function runWebsocket() {
+			try {
+			    socket = new WebSocket(host);
+			    
+			    //Manages the open event within your client code
+			    socket.onopen = function () {
+			        console.log('Connection Opened');	 
+			        sendMessage(timeManagementJson);
+			        connected = true;
+			        return;
+			    };
+			    //Manages the message event within your client code
+			    socket.onmessage = function (msg) {
+			      console.log(msg.data);
+			      return;
+			    };
+			    //Manages the close event within your client code
+			    socket.onclose = function () {
+			        console.log('Connection Closed');
+			        connected = false;
+			        return;
+			    };
+			} catch (e) {
+			    console.log(e);
+			}
 		}
+
+		runWebsocket();
+
+		
 
 		function sendMessage(id) {
 			socket.send(id);
@@ -94,6 +102,10 @@
 			$(".endTime").each(function(index, element) {
 				sendDMSSwitcher(element, "DMS");
 			});
+
+			if (this.connected == false) {
+				runWebsocket();
+			}
 
 		}, 1000);
 

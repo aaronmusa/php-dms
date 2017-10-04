@@ -42,7 +42,7 @@ class StartSocketServer extends Command
      */
     public function handle()
     {
-        //date_default_timezone_set('Asia/Manila'); // CDT
+        date_default_timezone_set('Asia/Manila'); // CDT
 
         
 
@@ -57,12 +57,13 @@ class StartSocketServer extends Command
 
         $websocket->on('message', function (\Hoa\Event\Bucket $bucket) {
             $data = $bucket->getData();
-            $current_date = date('H:i:s');
+            $current_date = date('H:m:s');
 
             // var_dump($bucket->getSource());
             echo 'message: ', $data['message'], "\n";
             $bucket->getSource()->broadcast($data['message']);
-            //$bucket->getSource()->send($current_date);
+            $bucket->getSource()->send($current_date);
+            $bucket->getSource()->send($data['id']);
             return;
         });
 

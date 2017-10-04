@@ -46,10 +46,18 @@ class HomeController extends Controller
 
         $exists = Storage::disk('local')->exists('video-streaming-url.txt');
         if (!$exists) {
-            $urlStorage = "";
+            $urlStorage = "about:blank";
         }
         else{
             $urlStorage = Storage::get('video-streaming-url.txt');
+            
+            if ($urlStorage == ''){
+                $urlStorage = "about:blank";
+            }
+            else{
+               $urlStorage = Storage::get('video-streaming-url.txt'); 
+            }
+            
         }
         return view('index', compact('timeLogs', 'timeManagement', 'urlStorage', 'websocketUrl'));
     }

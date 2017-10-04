@@ -4,10 +4,17 @@ namespace App\Http\Controllers;
 
 use App\TimeScheduler;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Config;
 
 
 class TimeSchedulerController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,9 +22,26 @@ class TimeSchedulerController extends Controller
      */
     public function index()
     {
-        // $logs = TimeScheduler::all();
-        // dd($logs);
-        // return view('index', compact('logs'));
+        $timeLogs = TimeScheduler::all();
+        $timeManagement = json_encode(array("time_management" => $timeLogs));
+
+        $websocketUrl = Config::get('websocket.url');
+
+        $exists = Storage::disk('local')->exists('video-streaming-url.txt');
+        if (!$exists) {
+            $urlStorage = "about:blank";
+        }
+        else{
+            $urlStorage = Storage::get('video-streaming-url.txt');
+            
+            if ($urlStorage == ''){
+                $urlStorage = "about:blank";
+            }
+            else{
+               $urlStorage = Storage::get('video-streaming-url.txt'); 
+            }  
+        }
+        return view('admin_bsb', compact('timeLogs', 'timeManagement', 'urlStorage', 'websocketUrl'));
     }
 
     /**
@@ -34,7 +58,7 @@ class TimeSchedulerController extends Controller
             $timeScheduler->save();
         }
 
-        return redirect('/home');
+        return redirect('/time-scheduler');
     }
 
     /**
@@ -51,7 +75,7 @@ class TimeSchedulerController extends Controller
         $timeScheduler->update($request->all());
         $timeScheduler->save();
 
-        return redirect('/home');
+        return redirect('/time-scheduler');
     }
 
     /**
@@ -66,6 +90,6 @@ class TimeSchedulerController extends Controller
         $timeScheduler = TimeScheduler::find($timeScheduler->id);
         $timeScheduler->delete();
 
-        return redirect('/home');
+        return redirect('/time-scheduler');
     }
 }

@@ -57,13 +57,15 @@ class StartSocketServer extends Command
 
         $websocket->on('message', function (\Hoa\Event\Bucket $bucket) {
             $data = $bucket->getData();
-            $current_date = date('H:m:s');
+
+            $current_time = array("current_time" => date('H:m:s'));
+
 
             // var_dump($bucket->getSource());
             echo 'message: ', $data['message'], "\n";
             $bucket->getSource()->broadcast($data['message']);
-            $bucket->getSource()->send($current_date);
-            $bucket->getSource()->send($data['id']);
+            $bucket->getSource()->send(json_encode($current_time));
+
             return;
         });
 

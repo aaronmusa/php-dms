@@ -119,12 +119,7 @@
 
 			function integrateDatePicker() {
 
-			    $('.startTime').datetimepicker({
-
-			        format: 'HH:mm:ss'
-
-			    }); 
-			    $('.endTime').datetimepicker({
+			    $('.datePicker').datetimepicker({
 
 			        format: 'HH:mm:ss'
 
@@ -145,13 +140,13 @@
 		    		$("#submitBtn").attr('style','visibility:hidden;');
 		    	}
 		    	var startTime = '<div class = "col-sm-12">'+
-		    					'<div id="startTime' + addButtonCounter + '" class="form-group col-sm-4">'+
+		    					'<div id="startTime' + addButtonCounter + '" class= "form-group col-sm-4">'+
 		    					'<h4 class = "newEntryHeader'+ addButtonCounter +'" >New Entry # '+ addButtonCounter +'</h4>'+
-								'<input value = "'+ time +'" type="text" name="times[][start_time]" class = "form-control" />'+
+								'<input value = "'+ time +'" type="text" name="times[][start_time]" class = "datePicker form-control" />'+
 								'</div>'+
 								'<div id="endTime' + addButtonCounter + '" class = "form-group col-sm-4">'+
 								'<h4 style = "visibility:hidden;" class = "newEntryHeader'+ addButtonCounter +'" >New Entry # '+ addButtonCounter +'</h4>'+
-								'<input value = "'+ time +'" type="text"  name="times['+ counter +'][end_time]" class = "form-control" />'+
+								'<input value = "'+ time +'" type="text"  name="times['+ counter +'][end_time]" class = "datePicker form-control" />'+
 								'</div>'+
 								'<div class = "xBtn'+ addButtonCounter +'" class="form-group col-sm-4">'+
 								'<h4 style = "visibility:hidden;" class = "newEntryHeader'+ addButtonCounter +'" >New Entry # '+ addButtonCounter +'</h4>'+

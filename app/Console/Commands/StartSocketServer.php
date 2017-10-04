@@ -34,6 +34,7 @@ class StartSocketServer extends Command
         parent::__construct();
     }
 
+
     /**
      * Execute the console command.
      *
@@ -41,12 +42,14 @@ class StartSocketServer extends Command
      */
     public function handle()
     {
+        //date_default_timezone_set('Asia/Manila'); // CDT
+
+        
 
         $websocket = new \Hoa\Websocket\Server(new \Hoa\Socket\Server(Config::get('websocket.url')));
 
         $websocket->on('open', function (\Hoa\Event\Bucket $bucket) {
             $time_management = array("time_management" => TimeScheduler::all());
-
             echo "Connection Opened\n";
             $bucket->getSource()->send(json_encode($time_management));
             return;
@@ -54,10 +57,12 @@ class StartSocketServer extends Command
 
         $websocket->on('message', function (\Hoa\Event\Bucket $bucket) {
             $data = $bucket->getData();
+            $current_date = date('H:i:s');
 
             // var_dump($bucket->getSource());
             echo 'message: ', $data['message'], "\n";
             $bucket->getSource()->broadcast($data['message']);
+            //$bucket->getSource()->send($current_date);
             return;
         });
 

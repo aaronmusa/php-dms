@@ -26,13 +26,28 @@
 	</div>
 
 	<div class = "container" style = "padding-top:20px;">
+		
+		<div class = "form-group col-lg-12">
+			<div class = "col-lg-9">
+				<div class='col-sm-2'>
+					<label for="url">Time:</label>
+				</div>
+				<div class='col-sm-4'>
+					<label for='time'></label>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class = "container" style = "padding-top:20px;">
+
 		<div class = "form-group col-lg-12">
 			<div class = "col-lg-9">
 				<div class='col-sm-2'>
 					<label for="url">Switcher:</label>
 				</div>
-				<div class='col-sm-4'>
-					<button class = "btn btn-info" type = "button" id = "fbLiveSwitcher" value = "VIDEO SREAM">FBLIVE</button>
+				<div class='col-sm-5'>
+					<button class = "btn btn-info" type = "button" id = "fbLiveSwitcher" value = "FBLIVE">VIDEO STREAM</button>
 					<button class = "btn btn-basic" type = "button" id = "dmsSwitcher" value = "DMS">DMS</button>
 				</div>
 			</div>

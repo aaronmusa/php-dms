@@ -49,6 +49,21 @@
 			    }
 		}
 
+		function showTime(){
+			var date = new Date();
+			var hour = date.getHours();
+			var minutes = date.getMinutes();
+			var seconds = date.getSeconds();
+
+			if (seconds < 10){
+				seconds = "0" + seconds;
+			}
+
+			var currentTime = (hour +":"+ minutes +":"+ seconds);
+
+			return currentTime;
+		}
+
 		$(function() {
 
 			// var logs = $('#logs').val();
@@ -63,6 +78,8 @@
 			// 	console.log(element.id);
 			// });
 
+			$("label[for='time']").html(showTime())
+			
 				
 			$(".startTime").each(function(index, element) {
 				sendDMSSwitcher(element, "FBLIVE");

@@ -28,8 +28,8 @@
         </div>
     @endif -->
     <div class="row">
-        <div class="col-xs-4">
-            <button class="btn btn-block bg-blue waves-effect" type="submit">SIGN IN</button>
+        <div style = "float:right;" class="col-xs-4">
+            <button  class="btn btn-block bg-blue waves-effect" type="submit">SIGN IN</button>
         </div>
     </div>
 </form>

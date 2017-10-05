@@ -39,6 +39,10 @@
 </head>
 
 <body class="theme-blue">
+    <!-- PHP hidden inputs -->
+    <input type = "hidden" id = "timeLogs" value = "{{$timeManagement}}">
+    <input type = "hidden" id = "websocketUrl" value = "{{$websocketUrl}}">
+
     <!-- Page Loader -->
     <div class="page-loader-wrapper">
         <div class="loader">
@@ -76,7 +80,7 @@
             <div class="navbar-header">
                 <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                 <a href="javascript:void(0);" class="bars"></a>
-                <a class="navbar-brand" href="index.html">HTECH - DMS</a>
+                <a class="navbar-brand" href= "time-scheduler">HTECH - DMS</a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -101,23 +105,11 @@
             <!-- User Info -->
             <div class="user-info">
                 <div class="image">
-                    <img src="images/user.png" width="48" height="48" alt="User" />
+                    <img src="/admin/images/user.png" width="48" height="48" alt="User" />
                 </div>
                 <div class="info-container">
-                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">John Doe</div>
-                    <div class="email">john.doe@example.com</div>
-                    <div class="btn-group user-helper-dropdown">
-                        <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
-                        <ul class="dropdown-menu pull-right">
-                            <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li>
-                            <li role="seperator" class="divider"></li>
-                            <li><a href="javascript:void(0);"><i class="material-icons">group</i>Followers</a></li>
-                            <li><a href="javascript:void(0);"><i class="material-icons">shopping_cart</i>Sales</a></li>
-                            <li><a href="javascript:void(0);"><i class="material-icons">favorite</i>Likes</a></li>
-                            <li role="seperator" class="divider"></li>
-                            <li><a href="javascript:void(0);"><i class="material-icons">input</i>Sign Out</a></li>
-                        </ul>
-                    </div>
+                    <div style = "color: black;" class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">John Doe</div>
+                    <div style = "color: black;" class="email">john.doe@example.com</div>
                 </div>
             </div>
             <!-- #User Info -->
@@ -176,7 +168,7 @@
                     {{ csrf_field() }}
                 </form> 
                 <!-- Time display -->
-                <div class = "container" style = "padding-top:20px;">
+                <div class = "container-fluid" style = "padding-top:20px;">
                     <div class='col-sm-1'>
                         <label for="url">Time:</label>
                     </div>
@@ -185,7 +177,7 @@
                     </div>
                 </div>
                 <!-- Switcher -->
-                <div class = "container" style = "padding-top:20px;">
+                <div class = "container-fluid" style = "padding-top:20px;">
                     <div class='col-sm-1'>
                         <label for="url">Switcher:</label>
                     </div>
@@ -196,7 +188,7 @@
                     
                 </div>
                 <!-- URL Input -->
-                <div class = "container" style = "padding-top:20px;">
+                <div class = "container-fluid" style = "padding-top:20px;">
                     <div class='col-sm-1'>
                         <label for="url">URL:</label>
                     </div>
@@ -213,7 +205,7 @@
                     </form>
                 </div>
                 <!-- Add Button -->
-                <div class = "container" style = "padding-top:20px;">
+                <div class = "container-fluid" style = "padding-top:20px;">
                     <div class='col-sm-4'>
                         <a href = "{{ route('home') }}"><button type = "submit" id = "updateUrl" class = "btn btn-info waves-effect">Update</button></a>
                     </div>
@@ -303,19 +295,25 @@
     <!-- <script src="plugins/chartjs/Chart.bundle.js"></script> -->
 
     <!-- Flot Charts Plugin Js -->
-    <script src="{{ asset('plugins/flot-charts/jquery.flot.js') }}"></script>
+<!--     <script src="{{ asset('plugins/flot-charts/jquery.flot.js') }}"></script>
     <script src="{{ asset('plugins/flot-charts/jquery.flot.resize.js') }}"></script>
     <script src="{{ asset('plugins/flot-charts/jquery.flot.pie.js') }}"></script>
     <script src="{{ asset('plugins/flot-charts/jquery.flot.categories.js') }}"></script>
-    <script src="{{ asset('plugins/flot-charts/jquery.flot.time.js') }}"></script>
+    <script src="{{ asset('plugins/flot-charts/jquery.flot.time.js') }}"></script> -->
 
 
     <!-- Sparkline Chart Plugin Js -->
     <script src="{{ asset('plugins/jquery-sparkline/jquery.sparkline.js') }}"></script>
 
+    <!-- Websocket js -->
+    <script src="{{ asset('js/socket.js') }}"></script>
+
+    <!-- Custom -->
+    <script src="{{ asset('js/custom-js.js') }}"></script>
+
     <!-- Custom Js -->
     <script src="{{ asset('js/admin.js') }}"></script>
-    <script src="{{ asset('js/pages/index.js') }}"></script>
+<!--     <script src="{{ asset('js/pages/index.js') }}"></script> -->
 
     <!-- Demo Js -->
     <script src="{{ asset('js/demo.js') }}"></script>

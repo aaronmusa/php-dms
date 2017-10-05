@@ -86,10 +86,11 @@ class TimeSchedulerController extends Controller
      */
     public function destroy(TimeScheduler $timeScheduler)
     {
+        dd("pasok");
 
         $timeScheduler = TimeScheduler::find($timeScheduler->id);
         $timeScheduler->delete();
 
-        return redirect('/time-scheduler');
+        //return redirect('/time-scheduler');
     }
 }

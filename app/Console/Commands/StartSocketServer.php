@@ -43,9 +43,7 @@ class StartSocketServer extends Command
     public function handle()
     {
         date_default_timezone_set('Asia/Manila'); // CDT
-
         
-
         $websocket = new \Hoa\Websocket\Server(new \Hoa\Socket\Server(Config::get('websocket.url')));
 
         $websocket->on('open', function (\Hoa\Event\Bucket $bucket) {
@@ -63,7 +61,6 @@ class StartSocketServer extends Command
 
             // var_dump($bucket->getSource());
             echo 'message: ', $data['message'], "\n";
-            $bucket->getSource()->broadcast($data['message']);
             $bucket->getSource()->send(json_encode($current_time));
 
             return;

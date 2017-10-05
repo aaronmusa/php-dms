@@ -1,87 +1,95 @@
-	<script type="text/javascript">
-		$(function() {
+function sendDMSSwitcher(element, message) {
+	var startTime = element.value;
+		var timeString = startTime.split(":");
+		var hour = parseInt(timeString[0]);
+		var minutes = parseInt(timeString[1]);
+		var seconds = parseInt(timeString[2]);
+		var date = new Date(); // Create a Date object to find out what time it is
+	    if(date.getHours() == hour && date.getMinutes() == minutes && date.getSeconds() == seconds){ // Check the time
+	        sendMessage(message);
+	    }
+}
 
-			var addButtonCounter = 0;
-			var counter = 0;
+function showTime(){
+	var date = new Date();
+	var hour = date.getHours();
+	var minutes = date.getMinutes();
+	var seconds = date.getSeconds();
 
+	if (seconds < 10){
+		seconds = "0" + seconds;
+	}
+	if (minutes < 10) {
+		minutes = "0" + minutes;
+	}
+	if (hour < 10) {
+		hour = "0" + hour;
+	}
 
-			function integrateDatePicker() {
+	var currentTime = (hour +":"+ minutes +":"+ seconds);
 
-			    $('.startTime').datetimepicker({
+	return currentTime;
+}
 
-			        format: 'HH:mm:ss'
+$(function() {
 
-			    }); 
-			    $('.endTime').datetimepicker({
+			// var logs = $('#logs').val();
+			// console.log(JSON.stringify("'"+ logs + "'", replacer));
+			// 			console.log(logs);
 
-			        format: 'HH:mm:ss'
+	var addButtonCounter = 0;
+	var counter = 0;
 
-			    }); 
+	window.setInterval(function(){ // Set interval for checking
+	// $(timeLogs.time_management).each(function(index, element) {
+	// 	console.log(element.id);
+	// });
 
-			}
+		$("label[for='time']").html(showTime())
+		
+			
+		$(".startTime").each(function(index, element) {
+			sendDMSSwitcher(element, "FBLIVE");
+		});
 
-		    $(".addBtn").on('click',function(){
-		    	var dt = new Date;
-		    	var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
-		    	addButtonCounter++;
-		    	if (addButtonCounter > 0) {
-		    		$('.removeBtn').attr('style','visibility:visible',);
-		    		$("#submitBtn").attr('style','visibility:visible;');
-		    	}
-		    	else{
-		    		$('.removeBtn').attr('visibility','hidden');
-		    		$("#submitBtn").attr('style','visibility:hidden;');
-		    	}
-		    	var startTime = '<div class = "col-lg-9">'+
-		    					'<div id="startTime' + addButtonCounter + '" class="form-group col-sm-4">'+
-		    					'<h4 class = "newEntryHeader'+ addButtonCounter +'" >New Entry # '+ addButtonCounter +'</h4>'+
-								'<input value = "'+ time +'" type="text" name="times[][start_time]" class = "startTime form-control" />'+
-								'</div>'+
-								'<div id="endTime' + addButtonCounter + '" class = "form-group col-sm-4">'+
-								'<h4 style = "visibility:hidden;" class = "newEntryHeader'+ addButtonCounter +'" >New Entry # '+ addButtonCounter +'</h4>'+
-								'<input value = "'+ time +'" type="text"  name="times['+ counter +'][end_time]" class = "endTime form-control" />'+
-								'</div>'+
-								'<div class = "xBtn'+ addButtonCounter +'" class="form-group col-sm-4">'+
-								'<h4 style = "visibility:hidden;" class = "newEntryHeader'+ addButtonCounter +'" >New Entry # '+ addButtonCounter +'</h4>'+
-								'<button  style = "visibility:hidden;" value = "'+ addButtonCounter +'" class = "btn btn-danger">X</button>'+
-								'</div>'+
-								'</div>';
+		$(".endTime").each(function(index, element) {
+			sendDMSSwitcher(element, "DMS");
+		});
 
-		    	$("#timePickerContainer").append(startTime);
-		    	//$("#timePickerContainer").append(endTime);
+		if (this.connected == false) {
+			runWebsocket();
+		}
 
-		    	integrateDatePicker();
-		    	$(document).scrollTop($(document).height());
-		    	counter++;
-		    });
+	}, 1000);
 
-		    $('.removeBtn').on('click',function(){
-		    	counter--;
+	$('#fbLiveSwitcher').click(function(){
+    	var urlStorage = $('#urlStorage').val();
+    	var videoStreamingUrl = '{"live_url": "'+ urlStorage +'" }';
+    	//sendMessage(videoStreamingUrl);
+    	sendMessage("FBLIVE");
 
-		    	$('#startTime'+ addButtonCounter).remove();
-		    	$('#endTime'+ addButtonCounter).remove();
-		    	$('.xBtn'+ addButtonCounter).remove();
-		    	//$('.newEntryHeader'+ addButtonCounter).remove();
-		    	addButtonCounter--;
-		    	if (addButtonCounter <= 0) {
-		    		$('.removeBtn').hide();
-		    		$("#submitBtn").hide();
-		    	}
-		    });
+    });
 
+    $('#dmsSwitcher').click(function(){
+    	sendMessage("DMS");
+    });
 
-		    $(".deleteBtn").on('click',function(){
+    $(".deleteBtn").on('click',function(){
 		    	var deleteBtnData = $(this).data('id');
+		    	var token = $("input[name=_token]").val();
+		    	
 
 		    	$.ajax({
-	                url: 'timeScheduler/' + deleteBtnData,
+	                url: 'time-scheduler/' + deleteBtnData,
 	                type: 'POST',
 	                data: {
-	                	"_token": "{{ csrf_token() }}",
+	                	"_token": token,
 	                	"_method": "DELETE"
 	                },
 	                success: function(result) {
-	             		location.reload();
+	                	console.log(deleteBtnData);
+
+	             		//location.reload();
 	                },
 	                error: function(xhr, ajaxOptions, thrownError) {
 
@@ -89,32 +97,4 @@
 	            });
 		    });
 
-		    $(".updateBtn").on('click',function(){
-		    	var updateBtnData = $(this).data('id');
-		    	var start_time = $("#start_time"+updateBtnData).val();
-		    	var end_time = $("#end_time"+updateBtnData).val();
-
-		    	var data = {
-	                	"_token": "{{ csrf_token() }}",
-	                	"_method": "PUT",
-	                	"start_time": start_time,
-	                	"end_time": end_time
-	                };
-		    	$.ajax({
-	                url: 'timeScheduler/'+ updateBtnData ,
-	                type: 'POST',
-	                data: data,
-	                success: function(result) {
-	             		location.reload();
-	                },
-	                error: function(xhr, ajaxOptions, thrownError) {
-	              
-	                }
-	            });
-		    });
-
-
-
-		    integrateDatePicker();
-		});
-		</script>
+});

@@ -12,7 +12,7 @@ class VideoStreamingUrl extends Controller
     	$url = $request->videoStreamingUrl;
     	Storage::disk('local')->put('video-streaming-url.txt', $url);
     	// $videoStreamingUrl = Storage::get('file1.txt');
-    	return redirect('/home');
+    	return redirect('/time-scheduler');
 
     }
 }

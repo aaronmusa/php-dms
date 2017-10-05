@@ -1,30 +1,42 @@
 //START WEBSOCKET
 //The homestead or local host server (don't forget the ws prefix)
-var host = 'ws://127.0.0.1:8080';
+var host =  $("#websocketUrl").val();
 var socket = null;
-try {
-    socket = new WebSocket(host);
-    
-    //Manages the open event within your client code
-    socket.onopen = function () {
-        console.log('Connection Opened');
-        return;
-    };
-    //Manages the message event within your client code
-    socket.onmessage = function (msg) {
-      console.log(msg.data);
-      return;
-    };
-    //Manages the close event within your client code
-    socket.onclose = function () {
-        console.log('Connection Closed');
-        return;
-    };
-} catch (e) {
-    console.log(e);
+
+var timeManagementJson = $('#timeLogs').val();
+var timeLogs = JSON.parse(timeManagementJson);
+var connected = false;
+
+function runWebsocket() {
+    try {
+        socket = new WebSocket(host);
+        
+        //Manages the open event within your client code
+        socket.onopen = function () {
+            console.log('Connection Opened');    
+            sendMessage(timeManagementJson);
+            connected = true;
+            return;
+        };
+        //Manages the message event within your client code
+        socket.onmessage = function (msg) {
+          console.log(msg.data);
+          return;
+        };
+        //Manages the close event within your client code
+        socket.onclose = function () {
+            console.log('Connection Closed');
+            connected = false;
+            return;
+        };
+    } catch (e) {
+        console.log(e);
+    }
 }
 
-function sendMessage(message) {
-	socket.send(message);
+        runWebsocket();
+
+function sendMessage(id) {
+    socket.send(id);
 }
 //END WEBSOCKET

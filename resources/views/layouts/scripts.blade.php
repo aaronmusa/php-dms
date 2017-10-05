@@ -3,38 +3,80 @@
 		var host =  $("#websocketUrl").val();
 		var socket = null;
 
-		try {
-		    socket = new WebSocket(host);
-		    
-		    //Manages the open event within your client code
-		    socket.onopen = function () {
-		        console.log('Connection Opened');
-		        var timeManagementJson = '{time_management:'+'{!! json_encode($logs) !!}'+'}';
-		        sendMessage(timeManagementJson);
-		       	
-		        
-		        return;
-		    };
-		    //Manages the message event within your client code
-		    socket.onmessage = function (msg) {
-		      console.log(msg.data);
-		      return;
-		    };
-		    //Manages the close event within your client code
-		    socket.onclose = function () {
-		        console.log('Connection Closed');
-		        return;
-		    };
-		} catch (e) {
-		    console.log(e);
+		var timeManagementJson = $('#timeLogs').val();
+		var timeLogs = JSON.parse(timeManagementJson);
+		var connected = false;
+
+		function runWebsocket() {
+			try {
+			    socket = new WebSocket(host);
+			    
+			    //Manages the open event within your client code
+			    socket.onopen = function () {
+			        console.log('Connection Opened');	 
+			        sendMessage(timeManagementJson);
+			        connected = true;
+			        return;
+			    };
+			    //Manages the message event within your client code
+			    socket.onmessage = function (msg) {
+			      console.log(msg.data);
+			      return;
+			    };
+			    //Manages the close event within your client code
+			    socket.onclose = function () {
+			        console.log('Connection Closed');
+			        connected = false;
+			        return;
+			    };
+			} catch (e) {
+			    console.log(e);
+			}
 		}
 
-		function sendMessage(message) {
-			socket.send(message);
+		runWebsocket();
+
+		
+
+		function sendMessage(id) {
+			socket.send(id);
 		}
 		// function replacer(key, value) {
 		//   return value.replace(/\\/g, '');
 		// }
+
+		function sendDMSSwitcher(element, message) {
+			var startTime = element.value;
+				var timeString = startTime.split(":");
+				var hour = parseInt(timeString[0]);
+				var minutes = parseInt(timeString[1]);
+				var seconds = parseInt(timeString[2]);
+				var date = new Date(); // Create a Date object to find out what time it is
+			    if(date.getHours() == hour && date.getMinutes() == minutes && date.getSeconds() == seconds){ // Check the time
+			        sendMessage(message);
+			    }
+		}
+
+		function showTime(){
+			var date = new Date();
+			var hour = date.getHours();
+			var minutes = date.getMinutes();
+			var seconds = date.getSeconds();
+
+			if (seconds < 10){
+				seconds = "0" + seconds;
+			}
+			if (minutes < 10) {
+				minutes = "0" + minutes;
+			}
+			if (hour < 10) {
+				hour = "0" + hour;
+			}
+
+			var currentTime = (hour +":"+ minutes +":"+ seconds);
+
+			return currentTime;
+		}
 
 		$(function() {
 
@@ -46,27 +88,25 @@
 			var counter = 0;
 
 		window.setInterval(function(){ // Set interval for checking
-			@foreach ($logs as $log)
-				var startTime{{$log->id}} = "{{ $log->start_time }}";
-				var timeString{{$log->id}} = startTime{{$log->id}}.split(":");
-				var hour{{$log->id}} = timeString{{$log->id}}[0];
-				var minutes{{$log->id}} = timeString{{$log->id}}[1];
-				var seconds{{$log->id}} = timeString{{$log->id}}[2];
-				var date{{$log->id}} = new Date(); // Create a Date object to find out what time it is
-			    if(date{{$log->id}}.getHours() == hour{{$log->id}} && date{{$log->id}}.getMinutes() == minutes{{$log->id}} && date{{$log->id}}.getSeconds() == seconds{{$log->id}}){ // Check the time
-			        sendMessage("FBLIVE");
-			    }
+			// $(timeLogs.time_management).each(function(index, element) {
+			// 	console.log(element.id);
+			// });
 
-			    var endTime{{$log->id}} = "{{ $log->end_time }}";
-				var timeStringEnd{{$log->id}} = endTime{{$log->id}}.split(":");
-				var endHour{{$log->id}} = timeStringEnd{{$log->id}}[0];
-				var endMinutes{{$log->id}} = timeStringEnd{{$log->id}}[1];
-				var endSeconds{{$log->id}} = timeStringEnd{{$log->id}}[2];
-				var endDate{{$log->id}} = new Date(); // Create a Date object to find out what time it is
-			    if(endDate{{$log->id}}.getHours() == endHour{{$log->id}} && endDate{{$log->id}}.getMinutes() == endMinutes{{$log->id}} && endDate{{$log->id}}.getSeconds() == endSeconds{{$log->id}}){ // Check the time
-			        sendMessage("DMS");
-			    }
-			@endforeach
+			$("label[for='time']").html(showTime())
+			
+				
+			$(".startTime").each(function(index, element) {
+				sendDMSSwitcher(element, "FBLIVE");
+			});
+
+			$(".endTime").each(function(index, element) {
+				sendDMSSwitcher(element, "DMS");
+			});
+
+			if (this.connected == false) {
+				runWebsocket();
+			}
+
 		}, 1000);
 
 		
@@ -79,12 +119,7 @@
 
 			function integrateDatePicker() {
 
-			    $('.startTime').datetimepicker({
-
-			        format: 'HH:mm:ss'
-
-			    }); 
-			    $('.endTime').datetimepicker({
+			    $('.datePicker').datetimepicker({
 
 			        format: 'HH:mm:ss'
 
@@ -105,13 +140,13 @@
 		    		$("#submitBtn").attr('style','visibility:hidden;');
 		    	}
 		    	var startTime = '<div class = "col-sm-12">'+
-		    					'<div id="startTime' + addButtonCounter + '" class="form-group col-sm-4">'+
+		    					'<div id="startTime' + addButtonCounter + '" class= "form-group col-sm-4">'+
 		    					'<h4 class = "newEntryHeader'+ addButtonCounter +'" >New Entry # '+ addButtonCounter +'</h4>'+
-								'<input value = "'+ time +'" type="text" name="times[][start_time]" class = "startTime form-control" />'+
+								'<input value = "'+ time +'" type="text" name="times[][start_time]" class = "datePicker form-control" />'+
 								'</div>'+
 								'<div id="endTime' + addButtonCounter + '" class = "form-group col-sm-4">'+
 								'<h4 style = "visibility:hidden;" class = "newEntryHeader'+ addButtonCounter +'" >New Entry # '+ addButtonCounter +'</h4>'+
-								'<input value = "'+ time +'" type="text"  name="times['+ counter +'][end_time]" class = "endTime form-control" />'+
+								'<input value = "'+ time +'" type="text"  name="times['+ counter +'][end_time]" class = "datePicker form-control" />'+
 								'</div>'+
 								'<div class = "xBtn'+ addButtonCounter +'" class="form-group col-sm-4">'+
 								'<h4 style = "visibility:hidden;" class = "newEntryHeader'+ addButtonCounter +'" >New Entry # '+ addButtonCounter +'</h4>'+
@@ -197,6 +232,7 @@
 		    	var videoStreamingUrl = '{"live_url": "'+ urlStorage +'" }';
 		    	//sendMessage(videoStreamingUrl);
 		    	sendMessage("FBLIVE");
+
 		    });
 		    $('#dmsSwitcher').click(function(){
 		    	sendMessage("DMS");

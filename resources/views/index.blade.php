@@ -8,7 +8,7 @@
   </head>
 
   <body style = "background-color: #a1c4fd;">
-  	<input type = "hidden" id = "logs" value = "{{$logs}}">
+  	<input type = "hidden" id = "timeLogs" value = "{{$timeManagement}}">
   	<input type = "hidden" id = "websocketUrl" value = "{{$websocketUrl}}">
 
 	<div class = "container" style = "padding-top: 10px">
@@ -26,13 +26,28 @@
 	</div>
 
 	<div class = "container" style = "padding-top:20px;">
+		
+		<div class = "form-group col-lg-12">
+			<div class = "col-lg-9">
+				<div class='col-sm-2'>
+					<label for="url">Time:</label>
+				</div>
+				<div class='col-sm-4'>
+					<label for='time'>00:00:00</label>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class = "container" style = "padding-top:20px;">
+
 		<div class = "form-group col-lg-12">
 			<div class = "col-lg-9">
 				<div class='col-sm-2'>
 					<label for="url">Switcher:</label>
 				</div>
-				<div class='col-sm-4'>
-					<button class = "btn btn-info" type = "button" id = "fbLiveSwitcher" value = "VIDEO SREAM">FBLIVE</button>
+				<div class='col-sm-5'>
+					<button class = "btn btn-info" type = "button" id = "fbLiveSwitcher" value = "FBLIVE">VIDEO STREAM</button>
 					<button class = "btn btn-basic" type = "button" id = "dmsSwitcher" value = "DMS">DMS</button>
 				</div>
 			</div>
@@ -80,7 +95,7 @@
 					</div>
 				</div>
 				<div id = "timePickerContainer" class = "form-group container">
-					@foreach ($logs as $log)
+					@foreach ($timeLogs as $log)
 						@include ('layouts.datepickers')
 					@endforeach
 				</div>
@@ -101,12 +116,5 @@
 <!-- 	<script src="{{ asset('js/app.js') }}"></script> -->
    <!-- Script -->
    	@include ('layouts.scripts')
-   <script src="{{asset('assets/js/server.js')}}"></script>
-
-   	<script language="javascript">
-	  var localTime = new Date();
-	  document.write("Local machine time is: " + localTime + "<br>");
-	  document.write("Server time is: " + date);
-  </script>
   </body>
 </html>

@@ -94,13 +94,13 @@
 
 			$("label[for='time']").html(showTime())
 				
-			// $(".startTime").each(function(index, element) {
-			// 	sendDMSSwitcher(element, "FBLIVE");
-			// });
+			$(".startTime").each(function(index, element) {
+				sendDMSSwitcher(element, "FBLIVE");
+			});
 
-			// $(".endTime").each(function(index, element) {
-			// 	sendDMSSwitcher(element, "DMS");
-			// });
+			$(".endTime").each(function(index, element) {
+				sendDMSSwitcher(element, "DMS");
+			});
 
 			if (this.connected == false) {
 				runWebsocket();

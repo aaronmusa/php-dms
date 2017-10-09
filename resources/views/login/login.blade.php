@@ -1,4 +1,4 @@
-@extends('layouts.blank')
+@extends('layout.blank')
 
 @section('content')
 <form id="sign_in" method="POST" action="{{ route('login') }}">

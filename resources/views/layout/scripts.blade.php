@@ -1,3 +1,4 @@
+
 	<script type="text/javascript">
 
 		var host =  $("#websocketUrl").val();
@@ -109,17 +110,11 @@
 
 		}, 1000);
 
-		
-
 			//END WEBSOCKET
-			
-
-			
-
 
 			function integrateDatePicker() {
 
-			    $('.datePicker').datetimepicker({
+			    $('.datepicker').datetimepicker({
 
 			        format: 'HH:mm:ss'
 

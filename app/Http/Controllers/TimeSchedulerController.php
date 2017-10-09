@@ -6,6 +6,7 @@ use App\TimeScheduler;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Config;
+use Illuminate\Support\Facades\Input;
 
 
 class TimeSchedulerController extends Controller
@@ -41,7 +42,7 @@ class TimeSchedulerController extends Controller
                $urlStorage = Storage::get('video-streaming-url.txt'); 
             }  
         }
-        return view('admin_bsb', compact('timeLogs', 'timeManagement', 'urlStorage', 'websocketUrl'));
+        return view('time_management', compact('timeLogs', 'timeManagement', 'urlStorage', 'websocketUrl'));
     }
 
     /**
@@ -52,11 +53,14 @@ class TimeSchedulerController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->times);
-        foreach($request->times as $time) {
-            $timeScheduler = TimeScheduler::create($time);
-            $timeScheduler->save();
-        }
+        // dd($request->startTime);
+        // foreach($request->times as $time) {
+        //     $timeScheduler = TimeScheduler::create($time);
+        //     $timeScheduler->save();
+        // }
+        $timeScheduler = new TimeScheduler;
+        $timeScheduler = TimeScheduler::create($request->all());
+        $timeScheduler->save();
 
         return redirect('/time-scheduler');
     }
@@ -68,9 +72,7 @@ class TimeSchedulerController extends Controller
      * @param  \App\TimeScheduler  $timeScheduler
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TimeScheduler $timeScheduler)
-    {   
-
+    public function update(Request $request, TimeScheduler $timeScheduler){   
         $timeScheduler = TimeScheduler::find($timeScheduler->id);
         $timeScheduler->update($request->all());
         $timeScheduler->save();
@@ -86,11 +88,18 @@ class TimeSchedulerController extends Controller
      */
     public function destroy(TimeScheduler $timeScheduler)
     {
-        dd("pasok");
-
         $timeScheduler = TimeScheduler::find($timeScheduler->id);
-        $timeScheduler->delete();
+        return ($timeScheduler->delete()) ? "1" : "0";
+    }
+    //Show add page
+    public function showAddPage(){
+        return view('add_time');
+    }
 
-        //return redirect('/time-scheduler');
+    public function showEditPage($id){
+        $timeLog = TimeScheduler::find($id);
+        $startTime = $timeLog->start_time;
+        $endTime = $timeLog->end_time;
+        return view('edit_time', compact('startTime','endTime','id'));
     }
 }

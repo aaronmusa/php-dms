@@ -33,7 +33,7 @@
         </div>
     </div>
 </form>
-
+@include ('layout.errors')
 <!-- <div class="col-md-8 col-md-offset-4">
     <a class="btn btn-link" href="{{ route('register') }}">
         Register

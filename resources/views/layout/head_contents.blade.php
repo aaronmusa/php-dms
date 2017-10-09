@@ -70,9 +70,6 @@
     <!-- Sparkline Chart Plugin Js -->
     <script src="{{ asset('plugins/jquery-sparkline/jquery.sparkline.js') }}"></script>
 
-    <!-- Websocket js -->
-    <script src="{{ asset('js/socket.js') }}"></script>
-
     <!-- Custom -->
     <script src="{{ asset('js/time-management.js') }}"></script>
 

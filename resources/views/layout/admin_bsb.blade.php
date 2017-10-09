@@ -125,6 +125,8 @@
     @yield('add-time-content')
     @yield('edit-time-content')
 
+<!-- Websocket js -->
+    <script src="{{ asset('js/socket.js') }}"></script>
 </body>
 
 </html>

@@ -62,7 +62,7 @@ class TimeSchedulerController extends Controller
         $timeScheduler = TimeScheduler::create($request->all());
         $timeScheduler->save();
 
-        return redirect('time-scheduler');
+        return redirect('/time-scheduler');
     }
 
     /**
@@ -77,7 +77,7 @@ class TimeSchedulerController extends Controller
         $timeScheduler->update($request->all());
         $timeScheduler->save();
 
-        return redirect('time-scheduler');
+        return redirect('/time-scheduler');
     }
 
     /**

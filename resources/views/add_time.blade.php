@@ -14,7 +14,7 @@
 			                </h2>
 			            </div>
 			            <div class="body">
-			                <form method = "POST" action =  "/time-scheduler">
+			                <form method = "POST" action =  "{{url('/')}}/time-scheduler">
 			                	{{ csrf_field() }}
 			                    <label for="email_address">Start Time</label>
 			                    <div class="form-group">

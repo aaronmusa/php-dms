@@ -39,7 +39,7 @@
                 <div class='col-sm-1'>
                     <label for="url">URL:</label>
                 </div>
-                <form method = "POST" action = "video-streaming-url">
+                <form method = "POST" action = "{{url('/')}}/video-streaming-url">
                     {{ csrf_field() }}
                     <div class='col-sm-4'>
                         <input name = "videoStreamingUrl" id = "urlInput" class = "form-control" type = "text" value = @if ($urlStorage != '') "{{ $urlStorage }}" 

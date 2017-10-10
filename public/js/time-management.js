@@ -41,7 +41,15 @@ function integrateDatePicker() {
 
 }
 
+function setCurrentTime(){
+	var dt = new Date;
+	var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+	$('.currentTime').val(time);
+}
+
 $(function() {
+
+	setCurrentTime();
 
 	integrateDatePicker();
 	// var logs = $('#logs').val();
@@ -67,9 +75,9 @@ $(function() {
 			sendDMSSwitcher(element, "DMS");
 		});
 
-		// if (this.connected == false) {
-		// 	runWebsocket();
-		// }
+		if (this.connected == false) {
+			runWebsocket();
+		}
 
 	}, 1000);
 

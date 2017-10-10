@@ -19,17 +19,20 @@
 			                    <label for="email_address">Start Time</label>
 			                    <div class="form-group">
 			                        <div class="form-line">
-			                            <input type="text" name = "start_time" id="startTime" class="datePicker form-control">
+			                            <input type="text" name = "start_time" class="currentTime datePicker form-control">
 			                        </div>
 			                    </div>
 			                    <label for="password">End Time</label>
 			                    <div class="form-group">
 			                        <div class="form-line">
-			                            <input type="text" name = "end_time" id="endTime" class=" datePicker form-control">
+			                            <input type="text" name = "end_time" class="currentTime datePicker form-control">
 			                        </div>
 			                    </div>
 			                    <button type="submit" class="btn btn-primary m-t-15 waves-effect">ADD</button>
 			                </form>
+			                <div class = "body">
+			                	@include ('errors.errors')
+			                </div>
 			            </div>
 			        </div>
 			    </div>

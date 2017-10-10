@@ -27,7 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/time-scheduler';
+    protected $redirectTo = 'time-scheduler';
 
     /**
      * Create a new controller instance.
@@ -48,7 +48,7 @@ class LoginController extends Controller
 
         $request->session()->invalidate();
 
-        return redirect('/time-scheduler');
+        return redirect('time-scheduler');
     }
 
     public function redirectPath(){
@@ -56,7 +56,7 @@ class LoginController extends Controller
             return $this->redirectTo();
         }
 
-        return property_exists($this, 'redirectTo') ? $this->redirectTo : '/time-scheduler';
+        return property_exists($this, 'redirectTo') ? $this->redirectTo : 'time-scheduler';
     }
 
 }

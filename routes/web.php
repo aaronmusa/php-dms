@@ -11,16 +11,19 @@
 |
 */
 
-
-
 Route::get('/', function() {
 	return view('login.login');
 });
 
 Auth::routes();
-Route::group(array('prefix' => '', 'before' => 'auth'), function() {
 
-	Route::resource('timeScheduler', 'TimeSchedulerController', ['only' => ['index','store', 'update', 'destroy']]);
+	Route::group(array('prefix' => '', 'before' => 'auth'), function() {
+
+	Route::get('time-scheduler/add-time', 'TimeSchedulerController@showAddPage')->name('addPage');
+
+	Route::get('time-scheduler/edit-time/{id}', 'TimeSchedulerController@showEditPage')->name('editPage');
+
+	Route::resource('time-scheduler', 'TimeSchedulerController', ['only' => ['index','store', 'update', 'destroy']]);
 
 	Route::get('/home', 'HomeController@index')->name('home');
 

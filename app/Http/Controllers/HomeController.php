@@ -56,9 +56,8 @@ class HomeController extends Controller
             }
             else{
                $urlStorage = Storage::get('video-streaming-url.txt'); 
-            }
-            
+            }  
         }
-        return view('index', compact('timeLogs', 'timeManagement', 'urlStorage', 'websocketUrl'));
+        return view('admin_bsb', compact('timeLogs', 'timeManagement', 'urlStorage', 'websocketUrl'));
     }
 }

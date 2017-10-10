@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
 
-  <head>
-
-   @include ('layouts.head_contents')
-
-  </head>
-
-  <body style = "background-color: #a1c4fd;">
   	<input type = "hidden" id = "timeLogs" value = "{{$timeManagement}}">
   	<input type = "hidden" id = "websocketUrl" value = "{{$websocketUrl}}">
 
@@ -116,5 +107,3 @@
 <!-- 	<script src="{{ asset('js/app.js') }}"></script> -->
    <!-- Script -->
    	@include ('layouts.scripts')
-  </body>
-</html>

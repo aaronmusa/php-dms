@@ -1,4 +1,4 @@
-@extends('layouts.blank')
+@extends('layout.blank')
 
 @section('content')
 <form id="sign_in" method="POST" action="{{ route('login') }}">
@@ -9,7 +9,7 @@
             <i class="material-icons">person</i>
         </span>
         <div class="form-line">
-            <input type="text" class="form-control" name="name" placeholder="Username" required>
+            <input type="text" class="form-control" name="username" placeholder="Username" required>
         </div>
     </div>
     <div class="input-group">
@@ -20,23 +20,11 @@
             <input type="password" class="form-control" name="password" placeholder="Password" required>
         </div>
     </div>
-<!--     @if (count($errors) > 0)
-        <div class="alert alert-danger text-center">
-            @foreach ($errors->all() as $error)
-                {{ $error }}<br/>
-            @endforeach
-        </div>
-    @endif -->
+    @include('errors.errors')
     <div class="row">
         <div style = "float:right;" class="col-xs-4">
             <button  class="btn btn-block bg-blue waves-effect" type="submit">SIGN IN</button>
         </div>
     </div>
 </form>
-
-<!-- <div class="col-md-8 col-md-offset-4">
-    <a class="btn btn-link" href="{{ route('register') }}">
-        Register
-    </a>
-</div> -->
 @stop

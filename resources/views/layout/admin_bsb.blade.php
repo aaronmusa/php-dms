@@ -83,7 +83,7 @@
                 <ul class="list">
                     <li class="header">MAIN NAVIGATION</li>
                     <li class="active">
-                        <a href="/time-scheduler">
+                        <a href="time-scheduler">
                             <i class="material-icons">access_alarm</i>
                             <span>Sequence Management</span>
                         </a>

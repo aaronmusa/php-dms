@@ -19,9 +19,9 @@ Auth::routes();
 
 	Route::group(array('prefix' => '', 'before' => 'auth'), function() {
 
-	Route::get('time-scheduler/add-time', 'TimeSchedulerController@showAddPage')->name('addPage');
+	Route::get('add-time', 'TimeSchedulerController@showAddPage')->name('addPage');
 
-	Route::get('time-scheduler/edit-time/{id}', 'TimeSchedulerController@showEditPage')->name('editPage');
+	Route::get('edit-time/{id}', 'TimeSchedulerController@showEditPage')->name('editPage');
 
 	Route::resource('time-scheduler', 'TimeSchedulerController', ['only' => ['index','store', 'update', 'destroy']]);
 

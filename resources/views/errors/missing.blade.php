@@ -25,7 +25,7 @@ background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYA
                     Sorry, an error has occured, Requested page not found!
                 </div>
                 <div class="error-actions">
-                    <a href="/time-scheduler" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-home"></span>
+                    <a href="time-scheduler" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-home"></span>
                         Take Me Home </a>
                 </div>
             </div>

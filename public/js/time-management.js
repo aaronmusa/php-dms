@@ -114,7 +114,7 @@ $(function() {
 		  confirmButtonText: 'Yes, delete it!'
 		}).then(function () {
 			$.ajax({
-                url: '/time-scheduler/' + deleteBtnData,
+                url: 'time-scheduler/' + deleteBtnData,
                 type: 'POST',
                 data: {
                 	"_token": token,

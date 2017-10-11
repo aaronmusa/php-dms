@@ -23,6 +23,8 @@ Auth::routes();
 
 	Route::get('edit-time/{id}', 'TimeSchedulerController@showEditPage')->name('editPage');
 
+	Route::resource('connections', 'ConnectionController', ['only' => ['index']]);
+
 	Route::resource('time-scheduler', 'TimeSchedulerController', ['only' => ['index','store', 'update', 'destroy']]);
 
 	Route::get('/home', 'HomeController@index')->name('home');

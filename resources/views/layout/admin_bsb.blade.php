@@ -82,14 +82,14 @@
             <div class="menu">
                 <ul class="list">
                     <li class="header">MAIN NAVIGATION</li>
-                    <li class="active">
+                    <li {{ setActive('time-scheduler') }} {{ setActive('add-time') }} {{ setActive('edit-time') }}>
                         <a href="{{url('/')}}/time-scheduler">
                             <i class="material-icons">access_alarm</i>
                             <span>Sequence Management</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="pages/typography.html">
+                    <li {{ setActive('connections') }}>
+                        <a href="{{url('/')}}/connections">
                             <i class="material-icons">cast_connected</i>
                             <span>Connections</span>
                         </a>
@@ -124,6 +124,7 @@
     @yield('time-management-content')
     @yield('add-time-content')
     @yield('edit-time-content')
+    @yield('connections-content')
 
 <!-- Websocket js -->
     <script src="{{ asset('js/socket.js') }}"></script>

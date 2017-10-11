@@ -79,7 +79,9 @@
                                             @foreach ($timeLogs as $log)
                                                 <tr>
                                                     <th scope="row">{{$log->id}}</th>
+                                                    <input type = "hidden" class = "startTime" value = "{{$log->start_time}}">
                                                     <td>{{$log->start_time}}</td>
+                                                    <input type = "hidden" class = "endTime" value = "{{$log->end_time}}">
                                                     <td>{{$log->end_time}}</td>
                                                     <td align="center">
                                                         <a href = "{{ route('editPage',$log->id) }}" ><button type = "submit" name = "editBtn" value = "{{$log->id}}" class = "btn btn-info waves-effect"><i class="material-icons">mode_edit</i></button></a>

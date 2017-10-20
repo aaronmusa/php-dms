@@ -95,11 +95,15 @@ $(function() {
             });
 		}).catch(swal.noop)	
     });
-    $('#startBtn').click(function(){
-    	sendMessage("START");
+    // $('#startBtn').click(function(){
+    // 	sendMessage("START");
+    // });
+    // $('#stopBtn').click(function(){
+    // 	sendMessage("STOP");
+    // });
+    $('#restartBtn').click(function(){
+    	sendMessage("RESTART");
     });
-    $('#stopBtn').click(function(){
-    	sendMessage("STOP");
-    });
+
     
 });

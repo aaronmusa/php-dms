@@ -51,7 +51,7 @@ class StartSocketServer extends Command
         $websocket->on('open', function (\Hoa\Event\Bucket $bucket) {
             $urlStorage = Storage::get('video-streaming-url.txt');
             $time_management = array("time_management" => TimeScheduler::all());
-            $liveUrl =  json_encode(array("live_url" => $urlStorage));
+            $liveUrl =  array("live_url" => $urlStorage);
             echo "Connection Opened\n";
             $bucket->getSource()->send(json_encode($time_management));
             $bucket->getSource()->send(json_encode($liveUrl));
@@ -61,7 +61,7 @@ class StartSocketServer extends Command
         $websocket->on('message', function (\Hoa\Event\Bucket $bucket) {
             $data = $bucket->getData();
             echo 'message: ', $data['message'], "\n";
- 	   $bucket->getSource()->broadcast($data['message']);
+            $bucket->getSource()->broadcast($data['message']);
 
             return;
         });

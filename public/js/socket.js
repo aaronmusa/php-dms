@@ -3,13 +3,7 @@
 var host =  $("#websocketUrl").val();
 var socket = null;
 var currentRouteName = $('#routeName').val();
-if (currentRouteName != 'connections.index') {
-    var timeManagementJson = $('#timeLogs').val();
-    var timeLogs = JSON.parse(timeManagementJson);
-    var connected = false;
-    var urlInput = $('#urlInput').val();
-}
-
+var connected = false;
 
 function runWebsocket() {
 

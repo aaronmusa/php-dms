@@ -1,5 +1,6 @@
 @extends('layout.admin_bsb')
 @section('connections-content')
+<script src="{{ asset('js/connection.js') }}"></script>
 <input type = "hidden" id = "routeName" value = "{{\Route::currentRouteName()}}"
 <section class="content">
 	<div class = "container-fluid" style = "padding-top:20px;">

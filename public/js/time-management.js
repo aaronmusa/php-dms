@@ -47,22 +47,22 @@ function setCurrentTime(){
 	$('.currentTime').val(time);
 }
 
-// function testId(){
-// jsonObj = [];
-// item = {}
-//     $(".log-id").each(function() {
+function testId(){
+jsonObj = [];
+item = {}
+    $(".log-id").each(function() {
 
-//     	var title = "id";
-//         var id = $(this).val();
+    	var title = "id";
+        var id = $(this).val();
 
         
-//         item ["title"] = title;
-//         item ["id"] = id;
+        item ["title"] = title;
+        item ["id"] = id;
 
-//         jsonObj.push(item);
-//     });
+        jsonObj.push(item);
+    });
 
-//     console.log(JSON.stringify(jsonObj));
-// }
+    console.log(JSON.stringify(jsonObj));
+}
 
 

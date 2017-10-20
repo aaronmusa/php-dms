@@ -57,9 +57,9 @@
                     <label for="url">Action:</label>
                 </div>
                 <div class='col-sm-5'>
-                    <!-- <button class = "btn btn-primary waves-effect" type = "button" id = "startBtn" value = "START">START</button>
-                    <button class = "btn btn-danger waves-effect" type = "button" id = "stopBtn" value = "START">STOP</button> -->
-                     <button class = "btn btn-warning waves-effect" type = "button" id = "restartBtn" value = "RESTART">RESTART</button>
+                    <button class = "btn btn-primary waves-effect" type = "button" id = "startBtn" value = "START">START</button>
+                    <button class = "btn btn-danger waves-effect" type = "button" id = "stopBtn" value = "START">STOP</button>
+                    <!--  <button class = "btn btn-warning waves-effect" type = "button" id = "restartBtn" value = "RESTART">RESTART</button> -->
                 </div>
                 
             </div>

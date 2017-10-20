@@ -1,5 +1,6 @@
 @extends('layout.admin_bsb')
 @section('edit-time-content')
+ <script src="{{ asset('js/sequence-management.js') }}"></script>
     <section class="content">
         <div class="container-fluid">
             <div class="block-header">

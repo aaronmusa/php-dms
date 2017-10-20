@@ -1,6 +1,6 @@
 $(function() {
 
-	//testId();
+	// testId();
 
 	setCurrentTime();
 
@@ -95,15 +95,15 @@ $(function() {
             });
 		}).catch(swal.noop)	
     });
-    // $('#startBtn').click(function(){
-    // 	sendMessage("START");
-    // });
-    // $('#stopBtn').click(function(){
-    // 	sendMessage("STOP");
-    // });
-    $('#restartBtn').click(function(){
-    	sendMessage("RESTART");
+    $('#startBtn').click(function(){
+    	sendMessage("START");
     });
+    $('#stopBtn').click(function(){
+    	sendMessage("STOP");
+    });
+    // $('#restartBtn').click(function(){
+    // 	sendMessage("RESTART");
+    // });
 
     
 });

@@ -88,7 +88,7 @@ $(function() {
             		}
                 },
                 error: function(xhr, ajaxOptions, thrownError) {
-
+                	console.log(thrownError);
                 }
             });
 		}).catch(swal.noop)	

@@ -2,7 +2,7 @@
 //The homestead or local host server (don't forget the ws prefix)
 var host =  $("#websocketUrl").val();
 var socket = null;
-var currentRouteName = $('#routeName').val();
+var logs = $('#timeLogs').val();
 var connected = false;
 
 function runWebsocket() {
@@ -12,7 +12,8 @@ function runWebsocket() {
         
         //Manages the open event within your client code
         socket.onopen = function () {
-            console.log('Connection Opened');    
+            console.log('Connection Opened');  
+            sendMessage(logs);  
             connected = true;
             return;
         };

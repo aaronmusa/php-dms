@@ -50,7 +50,7 @@ function setCurrentTime(){
 function retrieveLogs(){
 	var token = $("input[name=_token]").val();
 	$.ajax({
-        url: 'retrieve-logs/',
+        url: 'retrieve-logs',
         type: 'GET',
         data: {
         	"_token": token,
@@ -59,7 +59,7 @@ function retrieveLogs(){
     		sendMessage(result);
         },
         error: function(xhr, ajaxOptions, thrownError) {
-        	console.log("error");
+        	console.log(thrownError);
         }
     });
 }

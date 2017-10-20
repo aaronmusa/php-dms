@@ -92,9 +92,9 @@
                             <span>Connections</span>
                         </a>
                     </li>
-                    <li {{ setActive('ticker') }}>
+                    <li {{ setActive('ticker') }} {{ setActive('add-ticker') }} {{ setActive('edit-ticker') }}>
                         <a href="{{url('/')}}/ticker">
-                            <i class="material-icons">cast_connected</i>
+                            <i class="material-icons">short_text</i>
                             <span>Tickers</span>
                         </a>
                     </li>
@@ -130,6 +130,8 @@
     @yield('edit-time-content')
     @yield('connections-content')
     @yield('ticker-management-content')
+    @yield('add-ticker-content')
+    @yield('edit-ticker-content')
 
 <!-- Websocket js -->
     <script src="{{ asset('js/socket.js') }}"></script>

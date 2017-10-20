@@ -63,5 +63,21 @@ function retrieveLogs(){
         }
     });
 }
+function retrieveTickers(){
+	var token = $("input[name=_token]").val();
+	$.ajax({
+        url: 'retrieve-tickers',
+        type: 'GET',
+        data: {
+        	"_token": token,
+        },
+        success: function(result) {
+    		sendMessage(result);
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+        	console.log(thrownError);
+        }
+    });
+}
 
 

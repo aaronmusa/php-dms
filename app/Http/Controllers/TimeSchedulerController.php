@@ -42,7 +42,7 @@ class TimeSchedulerController extends Controller
                $urlStorage = Storage::get('video-streaming-url.txt'); 
             }  
         }
-        return view('time_management', compact('timeLogs', 'timeManagement', 'urlStorage', 'websocketUrl'));
+        return view('TimeManagement.time_management', compact('timeLogs', 'timeManagement', 'urlStorage', 'websocketUrl'));
     }
 
     /**
@@ -93,14 +93,14 @@ class TimeSchedulerController extends Controller
     }
     //Show add page
     public function showAddPage(){
-        return view('add_time');
+        return view('TimeManagement.add_time');
     }
 
     public function showEditPage($id){
         $timeLog = TimeScheduler::find($id);
         $startTime = $timeLog->start_time;
         $endTime = $timeLog->end_time;
-        return view('edit_time', compact('startTime','endTime','id'));
+        return view('TimeManagement.edit_time', compact('startTime','endTime','id'));
     }
     public function retrieveLogs(){
         $timeLogs = TimeScheduler::all();

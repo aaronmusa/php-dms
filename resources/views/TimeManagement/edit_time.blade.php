@@ -15,7 +15,7 @@
 			                </h2>
 			            </div>
 			            <div class="body">
-			                <form method = "POST" action = "{{url('/')}}/time-scheduler/{{$id}}">
+			                <form method = "POST" action = "{{url('/')}}/ticker/{{$id}}">
 			                	{{ csrf_field() }}
 			                	{!! method_field('patch') !!}
 			                	<input name = "id" type = "hidden" value = "{{$id}}">

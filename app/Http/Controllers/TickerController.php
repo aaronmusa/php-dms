@@ -15,11 +15,11 @@ class TickerController extends Controller
      */
     public function index(){
         $tickers = Ticker::all();
-        $tickerManagement = json_encode(array("ticker_management" => $tickers));
+        $tickerManagement = json_encode(array("tickers" => $tickers));
 
         $websocketUrl = Config::get('websocket.url');
 
-        return view('ticker', compact('tickers', 'tickerManagement','websocketUrl'));
+        return view('TickerManagement.ticker', compact('tickers', 'tickerManagement','websocketUrl'));
     }
 
 
@@ -31,7 +31,11 @@ class TickerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $ticker = new Ticker;
+        $ticker = Ticker::create($request->all());
+        $ticker->save();
+
+        return redirect('/ticker');
     }
 
     /**
@@ -43,7 +47,11 @@ class TickerController extends Controller
      */
     public function update(Request $request, Ticker $ticker)
     {
-        //
+        $chosenTicker = Ticker::find($ticker->id);
+        $chosenTicker->update($request->all());
+        $chosenTicker->save();
+
+        return redirect('/ticker');
     }
 
     /**
@@ -54,6 +62,26 @@ class TickerController extends Controller
      */
     public function destroy(Ticker $ticker)
     {
-        //
+        $chosenTicker = Ticker::find($ticker->id);
+        return ($chosenTicker->delete()) ? "1" : "0";
+    }
+        //Show add page
+    public function showAddTickerPage(){
+        return view('TickerManagement.add_ticker');
+    }
+    
+    public function showEditTickerPage($id){
+        $ticker = Ticker::find($id);
+        $tickerMessage = $ticker->message;
+        $startTime = $ticker->start_time;
+        $endTime = $ticker->end_time;
+        return view('TickerManagement.edit_ticker', compact('startTime','tickerMessage','endTime','id'));
+    }
+
+    public function retrieveTickers(){
+        $tickerLogs = Ticker::all();
+        $tickers = json_encode(array("tickers" => $tickerLogs));
+
+        return $tickers;
     }
 }

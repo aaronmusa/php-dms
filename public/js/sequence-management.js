@@ -78,7 +78,8 @@ $(function() {
 						    'success'
 					  	)
 	    				deleteBtn.parents('tr')[0].remove();
-	    				retrieveLogs()            		} 
+	    				retrieveLogs();
+	    				retrieveTickers();            		} 
             		else{
             			swal(
 						  'Oops...',

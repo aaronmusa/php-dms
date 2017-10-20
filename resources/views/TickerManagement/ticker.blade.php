@@ -1,16 +1,25 @@
 @extends('layout.admin_bsb')
 @section('ticker-management-content')
     <!-- Custom -->
-    <script src="{{ asset('js/ticker-management.js') }}"></script>
+    <script src="{{ asset('js/ticker.js') }}"></script>
     <input type = "hidden" id = "routeName" value = "{{\Route::currentRouteName()}}"
     <section class="content">
+        <!-- Time display -->
+            <div class = "container-fluid" style = "padding-top:20px;">
+                <div class='col-sm-1'>
+                    <label for="url">Time:</label>
+                </div>
+                <div class='col-sm-4'>
+                    <label for='time'>00:00:00</label>
+                </div>
+            </div>
             <!-- PHP hidden inputs -->
         <input type = "hidden" id = "websocketUrl" value = "{{$websocketUrl}}">
         <div class="container-fluid">
             <div class="block-header">
                 <h2>Ticker Management</h2>
             </div>
-           <input type = "hidden" id = "tickers" value = "{{$tickers}}">
+           <input type = "hidden" id = "tickers" value = "{{$tickerManagement}}">
             <input type = "hidden" id = "websocketUrl" value = "{{$websocketUrl}}">
              <!-- Logout form -->
             <form id="logout-form" action="{{ route('logout') }}" method="POST">
@@ -36,7 +45,7 @@
                                     TICKERS
                                 </h2>
                                 <div style = "padding-top:10px;" >
-                                    <a href = "{{ route('addPage') }}"><button type = "submit" id = "add" class = "btn btn-info waves-effect"><i class = 'material-icons'>add</i></button></a>
+                                    <a href = "{{ route('addTickerPage') }}"><button type = "submit" id = "add" class = "btn btn-info waves-effect"><i class = 'material-icons'>add</i></button></a>
                                 </div>
                             </div>
                             <div class="container-fluid">
@@ -60,10 +69,10 @@
                                                     <td>{{$ticker->message}}</td>
                                                     <input type = "hidden" class = "ticker_start_time" value = "{{$ticker->start_time}}">
                                                     <td>{{$ticker->start_time}}</td>
-                                                    <input type = "hidden" class = "endTime" value = "{{$ticker->end_time}}">
+                                                    <input type = "hidden" class = "ticker_end_time" value = "{{$ticker->end_time}}">
                                                     <td>{{$ticker->end_time}}</td>
                                                     <td align="center">
-                                                        <a href = "{{ route('editPage',$ticker->id) }}" ><button type = "submit" name = "editBtn" value = "{{$ticker->id}}" class = "btn btn-info waves-effect"><i class="material-icons">mode_edit</i></button></a>
+                                                        <a href = "{{ route('editTickerPage',$ticker->id) }}" ><button type = "submit" name = "editBtn" value = "{{$ticker->id}}" class = "btn btn-info waves-effect"><i class="material-icons">mode_edit</i></button></a>
                                                         <button type = "button" value = "{{ $ticker->id }}" data-id = "{{ $ticker->id }}" class = "deleteBtn btn btn-danger waves-effect"><i class="material-icons">delete</i></button>       
                                                     </td>
                                                 </tr>

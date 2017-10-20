@@ -102,4 +102,10 @@ class TimeSchedulerController extends Controller
         $endTime = $timeLog->end_time;
         return view('edit_time', compact('startTime','endTime','id'));
     }
+    public function retrieveLogs(){
+        $timeLogs = TimeScheduler::all();
+        $timeManagement = json_encode(array("time_management" => $timeLogs));
+
+        return $timeManagement;
+    }
 }

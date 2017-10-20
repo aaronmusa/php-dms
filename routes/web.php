@@ -27,8 +27,9 @@ Auth::routes();
 
 	Route::resource('time-scheduler', 'TimeSchedulerController', ['only' => ['index','store', 'update', 'destroy']]);
 
-	Route::get('/home', 'HomeController@index')->name('home');
+	Route::get('/retrieve-logs', 'TimeSchedulerController@retrieveLogs')->name('logs');
 
 	Route::post('video-streaming-url','VideoStreamingUrl@setUrl');
+
 
 });

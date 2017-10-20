@@ -47,22 +47,21 @@ function setCurrentTime(){
 	$('.currentTime').val(time);
 }
 
-function testId(){
-jsonObj = [];
-item = {}
-    $(".log-id").each(function() {
-
-    	var title = "id";
-        var id = $(this).val();
-
-        
-        item ["title"] = title;
-        item ["id"] = id;
-
-        jsonObj.push(item);
+function retrieveLogs(){
+	var token = $("input[name=_token]").val();
+	$.ajax({
+        url: 'retrieve-logs/',
+        type: 'GET',
+        data: {
+        	"_token": token,
+        },
+        success: function(result) {
+    		sendMessage(result);
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+        	console.log("error");
+        }
     });
-
-    console.log(JSON.stringify(jsonObj));
 }
 
 

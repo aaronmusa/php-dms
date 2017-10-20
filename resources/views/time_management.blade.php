@@ -92,6 +92,8 @@
                                                 <tr>
                                                     <th scope="row">{{$log->id}}</th>
                                                     <input type = "hidden" class = "log-id" value = "{{$log->id}}">
+                                                    <input type = "hidden" class = "log-update-at" value = "{{$log->updated_at}}">
+                                                    <input type = "hidden" class = "log-created-at" value = "{{$log->created_at}}">
                                                     <input type = "hidden" class = "startTime" value = "{{$log->start_time}}">
                                                     <td>{{$log->start_time}}</td>
                                                     <input type = "hidden" class = "endTime" value = "{{$log->end_time}}">

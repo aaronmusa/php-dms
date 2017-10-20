@@ -1,6 +1,5 @@
 $(function() {
 
-	// testId();
 
 	setCurrentTime();
 
@@ -79,8 +78,7 @@ $(function() {
 						    'success'
 					  	)
 	    				deleteBtn.parents('tr')[0].remove();
-	    				sendMessage(logs);
-            		} 
+	    				retrieveLogs()            		} 
             		else{
             			swal(
 						  'Oops...',

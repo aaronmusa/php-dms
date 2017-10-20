@@ -6,8 +6,6 @@
 </head>
 
 <body class="theme-blue">
-
-
     <!-- Page Loader -->
     <div class="page-loader-wrapper">
         <div class="loader">
@@ -70,11 +68,11 @@
             <!-- User Info -->
             <div class="user-info">
                 <div class="image">
-                    <img src="/admin/images/user.png" width="48" height="48" alt="User" />
+                    <!-- <img src="/admin/images/user.png" width="48" height="48" alt="User" /> -->
                 </div>
                 <div class="info-container">
-                    <div style = "color: black;" class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">John Doe</div>
-                    <div style = "color: black;" class="email">john.doe@example.com</div>
+                    <div style = "color: black;" class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</div>
+                    <div style = "color: black;" class="email">admin@gmail.com</div>
                 </div>
             </div>
             <!-- #User Info -->
@@ -92,6 +90,12 @@
                         <a href="{{url('/')}}/connections">
                             <i class="material-icons">cast_connected</i>
                             <span>Connections</span>
+                        </a>
+                    </li>
+                    <li {{ setActive('ticker') }}>
+                        <a href="{{url('/')}}/ticker">
+                            <i class="material-icons">cast_connected</i>
+                            <span>Tickers</span>
                         </a>
                     </li>
                     <li>
@@ -125,6 +129,7 @@
     @yield('add-time-content')
     @yield('edit-time-content')
     @yield('connections-content')
+    @yield('ticker-management-content')
 
 <!-- Websocket js -->
     <script src="{{ asset('js/socket.js') }}"></script>

@@ -2,7 +2,14 @@
 //The homestead or local host server (don't forget the ws prefix)
 var host =  $("#websocketUrl").val();
 var socket = null;
-var logs = $('#timeLogs').val();
+var currentRouteName = $('#routeName').val();
+if (currentRouteName == 'ticker.index'){
+    var logs =  $('#tickers').val();
+}
+else{
+   var logs = $('#timeLogs').val(); 
+}
+
 var connected = false;
 
 function runWebsocket() {

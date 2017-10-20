@@ -31,5 +31,7 @@ Auth::routes();
 
 	Route::post('video-streaming-url','VideoStreamingUrl@setUrl');
 
+	Route::resource('ticker', 'TickerController', ['only' => ['index','store', 'update', 'destroy']]);
+
 
 });

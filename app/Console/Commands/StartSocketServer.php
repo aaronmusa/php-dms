@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 
 use App\TimeScheduler;
+use App\Ticker;
 use Config;
 use Illuminate\Support\Facades\Storage;
 
@@ -51,9 +52,11 @@ class StartSocketServer extends Command
         $websocket->on('open', function (\Hoa\Event\Bucket $bucket) {
             $urlStorage = Storage::get('video-streaming-url.txt');
             $time_management = array("time_management" => TimeScheduler::all());
+            $tickers = array("tickers" => Ticker::all());
             $liveUrl =  array("live_url" => $urlStorage);
             echo "Connection Opened\n";
             $bucket->getSource()->send(json_encode($time_management));
+            $bucket->getSource()->send(json_encode($tickers));
             $bucket->getSource()->send(json_encode($liveUrl));
             return;
         });

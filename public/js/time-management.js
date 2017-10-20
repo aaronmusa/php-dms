@@ -52,9 +52,7 @@ $(function() {
 	setCurrentTime();
 
 	integrateDatePicker();
-	// var logs = $('#logs').val();
-	// console.log(JSON.stringify("'"+ logs + "'", replacer));
-	// 			console.log(logs);
+	var logs = $('#timeLogs').val();
 
 	var addButtonCounter = 0;
 	var counter = 0;
@@ -128,6 +126,7 @@ $(function() {
 						    'success'
 					  	)
 	    				deleteBtn.parents('tr')[0].remove();
+	    				sendMessage(logs);
             		} 
             		else{
             			swal(

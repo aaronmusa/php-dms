@@ -6,6 +6,7 @@ var socket = null;
 var timeManagementJson = $('#timeLogs').val();
 var timeLogs = JSON.parse(timeManagementJson);
 var connected = false;
+var urlInput = $('#urlInput').val();
 
 function runWebsocket() {
     try {
@@ -15,6 +16,7 @@ function runWebsocket() {
         socket.onopen = function () {
             console.log('Connection Opened');    
             sendMessage(timeManagementJson);
+            sendMessage('{"live_url": "'+ urlInput +'"}');
             connected = true;
             return;
         };

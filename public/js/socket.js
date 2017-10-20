@@ -2,21 +2,23 @@
 //The homestead or local host server (don't forget the ws prefix)
 var host =  $("#websocketUrl").val();
 var socket = null;
+var currentRouteName = $('#routeName').val();
+if (currentRouteName != 'connections.index') {
+    var timeManagementJson = $('#timeLogs').val();
+    var timeLogs = JSON.parse(timeManagementJson);
+    var connected = false;
+    var urlInput = $('#urlInput').val();
+}
 
-var timeManagementJson = $('#timeLogs').val();
-var timeLogs = JSON.parse(timeManagementJson);
-var connected = false;
-var urlInput = $('#urlInput').val();
 
 function runWebsocket() {
+
     try {
         socket = new WebSocket(host);
         
         //Manages the open event within your client code
         socket.onopen = function () {
             console.log('Connection Opened');    
-            sendMessage(timeManagementJson);
-            sendMessage('{"live_url": "'+ urlInput +'"}');
             connected = true;
             return;
         };

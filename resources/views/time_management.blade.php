@@ -1,8 +1,9 @@
 @extends('layout.admin_bsb')
 @section('time-management-content')
+    <!-- Custom -->
+    <script src="{{ asset('js/sequence-management.js') }}"></script>
     <section class="content">
             <!-- PHP hidden inputs -->
-        <input type = "hidden" id = "timeLogs" value = "{{$timeManagement}}">
         <input type = "hidden" id = "websocketUrl" value = "{{$websocketUrl}}">
         <div class="container-fluid">
             <div class="block-header">
@@ -79,6 +80,7 @@
                                             @foreach ($timeLogs as $log)
                                                 <tr>
                                                     <th scope="row">{{$log->id}}</th>
+                                                    <input type = "hidden" class = "log-id" value = "{{$log->id}}">
                                                     <input type = "hidden" class = "startTime" value = "{{$log->start_time}}">
                                                     <td>{{$log->start_time}}</td>
                                                     <input type = "hidden" class = "endTime" value = "{{$log->end_time}}">

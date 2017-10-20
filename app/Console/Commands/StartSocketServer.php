@@ -47,10 +47,14 @@ class StartSocketServer extends Command
         
         $websocket = new \Hoa\Websocket\Server(new \Hoa\Socket\Server(Config::get('websocket.url')));
        
+
         $websocket->on('open', function (\Hoa\Event\Bucket $bucket) {
+            $urlStorage = Storage::get('video-streaming-url.txt');
             $time_management = array("time_management" => TimeScheduler::all());
+            $liveUrl =  json_encode(array("live_url" => $urlStorage));
             echo "Connection Opened\n";
             $bucket->getSource()->send(json_encode($time_management));
+            $bucket->getSource()->send(json_encode($liveUrl));
             return;
         });
 

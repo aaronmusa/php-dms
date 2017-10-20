@@ -95,5 +95,11 @@ $(function() {
             });
 		}).catch(swal.noop)	
     });
+    $('#startBtn').click(function(){
+    	sendMessage("START");
+    });
+    $('#stopBtn').click(function(){
+    	sendMessage("STOP");
+    });
     
 });

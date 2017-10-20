@@ -52,6 +52,16 @@
                     </div>
                 </form>
             </div>
+             <div class = "container-fluid" style = "padding-top:20px;">
+                <div class='col-sm-1'>
+                    <label for="url">Action:</label>
+                </div>
+                <div class='col-sm-5'>
+                    <button class = "btn btn-primary waves-effect" type = "button" id = "startBtn" value = "START">START</button>
+                    <button class = "btn btn-danger waves-effect" type = "button" id = "stopBtn" value = "START">STOP</button>
+                </div>
+                
+            </div>
             <!-- Time Inputs -->
             <div class = "container-fluid" style = "padding-top: 30px;">
                 <div class="row clearfix">

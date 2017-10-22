@@ -21,7 +21,7 @@
 			                	<label for="message">Message</label>
 			                    <div class="form-group">
 			                        <div class="form-line">
-                                        <textarea name = "message" rows="4" class="form-control no-resize" placeholder="Please type what you want..."></textarea>
+                                        <textarea name = "message" rows="4" class="form-control no-resize" placeholder="Please type what you want..." required></textarea>
                                     </div>
 			                    </div>
 			                    <label for="start_time">Start Time</label>

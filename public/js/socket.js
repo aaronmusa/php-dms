@@ -3,13 +3,6 @@
 var host =  $("#websocketUrl").val();
 var socket = null;
 var currentRouteName = $('#routeName').val();
-if (currentRouteName == 'ticker.index'){
-    var logs =  $('#tickers').val();
-}
-else{
-   var logs = $('#timeLogs').val(); 
-}
-
 var connected = false;
 
 function runWebsocket() {
@@ -20,7 +13,6 @@ function runWebsocket() {
         //Manages the open event within your client code
         socket.onopen = function () {
             console.log('Connection Opened');  
-            sendMessage(logs);  
             connected = true;
             return;
         };

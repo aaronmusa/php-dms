@@ -2,6 +2,7 @@
 @section('add-ticker-content')
 	 <script src="{{ asset('js/ticker.js') }}"></script>
     <section class="content">
+    <input type = "hidden" id = "websocketUrl" value = "{{$websocketUrl}}">
         <div class="container-fluid">
             <div class="block-header">
                 <h2>ADD TICKER</h2>

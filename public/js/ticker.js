@@ -9,30 +9,30 @@ $(function() {
 	var counter = 0;
 	var tickerMessageArray = [];
 
-	$(".ticker_message").each(function() {
-	 		tickerMessageArray.push($(this).val());
-	 });
+	// $(".ticker_message").each(function() {
+	//  		tickerMessageArray.push($(this).val());
+	//  });
 
-	window.setInterval(function(){ 
+	// window.setInterval(function(){ 
 
-		$("label[for='time']").html(showTime())
+	// 	$("label[for='time']").html(showTime())
 
 			
-		$(".ticker_start_time").each(function(index, element) {
-			var message = tickerMessageArray[index];
-			var startTickerJson = '{"start_ticker":' + '"'+ message + '"' + '}';
-			sendDMSSwitcher(element, startTickerJson);
-		});
+	// 	$(".ticker_start_time").each(function(index, element) {
+	// 		var message = tickerMessageArray[index];
+	// 		var startTickerJson = '{"start_ticker":' + '"'+ message + '"' + '}';
+	// 		sendDMSSwitcher(element, startTickerJson);
+	// 	});
 
-		$(".ticker_end_time").each(function(index, element) {
-			sendDMSSwitcher(element, "END_TICKER");
-		});
+	// 	$(".ticker_end_time").each(function(index, element) {
+	// 		sendDMSSwitcher(element, "END_TICKER");
+	// 	});
 
-		if (this.connected == false) {
-			runWebsocket();
-		}
+	// 	if (this.connected == false) {
+	// 		runWebsocket();
+	// 	}
 
-	}, 1000);
+	// }, 1000);
 
     $(".deleteBtn").on('click',function(){
 		var deleteBtn = $(this);
@@ -62,8 +62,8 @@ $(function() {
 						    'success'
 					  	)
 	    				deleteBtn.parents('tr')[0].remove();
-	    				retrieveLogs()  
-	    				retrieveTickers()          		
+	    				retrieveLogsOnDelete()  
+	    				retrieveTickersOnDelete()          		
 	    			}else{
 	        			swal(
 						  'Oops...',

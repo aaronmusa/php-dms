@@ -93,16 +93,18 @@ class TimeSchedulerController extends Controller
     }
     //Show add page
     public function showAddPage(){
-        return view('TimeManagement.add_time');
+         $websocketUrl = Config::get('websocket.url');
+        return view('TimeManagement.add_time',compact('websocketUrl'));
     }
 
     public function showEditPage($id){
         $timeLog = TimeScheduler::find($id);
         $startTime = $timeLog->start_time;
         $endTime = $timeLog->end_time;
-        return view('TimeManagement.edit_time', compact('startTime','endTime','id'));
+        $websocketUrl = Config::get('websocket.url');
+        return view('TimeManagement.edit_time', compact('startTime','endTime','id','websocketUrl'));
     }
-    public function retrieveLogs(){
+    public function retrieveLogsOnDelete(){
         $timeLogs = TimeScheduler::all();
         $timeManagement = json_encode(array("time_management" => $timeLogs));
 

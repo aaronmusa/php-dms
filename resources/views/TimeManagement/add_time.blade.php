@@ -2,6 +2,7 @@
 @section('add-time-content')
 	 <script src="{{ asset('js/sequence-management.js') }}"></script>
     <section class="content">
+    <input type = "hidden" id = "websocketUrl" value = "{{$websocketUrl}}">
         <div class="container-fluid">
             <div class="block-header">
                 <h2>ADD TIME</h2>

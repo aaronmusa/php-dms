@@ -1,5 +1,6 @@
 function sendDMSSwitcher(element, message) {
-	var startTime = element.value;
+	var startTime = element;
+		startTime = startTime.replace(/\"/g, "");
 		var timeString = startTime.split(":");
 		var hour = parseInt(timeString[0]);
 		var minutes = parseInt(timeString[1]);
@@ -47,7 +48,7 @@ function setCurrentTime(){
 	$('.currentTime').val(time);
 }
 
-function retrieveLogs(){
+function retrieveLogsOnDelete(){
 	var token = $("input[name=_token]").val();
 	$.ajax({
         url: 'retrieve-logs',
@@ -63,7 +64,7 @@ function retrieveLogs(){
         }
     });
 }
-function retrieveTickers(){
+function retrieveTickersOnDelete(){
 	var token = $("input[name=_token]").val();
 	$.ajax({
         url: 'retrieve-tickers',
@@ -79,5 +80,75 @@ function retrieveTickers(){
         }
     });
 }
+function fetchTimeLogs(logs){
+	var token = $("input[name=_token]").val();
+	$.ajax({
+        url: '/retrieve-logs',
+        type: 'GET',
+        data: {
+        	"_token": token,
+        },
+        success: function(result) {
+    		logs($.parseJSON(result));
+    	},
+        error: function(xhr, ajaxOptions, thrownError) {
+        	console.log(thrownError);
+        	logs(thrownError);
+        }
+    });
+}
+
+fetchTimeLogs(function(result){
+	window.setInterval(function(){
+		$.each(result.time_management, function(index,element){
+			var startTime = JSON.stringify(element.start_time);
+			sendDMSSwitcher(startTime, "FBLIVE");
+		});
+
+		$.each(result.time_management, function(index,element){
+			var endTime = JSON.stringify(element.end_time);
+			sendDMSSwitcher(endTime, "DMS");
+		});
+		$("label[for='time']").html(showTime())
+
+		if (this.connected == false) {
+			runWebsocket();
+		}
+	}, 1000);
+});
+
+function fetchTickers(tickers){
+	var token = $("input[name=_token]").val();
+	$.ajax({
+        url: '/retrieve-tickers',
+        type: 'GET',
+        data: {
+        	"_token": token,
+        },
+        success: function(result) {
+    		tickers($.parseJSON(result));
+    	},
+        error: function(xhr, ajaxOptions, thrownError) {
+        	console.log(thrownError);
+        	tickers(thrownError);
+        }
+    });
+}
+
+fetchTickers(function(result){
+	window.setInterval(function(){
+		$.each(result.tickers, function(index,element){
+			var startTime = JSON.stringify(element.start_time);
+			var message = JSON.stringify(element.message);
+			var startTickerJson = '{"start_ticker":' + message + '}';
+			sendDMSSwitcher(startTime, startTickerJson);
+		});
+
+		$.each(result.tickers, function(index,element){
+			var endTime = JSON.stringify(element.end_time);
+			sendDMSSwitcher(endTime, "END_TICKER");
+		});
+	}, 1000);
+});
 
 

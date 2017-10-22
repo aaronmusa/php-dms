@@ -67,7 +67,9 @@ class TickerController extends Controller
     }
         //Show add page
     public function showAddTickerPage(){
-        return view('TickerManagement.add_ticker');
+        $websocketUrl = Config::get('websocket.url');
+
+        return view('TickerManagement.add_ticker',compact('websocketUrl'));
     }
     
     public function showEditTickerPage($id){
@@ -75,10 +77,11 @@ class TickerController extends Controller
         $tickerMessage = $ticker->message;
         $startTime = $ticker->start_time;
         $endTime = $ticker->end_time;
-        return view('TickerManagement.edit_ticker', compact('startTime','tickerMessage','endTime','id'));
+        $websocketUrl = Config::get('websocket.url');
+        return view('TickerManagement.edit_ticker', compact('startTime','tickerMessage','endTime','id','websocketUrl'));
     }
 
-    public function retrieveTickers(){
+    public function retrieveTickersOnDelete(){
         $tickerLogs = Ticker::all();
         $tickers = json_encode(array("tickers" => $tickerLogs));
 

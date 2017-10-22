@@ -1,6 +1,5 @@
 $(function() {
-
-
+	
 	setCurrentTime();
 
 	integrateDatePicker();
@@ -9,32 +8,8 @@ $(function() {
 	var addButtonCounter = 0;
 	var counter = 0;
 
-	window.setInterval(function(){ // Set interval for checking
-	// $(timeLogs.time_management).each(function(index, element) {
-	// 	console.log(element.id);
-	// });
-
-		$("label[for='time']").html(showTime())
-		
-			
-		$(".startTime").each(function(index, element) {
-			sendDMSSwitcher(element, "FBLIVE");
-		});
-
-		$(".endTime").each(function(index, element) {
-			sendDMSSwitcher(element, "DMS");
-		});
-
-		if (this.connected == false) {
-			runWebsocket();
-		}
-
-	}, 1000);
-
 	$('#fbLiveSwitcher').click(function(){
     	var urlStorage = $('#urlStorage').val();
-    	var videoStreamingUrl = '{"live_url": "'+ urlStorage +'" }';
-    	//sendMessage(videoStreamingUrl);
     	sendMessage("FBLIVE");
 
     });
@@ -46,7 +21,6 @@ $(function() {
     $('#updateUrl').click(function(){
     	var urlInput = $("#urlInput").val();
     	var videoStreamingUrl = '{"live_url": "'+ urlInput +'" }';
-    	console.log(videoStreamingUrl);
     	sendMessage(videoStreamingUrl);
     });
 
@@ -78,9 +52,9 @@ $(function() {
 						    'success'
 					  	)
 	    				deleteBtn.parents('tr')[0].remove();
-	    				retrieveLogs();
-	    				retrieveTickers();            		} 
-            		else{
+	    				retrieveLogsOnDelete();
+	    				retrieveTickersOnDelete();   
+	    			}else{
             			swal(
 						  'Oops...',
 						  'Something went wrong!',

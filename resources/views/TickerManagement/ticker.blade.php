@@ -2,17 +2,8 @@
 @section('ticker-management-content')
     <!-- Custom -->
     <script src="{{ asset('js/ticker.js') }}"></script>
-    <input type = "hidden" id = "routeName" value = "{{\Route::currentRouteName()}}"
+    <input type = "hidden" id = "routeName" value = "{{\Route::currentRouteName()}}">
     <section class="content">
-        <!-- Time display -->
-            <div class = "container-fluid" style = "padding-top:20px;">
-                <div class='col-sm-1'>
-                    <label for="url">Time:</label>
-                </div>
-                <div class='col-sm-4'>
-                    <label for='time'>00:00:00</label>
-                </div>
-            </div>
             <!-- PHP hidden inputs -->
         <input type = "hidden" id = "websocketUrl" value = "{{$websocketUrl}}">
         <div class="container-fluid">

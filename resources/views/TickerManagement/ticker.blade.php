@@ -25,6 +25,19 @@
                     <label for='time'>00:00:00</label>
                 </div>
             </div>
+            <div class = "container-fluid" style = "padding-top:20px;">
+                <div class='col-sm-1'>
+                    <label for="url">URL:</label>
+                </div>
+                    {{ csrf_field() }}
+                <div class='col-sm-4'>
+                    <input name = "tickerInput" id = "tickerInput" class = "form-control" type = "text" value = "Sample Ticker">
+                </div>
+                <div class='col-sm-4'>
+                    <button type = "submit" id = "startTicker" class = "btn btn-info waves-effect">START TICKER</button>
+                    <button type = "submit" id = "endTicker" class = "btn btn-info waves-effect">END TICKER</button>
+                </div>
+            </div>
 
             <!-- Time Inputs -->
             <div class = "container-fluid" style = "padding-top: 30px;">

@@ -79,5 +79,14 @@ $(function() {
 		}).catch(swal.noop)	
     });
 
+   $('#startTicker').click(function(){
+   		var message = $('#tickerInput').val();
+   		var jsonMessage = '{"start_ticker":' + '"' + message + '"' + '}';
+   		sendMessage(jsonMessage)
+   });
+
+   $('#endTicker').click(function(){
+   		sendMessage("END_TICKER");
+   });
     
 });

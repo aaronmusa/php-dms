@@ -27,7 +27,7 @@ Auth::routes();
 
 	Route::resource('time-scheduler', 'TimeSchedulerController', ['only' => ['index','store', 'update', 'destroy']]);
 
-	Route::get('retrieve-logs', 'TimeSchedulerController@retrieveLogsOnDelete')->name('logs');
+	Route::get('/retrieve-logs', 'TimeSchedulerController@retrieveLogsOnDelete')->name('logs');
 
 	Route::post('video-streaming-url','VideoStreamingUrl@setUrl');
 
@@ -37,7 +37,7 @@ Auth::routes();
 
 	Route::get('edit-ticker/{id}', 'TickerController@showEditTickerPage')->name('editTickerPage');
 
-	Route::get('//retrieve-tickers', 'TickerController@retrieveTickersOnDelete')->name('tickers');
+	Route::get('/retrieve-tickers', 'TickerController@retrieveTickersOnDelete')->name('tickers');
 
 
 });

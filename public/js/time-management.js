@@ -83,7 +83,7 @@ function retrieveTickersOnDelete(){
 function fetchTimeLogs(logs){
 	var token = $("input[name=_token]").val();
 	$.ajax({
-        url: '/retrieve-logs',
+        url: 'retrieve-logs',
         type: 'GET',
         data: {
         	"_token": token,
@@ -120,7 +120,7 @@ fetchTimeLogs(function(result){
 function fetchTickers(tickers){
 	var token = $("input[name=_token]").val();
 	$.ajax({
-        url: '/retrieve-tickers',
+        url: 'retrieve-tickers',
         type: 'GET',
         data: {
         	"_token": token,

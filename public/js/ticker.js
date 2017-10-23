@@ -80,9 +80,10 @@ $(function() {
     });
 
    $('#startTicker').click(function(){
-   		var message = $('#tickerInput').val();
+   		var message = $('#tickerMessage').val();
    		var jsonMessage = '{"start_ticker":' + '"' + message + '"' + '}';
    		sendMessage(jsonMessage)
+   		console.log(jsonMessage);
    });
 
    $('#endTicker').click(function(){

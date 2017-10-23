@@ -31,6 +31,8 @@ Auth::routes();
 
 	Route::post('video-streaming-url','VideoStreamingUrl@setUrl');
 
+	Route::post('ticker-message','VideoStreamingUrl@setTickerMessage');
+
 	Route::resource('ticker', 'TickerController', ['only' => ['index','store', 'update', 'destroy']]);
 
 	Route::get('add-ticker', 'TickerController@showAddTickerPage')->name('addTickerPage');

@@ -7,7 +7,7 @@
         <input type = "hidden" id = "websocketUrl" value = "{{$websocketUrl}}">
         <div class="container-fluid">
             <div class="block-header">
-                <h2>Time Scheduler</h2>
+                <h2>Sequence Management</h2>
             </div>
            <input type = "hidden" id = "timeLogs" value = "{{$timeManagement}}">
             <input type = "hidden" id = "websocketUrl" value = "{{$websocketUrl}}">
@@ -69,9 +69,6 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="card">
                             <div class="header">
-                                <h2>
-                                    TIME MANAGEMENT
-                                </h2>
                                 <div style = "padding-top:10px;" >
                                     <a href = "{{ route('addPage') }}"><button type = "submit" id = "add" class = "btn btn-info waves-effect"><i class = 'material-icons'>add</i></button></a>
                                 </div>

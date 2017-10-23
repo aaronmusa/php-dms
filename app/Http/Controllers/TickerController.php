@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Ticker;
 use Illuminate\Http\Request;
 use Config;
+use Illuminate\Support\Facades\Storage;
 
 class TickerController extends Controller
 {
@@ -19,7 +20,23 @@ class TickerController extends Controller
 
         $websocketUrl = Config::get('websocket.url');
 
-        return view('TickerManagement.ticker', compact('tickers', 'tickerManagement','websocketUrl'));
+        $exists = Storage::disk('local')->exists('ticker-message.txt');
+        if (!$exists) {
+            $tickerMessage = "Sample Ticker";
+            Storage::disk('local')->put('ticker-message.txt', $urlStorage);
+        }
+        else{
+            $tickerMessage = Storage::get('ticker-message.txt');
+            
+            if ($tickerMessage == ''){
+                $tickerMessage = "Sample Tocker";
+            }
+            else{
+               $tickerMessage = Storage::get('ticker-message.txt'); 
+            }  
+        }
+
+        return view('TickerManagement.ticker', compact('tickers', 'tickerManagement','websocketUrl','tickerMessage'));
     }
 
 

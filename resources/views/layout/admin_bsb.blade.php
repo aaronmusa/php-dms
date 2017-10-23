@@ -95,7 +95,7 @@
                     <li {{ setActive('ticker') }} {{ setActive('add-ticker') }} {{ setActive('edit-ticker') }}>
                         <a href="{{url('/')}}/ticker">
                             <i class="material-icons">short_text</i>
-                            <span>Tickers</span>
+                            <span>Ticker Management</span>
                         </a>
                     </li>
                     <li>

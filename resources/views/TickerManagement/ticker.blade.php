@@ -27,15 +27,26 @@
             </div>
             <div class = "container-fluid" style = "padding-top:20px;">
                 <div class='col-sm-1'>
-                    <label for="url">URL:</label>
+                    <label for="url">Message:</label>
                 </div>
+                <form method = "POST" action = "{{url('/')}}/ticker-message">
                     {{ csrf_field() }}
-                <div class='col-sm-4'>
-                    <input name = "tickerInput" id = "tickerInput" class = "form-control" type = "text" value = "Sample Ticker">
+                    <div class='col-sm-4'>
+                        <input type = "hidden" id = "tickerMessage" value = "{{ $tickerMessage }}">
+                        <input name = "tickerInput" id = "tickerInput" class = "form-control" type = "text" value = "{{ $tickerMessage }}">
+                    </div>
+                    <div class='col-sm-4'>
+                        <button type = "submit" id = "updateTickerMessage" class = "btn btn-warning waves-effect">UPDATE</button>
+                    </div>
+                </form>
+            </div>
+            <div class = "container-fluid" style = "padding-top:20px;">
+                <div class='col-sm-1'>
+                    <label for="url">Action:</label>
                 </div>
-                <div class='col-sm-4'>
-                    <button type = "submit" id = "startTicker" class = "btn btn-info waves-effect">START TICKER</button>
-                    <button type = "submit" id = "endTicker" class = "btn btn-info waves-effect">END TICKER</button>
+                 <div class='col-sm-4'>
+                    <button type = "button" id = "startTicker" class = "btn btn-success waves-effect">START TICKER</button>
+                    <button type = "button" id = "endTicker" class = "btn btn-danger waves-effect">END TICKER</button>
                 </div>
             </div>
 
@@ -45,9 +56,6 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="card">
                             <div class="header">
-                                <h2>
-                                    TICKERS
-                                </h2>
                                 <div style = "padding-top:10px;" >
                                     <a href = "{{ route('addTickerPage') }}"><button type = "submit" id = "add" class = "btn btn-info waves-effect"><i class = 'material-icons'>add</i></button></a>
                                 </div>

@@ -31,6 +31,7 @@ class TimeSchedulerController extends Controller
         $exists = Storage::disk('local')->exists('video-streaming-url.txt');
         if (!$exists) {
             $urlStorage = "about:blank";
+            Storage::disk('local')->put('video-streaming-url.txt', $urlStorage);
         }
         else{
             $urlStorage = Storage::get('video-streaming-url.txt');

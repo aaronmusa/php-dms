@@ -70,10 +70,10 @@
                     <label for="url">Action:</label>
                 </div>
                 <div class='col-sm-9'>
-                    <button class = "btn btn-primary waves-effect" type = "button" id = "startBtn" value = "START">START</button>
-                    <button class = "btn btn-danger waves-effect" type = "button" id = "stopBtn" value = "START">STOP</button>
+                    <button class = "btn btn-primary waves-effect" type = "button" id = "startBtn" value = "START">START DMS</button>
+                    <button class = "btn btn-danger waves-effect" type = "button" id = "stopBtn" value = "START">STOP DMS</button>
                     <button type = "button" id = "startTicker" class = "btn btn-success waves-effect">START TICKER</button>
-                    <button type = "button" id = "endTicker" class = "btn btn-danger waves-effect">END TICKER</button>
+                    <button type = "button" id = "endTicker" class = "btn btn-danger waves-effect">STOP TICKER</button>
                     <!--  <button class = "btn btn-warning waves-effect" type = "button" id = "restartBtn" value = "RESTART">RESTART</button> -->
                 </div>
                 
@@ -85,19 +85,19 @@
                         <div class="card">
                             <div class="container-fluid">
                                 <div class="body table-responsive">
-                                    <table class="table table-hover">
+                                    <table class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>Time</th>
-                                                <th>Action</th>
+                                                <th style = "text-align:center;">Time</th>
+                                                <th style = "text-align:center;">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                          @foreach ($controlPanelData as $log)
                                                 <tr>
-                                                    <th scope="row">{{$log->time}}</th>
+                                                    <td class = "time" align = "center" data-value = "{{ $log->time }}">{{$log->time}}</th>
                                                     <input type = "hidden" class = "log-id" value = "{{$log->id}}">
-                                                    <td>{{$log->returnMessage}}</td>
+                                                    <td align = "center">{{$log->returnMessage}}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

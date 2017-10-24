@@ -1,4 +1,12 @@
 $(function() {
+    window.setInterval(function(){
+        $(".time").each(function(){
+            var scheduledTime = $(this).data("value");
+            if (scheduledTime < showTime()){
+                $(this).parents('tr')[0].remove();
+            }
+        });
+    },1000);
 
     $('#fbLiveSwitcher').click(function(){
         var urlStorage = $('#urlStorage').val();

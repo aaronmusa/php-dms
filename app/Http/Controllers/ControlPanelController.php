@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Config;
 use App\ControlPanel;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class ControlPanelController extends Controller
 {
@@ -16,7 +17,8 @@ class ControlPanelController extends Controller
      */
     public function index()
     {
-         $controlPanelData = ControlPanel::all()->sortBy('time')->values();
+         $controlPanelData =  DB::select('SELECT * FROM control_panels order by time LIMIT 10');
+
 
         $websocketUrl = Config::get('websocket.url');
         $tickerMessageExists = Storage::disk('local')->exists('ticker-message.txt');

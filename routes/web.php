@@ -43,5 +43,7 @@ Auth::routes();
 
 	Route::resource('control-panel', 'ControlPanelController', ['only' => ['index']]);
 
+	Route::get('/fetch-control-panel-view', 'ControlPanelController@fetchControlPanelView')->name('fetchControlPanelView');
+
 
 });

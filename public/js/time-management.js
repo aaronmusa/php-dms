@@ -1,3 +1,4 @@
+
 function sendDMSSwitcher(element, message) {
 	var startTime = element;
 		startTime = startTime.replace(/\"/g, "");
@@ -150,5 +151,31 @@ fetchTickers(function(result){
 		});
 	}, 1000);
 });
+
+ function fetchControlPanelView(data){
+        var token = $("input[name=_token]").val();
+        $.ajax({
+            url: 'fetch-control-panel-view',
+            type: 'GET',
+            data: {
+                "_token": token,
+            },
+            success: function(result) {
+                data($.parseJSON(result));
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                console.log(thrownError);
+                tickers(thrownError);
+            }
+        });
+    }
+function test(){
+    console.log("hello");
+}
+
+
+
+
+
 
 

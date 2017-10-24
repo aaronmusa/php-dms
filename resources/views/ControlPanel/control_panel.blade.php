@@ -88,14 +88,7 @@
                                                 <th style = "text-align:center;">Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                         @foreach ($controlPanelData as $log)
-                                                <tr>
-                                                    <td class = "time" align = "center" data-value = "{{ $log->time }}">{{$log->time}}</th>
-                                                    <input type = "hidden" class = "log-id" value = "{{$log->id}}">
-                                                    <td align = "center">{{$log->returnMessage}}</td>
-                                                </tr>
-                                            @endforeach
+                                        <tbody id = "tableBody">
                                         </tbody>
                                     </table>
                                 </div>

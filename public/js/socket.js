@@ -5,8 +5,9 @@ var socket = null;
 var currentRouteName = $('#routeName').val();
 var connected = false;
 
-function runWebsocket() {
 
+
+function runWebsocket() {
     try {
         socket = new WebSocket(host);
         
@@ -14,11 +15,24 @@ function runWebsocket() {
         socket.onopen = function () {
             console.log('Connection Opened');  
             connected = true;
+            fetchControlPanelView(function(result){
+                sendMessage(result);
+            });
             return;
         };
         //Manages the message event within your client code
         socket.onmessage = function (msg) {
-          console.log(msg.data);
+            fetchControlPanelView(function(result){
+                $('#tableBody').empty();
+                 $.each(result, function(index,element){
+                    var time = JSON.stringify(element.time);
+                    time = time.replace(/\"/g, "");
+                    var message = JSON.stringify(element.returnMessage);
+                    message = message.replace(/\"/g, "");
+                            $('#tableBody').append('<tr><td class = "time" align = "center" data-value = "">'+ time +'</td>' +
+                                             '<td align = "center">'+ message +'</td><tr>');
+                 });
+            });
           return;
         };
         //Manages the close event within your client code

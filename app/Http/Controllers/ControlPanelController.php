@@ -55,4 +55,10 @@ class ControlPanelController extends Controller
 
         return view('ControlPanel.control_panel', compact('websocketUrl','controlPanelData','tickerMessage','urlStorage'));
     }
+
+    public function fetchControlPanelView(){
+         $controlPanelData =  DB::select('SELECT * FROM control_panels order by time LIMIT 10');
+
+         return json_encode($controlPanelData);
+    }
 }

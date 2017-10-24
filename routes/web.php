@@ -41,5 +41,7 @@ Auth::routes();
 
 	Route::get('/retrieve-tickers', 'TickerController@retrieveTickersOnDelete')->name('tickers');
 
+	Route::resource('control-panel', 'ControlPanelController', ['only' => ['index']]);
+
 
 });

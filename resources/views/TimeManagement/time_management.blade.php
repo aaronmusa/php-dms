@@ -15,54 +15,6 @@
             <form id="logout-form" action="{{ route('logout') }}" method="POST">
                 {{ csrf_field() }}
             </form> 
-            <!-- Time display -->
-            <div class = "container-fluid" style = "padding-top:20px;">
-                <div class='col-sm-1'>
-                    <label for="url">Time:</label>
-                </div>
-                <div class='col-sm-4'>
-                    <label for='time'>00:00:00</label>
-                </div>
-            </div>
-            <!-- Switcher -->
-            <div class = "container-fluid" style = "padding-top:20px;">
-                <div class='col-sm-1'>
-                    <label for="url">Switcher:</label>
-                </div>
-                <div class='col-sm-5'>
-                    <button class = "btn btn-info waves-effect" type = "button" id = "fbLiveSwitcher" value = "FBLIVE">VIDEO STREAM</button>
-                    <button class = "btn btn-basic waves-effect" type = "button" id = "dmsSwitcher" value = "DMS">DMS</button>
-                </div>
-                
-            </div>
-            <!-- URL Input -->
-            <div class = "container-fluid" style = "padding-top:20px;">
-                <div class='col-sm-1'>
-                    <label for="url">URL:</label>
-                </div>
-                <form method = "POST" action = "{{url('/')}}/video-streaming-url">
-                    {{ csrf_field() }}
-                    <div class='col-sm-4'>
-                        <input name = "videoStreamingUrl" id = "urlInput" class = "form-control" type = "text" value = @if ($urlStorage != '') "{{ $urlStorage }}" 
-                        @endif >
-                    </div>
-                    <div class='col-sm-4'>
-                        <input type = "hidden" id = "urlStorage" value = "{{$urlStorage}}">
-                        <button type = "submit" id = "updateUrl" class = "btn btn-info waves-effect">Update</button>
-                    </div>
-                </form>
-            </div>
-             <div class = "container-fluid" style = "padding-top:20px;">
-                <div class='col-sm-1'>
-                    <label for="url">Action:</label>
-                </div>
-                <div class='col-sm-5'>
-                    <button class = "btn btn-primary waves-effect" type = "button" id = "startBtn" value = "START">START</button>
-                    <button class = "btn btn-danger waves-effect" type = "button" id = "stopBtn" value = "START">STOP</button>
-                    <!--  <button class = "btn btn-warning waves-effect" type = "button" id = "restartBtn" value = "RESTART">RESTART</button> -->
-                </div>
-                
-            </div>
             <!-- Time Inputs -->
             <div class = "container-fluid" style = "padding-top: 30px;">
                 <div class="row clearfix">

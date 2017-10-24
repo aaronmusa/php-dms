@@ -22,11 +22,6 @@ class CreateUsersTable extends Migration
             $table->timestamps();
         });
 
-        Schema::table('users', function($table)
-        {
-            $table->renameColumn('name', 'username');
-        });
-
         DB::table('users')->insert(
             ['name' => 'admin', 'password' => bcrypt('admin001')]
         );

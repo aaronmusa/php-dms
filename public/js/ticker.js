@@ -1,38 +1,8 @@
 $(function() {
 
-
 	setCurrentTime();
 
 	integrateDatePicker();
-
-	var addButtonCounter = 0;
-	var counter = 0;
-	var tickerMessageArray = [];
-
-	// $(".ticker_message").each(function() {
-	//  		tickerMessageArray.push($(this).val());
-	//  });
-
-	// window.setInterval(function(){ 
-
-	// 	$("label[for='time']").html(showTime())
-
-			
-	// 	$(".ticker_start_time").each(function(index, element) {
-	// 		var message = tickerMessageArray[index];
-	// 		var startTickerJson = '{"start_ticker":' + '"'+ message + '"' + '}';
-	// 		sendDMSSwitcher(element, startTickerJson);
-	// 	});
-
-	// 	$(".ticker_end_time").each(function(index, element) {
-	// 		sendDMSSwitcher(element, "END_TICKER");
-	// 	});
-
-	// 	if (this.connected == false) {
-	// 		runWebsocket();
-	// 	}
-
-	// }, 1000);
 
     $(".deleteBtn").on('click',function(){
 		var deleteBtn = $(this);
@@ -78,16 +48,5 @@ $(function() {
             });
 		}).catch(swal.noop)	
     });
-
-   $('#startTicker').click(function(){
-   		var message = $('#tickerMessage').val();
-   		var jsonMessage = '{"start_ticker":' + '"' + message + '"' + '}';
-   		sendMessage(jsonMessage)
-   		console.log(jsonMessage);
-   });
-
-   $('#endTicker').click(function(){
-   		sendMessage("END_TICKER");
-   });
     
 });

@@ -3,26 +3,6 @@ $(function() {
 	setCurrentTime();
 
 	integrateDatePicker();
-	var logs = $('#timeLogs').val();
-
-	var addButtonCounter = 0;
-	var counter = 0;
-
-	$('#fbLiveSwitcher').click(function(){
-    	var urlStorage = $('#urlStorage').val();
-    	sendMessage("FBLIVE");
-
-    });
-
-    $('#dmsSwitcher').click(function(){
-    	sendMessage("DMS");
-    });
-
-    $('#updateUrl').click(function(){
-    	var urlInput = $("#urlInput").val();
-    	var videoStreamingUrl = '{"live_url": "'+ urlInput +'" }';
-    	sendMessage(videoStreamingUrl);
-    });
 
     $(".deleteBtn").on('click',function(){
 		var deleteBtn = $(this);

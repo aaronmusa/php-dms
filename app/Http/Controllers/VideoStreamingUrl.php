@@ -16,9 +16,9 @@ class VideoStreamingUrl extends Controller
     }
 
     public function setTickerMessage(Request $request) {
-    	$url = $request->tickerInput;
-    	Storage::disk('local')->put('ticker-message.txt', $url);
+    	$tickerMessage = $request->tickerInput;
+    	Storage::disk('local')->put('ticker-message.txt', $tickerMessage);
     	// $videoStreamingUrl = Storage::get('file1.txt');
-    	return redirect('/control-panel');
+    	return $tickerMessage ? "1" : "0";
     }
 }

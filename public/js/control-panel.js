@@ -23,24 +23,49 @@ $(function() {
         var videoStreamingUrl = '{"live_url": "'+ urlInput +'" }';
         sendMessage(videoStreamingUrl);
         $.ajax({
-                url: 'video-streaming-url',
-                type: 'POST',
-                data: {
-                    "_token": token,
-                    "videoStreamingUrl":urlInput
-                },
-                success: function(result) {
-                    if (result == 1) {
-                        console.log("URL Updated");   
-                    }else{
-                        console.log("error");
-                    }
-                },
-                error: function(xhr, ajaxOptions, thrownError) {
-                    console.log(thrownError);
+            url: 'video-streaming-url',
+            type: 'POST',
+            data: {
+                "_token": token,
+                "videoStreamingUrl":urlInput
+            },
+            success: function(result) {
+                if (result == 1) {
+                    console.log("URL Updated");   
+                }else{
+                    console.log("error");
                 }
-            });
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                console.log(thrownError);
+            }
+        });
     });
+
+        $('#updateTickerMessage').click(function(){
+        var token = $("input[name=_token]").val();
+        var tickerInput = $("#tickerInput").val();
+        $.ajax({
+            url: 'ticker-message',
+            type: 'POST',
+            data: {
+                "_token": token,
+                "tickerInput":tickerInput
+            },
+            success: function(result) {
+                if (result == 1) {
+                    console.log("Ticker message Updated");   
+                }else{
+                    console.log("error");
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                console.log(thrownError);
+            }
+        });
+    });
+
+
 
     $('#startBtn').click(function(){
         sendMessage("START");

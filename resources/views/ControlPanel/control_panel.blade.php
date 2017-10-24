@@ -52,16 +52,14 @@
                 <div class='col-sm-1'>
                     <label for="url">Message:</label>
                 </div>
-                <form method = "POST" action = "{{url('/')}}/ticker-message">
-                    {{ csrf_field() }}
-                    <div class='col-sm-4'>
-                        <input type = "hidden" id = "tickerMessage" value = "{{ $tickerMessage }}">
-                        <input name = "tickerInput" id = "tickerInput" class = "form-control" type = "text" value = "{{ $tickerMessage }}">
-                    </div>
-                    <div class='col-sm-4'>
-                        <button type = "submit" id = "updateTickerMessage" class = "btn btn-warning waves-effect">UPDATE</button>
-                    </div>
-                </form>
+                {{ csrf_field() }}
+                <div class='col-sm-4'>
+                    <input type = "hidden" id = "tickerMessage" value = "{{ $tickerMessage }}">
+                    <input name = "tickerInput" id = "tickerInput" class = "form-control" type = "text" value = "{{ $tickerMessage }}">
+                </div>
+                <div class='col-sm-4'>
+                    <button type = "submit" id = "updateTickerMessage" class = "btn btn-warning waves-effect">UPDATE</button>
+                </div>
             </div>
              <div class = "container-fluid" style = "padding-top:20px;">
                 <div class='col-sm-1'>

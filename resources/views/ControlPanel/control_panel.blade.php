@@ -39,7 +39,6 @@
                 <div class='col-sm-1'>
                     <label for="url">URL:</label>
                 </div>
-                <form method = "POST" action = "{{url('/')}}/video-streaming-url">
                     {{ csrf_field() }}
                     <div class='col-sm-4'>
                         <input name = "videoStreamingUrl" id = "urlInput" class = "form-control" type = "text" value = "{{ $urlStorage }}">
@@ -48,7 +47,6 @@
                         <input type = "hidden" id = "urlStorage" value = "{{ $urlStorage }}">
                         <button type = "submit" id = "updateUrl" class = "btn btn-warning waves-effect">UPDATE</button>
                     </div>
-                </form>
             </div>
             <div class = "container-fluid" style = "padding-top:20px;">
                 <div class='col-sm-1'>

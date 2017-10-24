@@ -11,7 +11,6 @@ $(function() {
     $('#fbLiveSwitcher').click(function(){
         var urlStorage = $('#urlStorage').val();
         sendMessage("FBLIVE");
-
     });
 
     $('#dmsSwitcher').click(function(){
@@ -19,9 +18,28 @@ $(function() {
     });
 
     $('#updateUrl').click(function(){
+        var token = $("input[name=_token]").val();
         var urlInput = $("#urlInput").val();
         var videoStreamingUrl = '{"live_url": "'+ urlInput +'" }';
         sendMessage(videoStreamingUrl);
+        $.ajax({
+                url: 'video-streaming-url',
+                type: 'POST',
+                data: {
+                    "_token": token,
+                    "videoStreamingUrl":urlInput
+                },
+                success: function(result) {
+                    if (result == 1) {
+                        console.log("URL Updated");   
+                    }else{
+                        console.log("error");
+                    }
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    console.log(thrownError);
+                }
+            });
     });
 
     $('#startBtn').click(function(){

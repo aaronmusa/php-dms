@@ -23,13 +23,13 @@ class TickerController extends Controller
         $exists = Storage::disk('local')->exists('ticker-message.txt');
         if (!$exists) {
             $tickerMessage = "Sample Ticker";
-            Storage::disk('local')->put('ticker-message.txt', $urlStorage);
+            Storage::disk('local')->put('ticker-message.txt', $tickerMessage);
         }
         else{
             $tickerMessage = Storage::get('ticker-message.txt');
             
             if ($tickerMessage == ''){
-                $tickerMessage = "Sample Tocker";
+                $tickerMessage = "Sample Ticker";
             }
             else{
                $tickerMessage = Storage::get('ticker-message.txt'); 

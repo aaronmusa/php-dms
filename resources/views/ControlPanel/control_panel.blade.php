@@ -4,6 +4,7 @@
     <script src="{{ asset('js/control-panel.js') }}"></script>
     <section class="content">
             <!-- PHP hidden inputs -->
+        {{ csrf_field() }}
         <input type = "hidden" id = "websocketUrl" value = "{{$websocketUrl}}">
         <div class="container-fluid">
             <div class="block-header">
@@ -32,14 +33,13 @@
                     <button class = "btn btn-info waves-effect" type = "button" id = "fbLiveSwitcher" value = "FBLIVE">VIDEO STREAM</button>
                     <button class = "btn btn-basic waves-effect" type = "button" id = "dmsSwitcher" value = "DMS">DMS</button>
                 </div>
-                
             </div>
             <!-- URL Input -->
             <div class = "container-fluid" style = "padding-top:20px;">
                 <div class='col-sm-1'>
                     <label for="url">URL:</label>
                 </div>
-                    {{ csrf_field() }}
+                    
                     <div class='col-sm-4'>
                         <input name = "videoStreamingUrl" id = "urlInput" class = "form-control" type = "text" value = "{{ $urlStorage }}">
                     </div>
@@ -52,7 +52,6 @@
                 <div class='col-sm-1'>
                     <label for="url">Message:</label>
                 </div>
-                {{ csrf_field() }}
                 <div class='col-sm-4'>
                     <input type = "hidden" id = "tickerMessage" value = "{{ $tickerMessage }}">
                     <input name = "tickerInput" id = "tickerInput" class = "form-control" type = "text" value = "{{ $tickerMessage }}">

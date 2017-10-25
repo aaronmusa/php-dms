@@ -4,8 +4,7 @@ var host =  $("#websocketUrl").val();
 var socket = null;
 var currentRouteName = $('#routeName').val();
 var connected = false;
-
-
+var intervalId = 0;
 
 function runWebsocket() {
     try {
@@ -15,24 +14,17 @@ function runWebsocket() {
         socket.onopen = function () {
             console.log('Connection Opened');  
             connected = true;
-            fetchControlPanelView(function(result){
-                sendMessage(result);
-            });
+            sendMessage("Connected");
+            fetchTickers();
+            fetchTimeLogs();
+            fetchControlPanelView();
             return;
         };
         //Manages the message event within your client code
         socket.onmessage = function (msg) {
-            fetchControlPanelView(function(result){
-                $('#tableBody').empty();
-                 $.each(result, function(index,element){
-                    var time = JSON.stringify(element.time);
-                    time = time.replace(/\"/g, "");
-                    var message = JSON.stringify(element.returnMessage);
-                    message = message.replace(/\"/g, "");
-                            $('#tableBody').append('<tr><td class = "time" align = "center" data-value = "">'+ time +'</td>' +
-                                             '<td align = "center">'+ message +'</td><tr>');
-                 });
-            });
+            fetchTickers();
+            fetchTimeLogs(); 
+            fetchControlPanelView();
           return;
         };
         //Manages the close event within your client code
@@ -46,9 +38,16 @@ function runWebsocket() {
     }
 }
 
-        runWebsocket();
+runWebsocket();
 
 function sendMessage(id) {
     socket.send(id);
 }
 //END WEBSOCKET
+
+//Check if web socket is up. Run if not.
+window.setInterval(function(){
+    if (this.connected == false) {
+        runWebsocket();
+    }
+}, 1000);

@@ -1,15 +1,47 @@
+var tickers = [];
+var time_sequence = [];
+var controlPanelView = [];
+
+fetchTickers();
+fetchTimeLogs();
+fetchControlPanelView();
+
+window.setInterval(function(){
+
+	//Check time logs and send to socket
+	$.each(time_sequence, function(index,element){
+		var startTime = JSON.stringify(element.start_time);
+		sendDMSSwitcher(startTime, "FBLIVE");
+
+		var endTime = JSON.stringify(element.end_time);
+		sendDMSSwitcher(endTime, "DMS");
+	});
+
+	//Check tickers and send to socket
+	$.each(tickers, function(index,element){
+		var startTime = JSON.stringify(element.start_time);
+		var message = JSON.stringify(element.message);
+		var startTickerJson = '{"start_ticker":' + message + '}';
+		sendDMSSwitcher(startTime, startTickerJson);
+		var endTime = JSON.stringify(element.end_time);
+		sendDMSSwitcher(endTime, "END_TICKER");
+	});
+
+	$("label[for='time']").html(showTime())
+
+}, 1000);
 
 function sendDMSSwitcher(element, message) {
 	var startTime = element;
 		startTime = startTime.replace(/\"/g, "");
-		var timeString = startTime.split(":");
-		var hour = parseInt(timeString[0]);
-		var minutes = parseInt(timeString[1]);
-		var seconds = parseInt(timeString[2]);
-		var date = new Date(); // Create a Date object to find out what time it is
-	    if(date.getHours() == hour && date.getMinutes() == minutes && date.getSeconds() == seconds){ // Check the time
-	        sendMessage(message);
-	    }
+	var timeString = startTime.split(":");
+	var hour = parseInt(timeString[0]);
+	var minutes = parseInt(timeString[1]);
+	var seconds = parseInt(timeString[2]);
+	var date = new Date(); // Create a Date object to find out what time it is
+    if(date.getHours() == hour && date.getMinutes() == minutes && date.getSeconds() == seconds){ // Check the time
+        sendMessage(message);
+    }
 }
 
 function showTime(){
@@ -81,7 +113,7 @@ function retrieveTickersOnDelete(){
         }
     });
 }
-function fetchTimeLogs(logs){
+function fetchTimeLogs(){
 	var token = $("input[name=_token]").val();
 	$.ajax({
         url: 'retrieve-logs',
@@ -90,7 +122,8 @@ function fetchTimeLogs(logs){
         	"_token": token,
         },
         success: function(result) {
-    		logs($.parseJSON(result));
+    		// logs($.parseJSON(result));
+    		time_sequence = $.parseJSON(result).time_management;
     	},
         error: function(xhr, ajaxOptions, thrownError) {
         	console.log(thrownError);
@@ -99,26 +132,7 @@ function fetchTimeLogs(logs){
     });
 }
 
-fetchTimeLogs(function(result){
-	window.setInterval(function(){
-		$.each(result.time_management, function(index,element){
-			var startTime = JSON.stringify(element.start_time);
-			sendDMSSwitcher(startTime, "FBLIVE");
-		});
-
-		$.each(result.time_management, function(index,element){
-			var endTime = JSON.stringify(element.end_time);
-			sendDMSSwitcher(endTime, "DMS");
-		});
-		$("label[for='time']").html(showTime())
-
-		if (this.connected == false) {
-			runWebsocket();
-		}
-	}, 1000);
-});
-
-function fetchTickers(tickers){
+function fetchTickers(){
 	var token = $("input[name=_token]").val();
 	$.ajax({
         url: 'retrieve-tickers',
@@ -127,7 +141,8 @@ function fetchTickers(tickers){
         	"_token": token,
         },
         success: function(result) {
-    		tickers($.parseJSON(result));
+        	tickers = $.parseJSON(result).tickers;
+    		// tickers($.parseJSON(result));
     	},
         error: function(xhr, ajaxOptions, thrownError) {
         	console.log(thrownError);
@@ -136,43 +151,38 @@ function fetchTickers(tickers){
     });
 }
 
-fetchTickers(function(result){
-	window.setInterval(function(){
-		$.each(result.tickers, function(index,element){
-			var startTime = JSON.stringify(element.start_time);
-			var message = JSON.stringify(element.message);
-			var startTickerJson = '{"start_ticker":' + message + '}';
-			sendDMSSwitcher(startTime, startTickerJson);
-		});
-
-		$.each(result.tickers, function(index,element){
-			var endTime = JSON.stringify(element.end_time);
-			sendDMSSwitcher(endTime, "END_TICKER");
-		});
-	}, 1000);
-});
-
- function fetchControlPanelView(data){
-        var token = $("input[name=_token]").val();
-        $.ajax({
-            url: 'fetch-control-panel-view',
-            type: 'GET',
-            data: {
-                "_token": token,
-            },
-            success: function(result) {
-                data($.parseJSON(result));
-            },
-            error: function(xhr, ajaxOptions, thrownError) {
-                console.log(thrownError);
-                tickers(thrownError);
-            }
-        });
-    }
-function test(){
-    console.log("hello");
+function fetchControlPanelView(){
+    var token = $("input[name=_token]").val();
+    $.ajax({
+        url: 'fetch-control-panel-view',
+        type: 'GET',
+        data: {
+            "_token": token,
+        },
+        success: function(result) {
+            controlPanelView = $.parseJSON(result);
+            reloadControlPanelTable();
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            console.log(thrownError);
+            tickers(thrownError);
+        }
+    });
 }
 
+function reloadControlPanelTable(){
+    $('#tableBody').empty();
+    $.each(controlPanelView, function(index,element){
+        var time = JSON.stringify(element.time);
+        time = time.replace(/\"/g, "");
+        var message = JSON.stringify(element.returnMessage);
+        	message = message.replace(/\"/g, "");
+        	if (time > showTime()) {
+        		$('#tableBody').append('<tr><td class = "time" align = "center" data-value = "'+time+'">'+ time +'</td>' +
+                                 '<td align = "center">'+ message +'</td><tr>');
+        	}
+    });
+}
 
 
 

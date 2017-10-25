@@ -132,7 +132,7 @@
     </section>
 
     @yield('time-management-content')
-    @yield('add-time-content')
+     @yield('add-time-content')
     @yield('edit-time-content')
     @yield('connections-content')
     @yield('ticker-management-content')

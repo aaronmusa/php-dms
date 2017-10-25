@@ -1,4 +1,9 @@
 $(function() {
+
+    setCurrentTime();
+
+    integrateDatePicker();
+
     window.setInterval(function(){
         $(".time").each(function(){
             var scheduledTime = $(this).data("value");
@@ -55,6 +60,60 @@ $(function() {
             success: function(result) {
                 if (result == 1) {
                     console.log("Ticker message Updated");   
+                }else{
+                    console.log("error");
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                console.log(thrownError);
+            }
+        });
+    });
+
+    $('#addEntry').click(function(){
+        var token = $("input[name=_token]").val();
+        var startTime = $("#startTimeInput").val();
+        var endTime = $("#endTimeInput").val();
+        $.ajax({
+            url: 'add-time-in-control-panel',
+            type: 'POST',
+            data: {
+                "_token": token,
+                "start_time":startTime,
+                "end_time": endTime
+            },
+            success: function(result) {
+                if (result == 1) {
+                    $('#addTimeSequenceModal').modal('toggle');
+                    reloadControlPanelView();
+                }else{
+                    console.log("error");
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                console.log(thrownError);
+            }
+        });
+    });
+
+    $('#addTicker').click(function(){
+        var token = $("input[name=_token]").val();
+        var message = $("#tickerMessageInput").val();
+        var startTime = $("#startTimeInput").val();
+        var endTime = $("#endTimeInput").val();
+        $.ajax({
+            url: 'add-time-in-control-panel',
+            type: 'POST',
+            data: {
+                "_token": token,
+                "message": message,
+                "start_time":startTime,
+                "end_time": endTime
+            },
+            success: function(result) {
+                if (result == 1) {
+                    $('#addTickerModal').modal('toggle');
+                    reloadControlPanelView();
                 }else{
                     console.log("error");
                 }

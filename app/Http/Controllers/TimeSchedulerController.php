@@ -111,4 +111,13 @@ class TimeSchedulerController extends Controller
 
         return $timeManagement;
     }
+
+    public function addTimeInControlPanel(Request $request) {
+        $timeScheduler = new TimeScheduler;
+        $timeScheduler->start_time = $request->start_time;
+        $timeScheduler->end_time = $request->end_time;
+        $timeScheduler->save();
+
+        return "1";
+    }
 }

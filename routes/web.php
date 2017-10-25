@@ -45,5 +45,9 @@ Auth::routes();
 
 	Route::get('/fetch-control-panel-view', 'ControlPanelController@fetchControlPanelView')->name('fetchControlPanelView');
 
+	Route::post('add-time-in-control-panel', 'TimeSchedulerController@addTimeInControlPanel');
+
+	Route::post('add-ticker-in-control-panel', 'TickerController@addTickerInControlPanel');
+
 
 });

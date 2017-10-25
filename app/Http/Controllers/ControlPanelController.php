@@ -57,7 +57,7 @@ class ControlPanelController extends Controller
     }
 
     public function fetchControlPanelView(){
-         $controlPanelData =  DB::select('SELECT * FROM control_panels order by time LIMIT 10');
+         $controlPanelData =  DB::select('SELECT * FROM control_panels order by time');
 
          return json_encode($controlPanelData);
     }

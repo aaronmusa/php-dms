@@ -17,15 +17,17 @@ function runWebsocket() {
             sendMessage("Connected");
             fetchTickers();
             fetchTimeLogs();
-            fetchControlPanelView();
             return;
         };
         //Manages the message event within your client code
         socket.onmessage = function (msg) {
+            if (msg.data == "Connected" || "Connection Opened"){
+                reloadControlPanelView();
+            }
+            console.log(msg.data);
             fetchTickers();
             fetchTimeLogs(); 
-            fetchControlPanelView();
-          return;
+            
         };
         //Manages the close event within your client code
         socket.onclose = function () {

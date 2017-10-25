@@ -14,7 +14,7 @@ $(function() {
     });
 
     $('#dmsSwitcher').click(function(){
-        clearInterval(intervalId);
+        sendMessage("DMS");
     });
 
     $('#updateUrl').click(function(){

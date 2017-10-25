@@ -1,10 +1,11 @@
 var tickers = [];
 var time_sequence = [];
-var controlPanelView = [];
+
 
 fetchTickers();
 fetchTimeLogs();
-fetchControlPanelView();
+reloadControlPanelView();
+
 
 window.setInterval(function(){
 
@@ -23,6 +24,8 @@ window.setInterval(function(){
 		var message = JSON.stringify(element.message);
 		var startTickerJson = '{"start_ticker":' + message + '}';
 		sendDMSSwitcher(startTime, startTickerJson);
+
+
 		var endTime = JSON.stringify(element.end_time);
 		sendDMSSwitcher(endTime, "END_TICKER");
 	});
@@ -151,7 +154,7 @@ function fetchTickers(){
     });
 }
 
-function fetchControlPanelView(){
+function fetchControlPanelView(data){
     var token = $("input[name=_token]").val();
     $.ajax({
         url: 'fetch-control-panel-view',
@@ -160,8 +163,7 @@ function fetchControlPanelView(){
             "_token": token,
         },
         success: function(result) {
-            controlPanelView = $.parseJSON(result);
-            reloadControlPanelTable();
+            data($.parseJSON(result));
         },
         error: function(xhr, ajaxOptions, thrownError) {
             console.log(thrownError);
@@ -170,19 +172,24 @@ function fetchControlPanelView(){
     });
 }
 
-function reloadControlPanelTable(){
-    $('#tableBody').empty();
-    $.each(controlPanelView, function(index,element){
-        var time = JSON.stringify(element.time);
-        time = time.replace(/\"/g, "");
-        var message = JSON.stringify(element.returnMessage);
-        	message = message.replace(/\"/g, "");
-        	if (time > showTime()) {
-        		$('#tableBody').append('<tr><td class = "time" align = "center" data-value = "'+time+'">'+ time +'</td>' +
-                                 '<td align = "center">'+ message +'</td><tr>');
-        	}
-    });
+function reloadControlPanelView(){
+	fetchControlPanelView(function(result){
+	    $('#tableBody').empty();
+	     $.each(result, function(index,element){
+	        var time = JSON.stringify(element.time);
+	        time = time.replace(/\"/g, "");
+	        var message = JSON.stringify(element.returnMessage);
+	        message = message.replace(/\"/g, "");
+	        if (time > showTime()){
+	                $('#tableBody').append('<tr><td class = "time" align = "center" data-value = "'+time+'">'+ time +'</td>' +
+	                                 '<td align = "center">'+ message +'</td><tr>');
+	        }
+	        
+	     });
+	});
 }
+ 
+
 
 
 

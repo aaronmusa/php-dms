@@ -131,12 +131,12 @@
                         <label for="message">Message</label>
                        <input type = "text" class = "form-control" id = "tickerMessageInput" required/>
                        <label for="startTime">Start Time</label>
-                       <input type = "text" class = "currentTime datePicker form-control" id = "startTimeInput" required/>
+                       <input type = "text" class = "currentTime datePicker form-control" id = "startTimeTickerInput" required/>
                        <label for="endTime">End Time</label>
-                       <input type = "text" class = "currentTime datePicker form-control" id = "endTimeInput" required/>
+                       <input type = "text" class = "currentTime datePicker form-control" id = "endTimeTickerInput" required/>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" id = "addEntry" class="btn btn-link waves-effect">ADD</button>
+                        <button type="button" id = "addTickerModal" class="btn btn-link waves-effect">ADD</button>
                         <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
                     </div>
                 </div>

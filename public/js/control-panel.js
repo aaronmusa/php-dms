@@ -96,13 +96,13 @@ $(function() {
         });
     });
 
-    $('#addTicker').click(function(){
+    $('#addTickerModal').click(function(){
         var token = $("input[name=_token]").val();
         var message = $("#tickerMessageInput").val();
-        var startTime = $("#startTimeInput").val();
-        var endTime = $("#endTimeInput").val();
+        var startTime = $("#startTimeTickerInput").val();
+        var endTime = $("#endTimeTickerInput").val();
         $.ajax({
-            url: 'add-time-in-control-panel',
+            url: 'add-ticker-in-control-panel',
             type: 'POST',
             data: {
                 "_token": token,
@@ -112,7 +112,7 @@ $(function() {
             },
             success: function(result) {
                 if (result == 1) {
-                    $('#addTickerModal').modal('toggle');
+                    $('#addTickerSequenceModal').modal('toggle');
                     reloadControlPanelView();
                 }else{
                     console.log("error");

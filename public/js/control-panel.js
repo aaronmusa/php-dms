@@ -1,6 +1,5 @@
 $(function() {
 
-    setCurrentTime();
 
     integrateDatePicker();
 
@@ -70,7 +69,8 @@ $(function() {
         });
     });
 
-    $('#addEntry').click(function(){
+    $('#add_time_sequence_form').submit(function(e){
+        e.preventDefault();
         var token = $("input[name=_token]").val();
         var startTime = $("#startTimeInput").val();
         var endTime = $("#endTimeInput").val();
@@ -98,7 +98,8 @@ $(function() {
         });
     });
 
-    $('#addTickerModal').click(function(){
+    $('#add_ticker_form').submit(function(e){
+        e.preventDefault();
         var token = $("input[name=_token]").val();
         var message = $("#tickerMessageInput").val();
         var startTime = $("#startTimeTickerInput").val();
@@ -146,6 +147,10 @@ $(function() {
 
    $('#endTicker').click(function(){
         sendMessage("END_TICKER");
+   });
+
+   $('.setCurrentTime').click(function(){
+        setCurrentTime();
    });
 
 });

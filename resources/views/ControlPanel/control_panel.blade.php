@@ -71,8 +71,8 @@
                     <label for="url">Operation:</label>
                 </div>
                 <div class='col-sm-9'>
-                    <button class = "btn btn-primary waves-effect" type = "button" id = "addTimeSequence" data-toggle="modal" data-target="#addTimeSequenceModal">ADD TIME SEQUENCE</button>
-                    <button class = "btn btn-primary waves-effect" type = "button" id = "addTicker" data-toggle = "modal" data-target = "#addTickerSequenceModal">ADD TICKER</button>
+                    <button class = "btn btn-primary waves-effect setCurrentTime" type = "button" id = "addTimeSequence" data-toggle="modal" data-target="#addTimeSequenceModal">ADD TIME SEQUENCE</button>
+                    <button class = "btn btn-primary waves-effect setCurrentTime" type = "button" id = "addTicker" data-toggle = "modal" data-target = "#addTickerSequenceModal">ADD TICKER</button>
                     <!--  <button class = "btn btn-warning waves-effect" type = "button" id = "restartBtn" value = "RESTART">RESTART</button> -->
                 </div>
             </div>
@@ -107,16 +107,18 @@
                     <div class="modal-header">
                         <h4 class="modal-title" id="largeModalLabel">ADD TIME SEQUENCE</h4>
                     </div>
-                    <div class="modal-body">
-                       <label for="startTime">Start Time</label>
-                       <input type = "text" class = "currentTime datePicker form-control" id = "startTimeInput" required/>
-                       <label for="endTime">End Time</label>
-                       <input type = "text" class = "currentTime datePicker form-control" id = "endTimeInput" required/>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" id = "addEntry" class="btn btn-link waves-effect">ADD</button>
-                        <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
-                    </div>
+                    <form id = "add_time_sequence_form">
+                        <div class="modal-body">
+                           <label for="startTime">Start Time</label>
+                           <input type = "text" class = "currentTime datePicker form-control" id = "startTimeInput" required/>
+                           <label for="endTime">End Time</label>
+                           <input type = "text" class = "currentTime datePicker form-control" id = "endTimeInput" required/>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" id = "addEntry" class="btn btn-link waves-effect">ADD</button>
+                            <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -127,18 +129,20 @@
                     <div class="modal-header">
                         <h4 class="modal-title" id="largeModalLabel">ADD TICKER</h4>
                     </div>
-                    <div class="modal-body">
-                        <label for="message">Message</label>
-                       <input type = "text" class = "form-control" id = "tickerMessageInput" required/>
-                       <label for="startTime">Start Time</label>
-                       <input type = "text" class = "currentTime datePicker form-control" id = "startTimeTickerInput" required/>
-                       <label for="endTime">End Time</label>
-                       <input type = "text" class = "currentTime datePicker form-control" id = "endTimeTickerInput" required/>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" id = "addTickerModal" class="btn btn-link waves-effect">ADD</button>
-                        <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
-                    </div>
+                    <form id = "add_ticker_form">
+                        <div class="modal-body">
+                           <label for="message">Message</label>
+                           <input type = "text" class = "form-control" id = "tickerMessageInput" required/>
+                           <label for="startTime">Start Time</label>
+                           <input type = "text" class = "currentTime datePicker form-control" id = "startTimeTickerInput" required/>
+                           <label for="endTime">End Time</label>
+                           <input type = "text" class = "currentTime datePicker form-control" id = "endTimeTickerInput" required/>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" id = "addTickerModal" class="btn btn-link waves-effect">ADD</button>
+                            <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

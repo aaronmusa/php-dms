@@ -79,8 +79,23 @@ function integrateDatePicker() {
 }
 
 function setCurrentTime(){
-	var dt = new Date;
-	var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+	var date = new Date;
+
+	var hour = date.getHours();
+	var minutes = date.getMinutes();
+	var seconds = date.getSeconds();
+
+	if (seconds < 10){
+		seconds = "0" + seconds;
+	}
+	if (minutes < 10) {
+		minutes = "0" + minutes;
+	}
+	if (hour < 10) {
+		hour = "0" + hour;
+	}
+
+	var time = hour + ":" + minutes + ":" + seconds;
 	$('.currentTime').val(time);
 }
 

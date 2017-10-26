@@ -86,6 +86,8 @@ $(function() {
                 if (result == 1) {
                     $('#addTimeSequenceModal').modal('toggle');
                     reloadControlPanelView();
+                    fetchTickers();
+                    fetchTimeLogs();
                 }else{
                     console.log("error");
                 }
@@ -114,6 +116,8 @@ $(function() {
                 if (result == 1) {
                     $('#addTickerSequenceModal').modal('toggle');
                     reloadControlPanelView();
+                    fetchTickers();
+                    fetchTimeLogs();
                 }else{
                     console.log("error");
                 }

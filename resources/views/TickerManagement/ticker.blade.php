@@ -16,40 +16,6 @@
             <form id="logout-form" action="{{ route('logout') }}" method="POST">
                 {{ csrf_field() }}
             </form> 
-            <!-- Time display -->
-            <div class = "container-fluid" style = "padding-top:20px;">
-                <div class='col-sm-1'>
-                    <label for="url">Time:</label>
-                </div>
-                <div class='col-sm-4'>
-                    <label for='time'>00:00:00</label>
-                </div>
-            </div>
-            <div class = "container-fluid" style = "padding-top:20px;">
-                <div class='col-sm-1'>
-                    <label for="url">Message:</label>
-                </div>
-                <form method = "POST" action = "{{url('/')}}/ticker-message">
-                    {{ csrf_field() }}
-                    <div class='col-sm-4'>
-                        <input type = "hidden" id = "tickerMessage" value = "{{ $tickerMessage }}">
-                        <input name = "tickerInput" id = "tickerInput" class = "form-control" type = "text" value = "{{ $tickerMessage }}">
-                    </div>
-                    <div class='col-sm-4'>
-                        <button type = "submit" id = "updateTickerMessage" class = "btn btn-warning waves-effect">UPDATE</button>
-                    </div>
-                </form>
-            </div>
-            <div class = "container-fluid" style = "padding-top:20px;">
-                <div class='col-sm-1'>
-                    <label for="url">Action:</label>
-                </div>
-                 <div class='col-sm-4'>
-                    <button type = "button" id = "startTicker" class = "btn btn-success waves-effect">START TICKER</button>
-                    <button type = "button" id = "endTicker" class = "btn btn-danger waves-effect">END TICKER</button>
-                </div>
-            </div>
-
             <!-- Time Inputs -->
             <div class = "container-fluid" style = "padding-top: 30px;">
                 <div class="row clearfix">

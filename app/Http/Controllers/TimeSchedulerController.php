@@ -90,6 +90,7 @@ class TimeSchedulerController extends Controller
     public function destroy(TimeScheduler $timeScheduler)
     {
         $timeScheduler = TimeScheduler::find($timeScheduler->id);
+
         return ($timeScheduler->delete()) ? "1" : "0";
     }
     //Show add page
@@ -110,5 +111,21 @@ class TimeSchedulerController extends Controller
         $timeManagement = json_encode(array("time_management" => $timeLogs));
 
         return $timeManagement;
+    }
+
+    public function addTimeInControlPanel(Request $request) {
+        $timeScheduler = new TimeScheduler;
+        $timeScheduler->start_time = $request->start_time;
+        $timeScheduler->end_time = $request->end_time;
+        $timeScheduler->save();
+
+        return "1";
+    }
+
+    public function deleteByEndTime(TimeScheduler $timeScheduler){
+        dd($timeScheduler->end_time);
+        $timeScheduler = TimeScheduler::find($timeScheduler->end_time);
+
+        return ($timeScheduler->delete()) ? "1" : "0";
     }
 }

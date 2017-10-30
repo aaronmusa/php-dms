@@ -104,4 +104,14 @@ class TickerController extends Controller
 
         return $tickers;
     }
+
+    public function addTickerInControlPanel(Request $request) {
+        $ticker = new Ticker;
+        $ticker->message = $request->message;
+        $ticker->start_time = $request->start_time;
+        $ticker->end_time = $request->end_time;
+        $ticker->save();
+
+        return "1";
+    }
 }

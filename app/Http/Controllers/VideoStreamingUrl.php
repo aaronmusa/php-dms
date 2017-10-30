@@ -12,13 +12,13 @@ class VideoStreamingUrl extends Controller
     	$url = $request->videoStreamingUrl;
     	Storage::disk('local')->put('video-streaming-url.txt', $url);
     	// $videoStreamingUrl = Storage::get('file1.txt');
-    	return redirect('/time-scheduler');
+    	return $url ? "1" : "0";
     }
 
     public function setTickerMessage(Request $request) {
-    	$url = $request->tickerInput;
-    	Storage::disk('local')->put('ticker-message.txt', $url);
+    	$tickerMessage = $request->tickerInput;
+    	Storage::disk('local')->put('ticker-message.txt', $tickerMessage);
     	// $videoStreamingUrl = Storage::get('file1.txt');
-    	return redirect('/ticker');
+    	return $tickerMessage ? "1" : "0";
     }
 }

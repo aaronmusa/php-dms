@@ -43,7 +43,7 @@
             <div class="navbar-header">
                 <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                 <a href="javascript:void(0);" class="bars"></a>
-                <a class="navbar-brand" href= "{{url('/')}}/time-scheduler">HTECH - DMS</a>
+                <a class="navbar-brand" href= "{{url('/')}}/control-panel">HTECH - DMS</a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -80,6 +80,12 @@
             <div class="menu">
                 <ul class="list">
                     <li class="header">MAIN NAVIGATION</li>
+                    <li {{ setActive('control-panel') }}>
+                        <a href="{{url('/')}}/control-panel">
+                            <i class="material-icons">dashboard</i>
+                            <span>Control Panel</span>
+                        </a>
+                    </li>
                     <li {{ setActive('time-scheduler') }} {{ setActive('add-time') }} {{ setActive('edit-time') }}>
                         <a href="{{url('/')}}/time-scheduler">
                             <i class="material-icons">access_alarm</i>
@@ -126,12 +132,13 @@
     </section>
 
     @yield('time-management-content')
-    @yield('add-time-content')
+     @yield('add-time-content')
     @yield('edit-time-content')
     @yield('connections-content')
     @yield('ticker-management-content')
     @yield('add-ticker-content')
     @yield('edit-ticker-content')
+    @yield('control-panel-content')
 
 <!-- Websocket js -->
     <script src="{{ asset('js/socket.js') }}"></script>

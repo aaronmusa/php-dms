@@ -41,5 +41,15 @@ Auth::routes();
 
 	Route::get('/retrieve-tickers', 'TickerController@retrieveTickersOnDelete')->name('tickers');
 
+	Route::resource('control-panel', 'ControlPanelController', ['only' => ['index']]);
+
+	Route::get('/fetch-control-panel-view', 'ControlPanelController@fetchControlPanelView')->name('fetchControlPanelView');
+
+	Route::post('add-time-in-control-panel', 'TimeSchedulerController@addTimeInControlPanel');
+
+	Route::post('add-ticker-in-control-panel', 'TickerController@addTickerInControlPanel');
+
+	Route::delete('delete-by-endtime/{id}','TimeSchedulerController@deleteByEndTime');
+
 
 });

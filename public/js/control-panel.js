@@ -201,7 +201,7 @@ $(function() {
     });
 
    $('#startTicker').click(function(){
-        var message = $('#tickerMessage').val();
+        var message = $('#tickerInput').val();
         var jsonMessage = '{"start_ticker":' + '"' + message + '"' + '}';
         sendMessage(jsonMessage)
         console.log(jsonMessage);

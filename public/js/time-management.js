@@ -6,33 +6,28 @@ fetchTickers();
 fetchTimeLogs();
 reloadControlPanelView();
 
+function reloadControlPanelView(){
+    fetchControlPanelView(function(result){
+        $('#tableBody').empty();
+         $.each(result, function(index,element){
+            var time = JSON.stringify(element.time);
+            	time = time.replace(/\"/g, "");
+            var message = JSON.stringify(element.returnMessage);
+            	message = message.replace(/\"/g, "");
+            var status = JSON.stringify(element.status);
+            	status = status.replace(/\"/g, "");
+            var id = JSON.stringify(element.id);
+            	id = id.replace(/\"/g, "");
+            var type = JSON.stringify(element.type);
+            	type = type.replace(/\"/g, "");
 
-window.setInterval(function(){
-
-	//Check time logs and send to socket
-	$.each(time_sequence, function(index,element){
-		var startTime = JSON.stringify(element.start_time);
-		sendDMSSwitcher(startTime, "FBLIVE");
-
-		var endTime = JSON.stringify(element.end_time);
-		sendDMSSwitcher(endTime, "DMS");
-	});
-
-	//Check tickers and send to socket
-	$.each(tickers, function(index,element){
-		var startTime = JSON.stringify(element.start_time);
-		var message = JSON.stringify(element.message);
-		var startTickerJson = '{"start_ticker":' + message + '}';
-		sendDMSSwitcher(startTime, startTickerJson);
-
-
-		var endTime = JSON.stringify(element.end_time);
-		sendDMSSwitcher(endTime, "END_TICKER");
-	});
-
-	$("label[for='time']").html(showTime())
-
-}, 1000);
+            if (time > showTime()){
+                    $('#tableBody').append('<tr><td class = "time" align = "center" data-type = "'+ type +'" data-id = "'+ id +'" data-status = "'+status+'" data-value = "'+time+'">'+ time +'</td>' +
+                                     '<td align = "center">'+ message +'</td><tr>');
+            }
+         });
+    });
+}
 
 function sendDMSSwitcher(element, message) {
 	var startTime = element;
@@ -187,21 +182,67 @@ function fetchControlPanelView(data){
     });
 }
 
-function reloadControlPanelView(){
-	fetchControlPanelView(function(result){
-	    $('#tableBody').empty();
-	     $.each(result, function(index,element){
-	        var time = JSON.stringify(element.time);
-	        time = time.replace(/\"/g, "");
-	        var message = JSON.stringify(element.returnMessage);
-	        message = message.replace(/\"/g, "");
-	        if (time > showTime()){
-	                $('#tableBody').append('<tr><td class = "time" align = "center" data-value = "'+time+'">'+ time +'</td>' +
-	                                 '<td align = "center">'+ message +'</td><tr>');
-	        }
-	        
-	     });
-	});
+function deleteTimeSequence(deleteBtn,deleteBtnData,token){
+    $.ajax({
+            url: 'time-scheduler/' + deleteBtnData,
+            type: 'POST',
+            data: {
+                "_token": token,
+                "_method": "DELETE"
+            },
+            success: function(result) {
+            if (result == 1) {
+                    swal(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                    )
+                    deleteBtn.parents('tr')[0].remove();
+                    retrieveLogsOnDelete();
+                    retrieveTickersOnDelete();   
+                }else{
+                    swal(
+                      'Oops...',
+                      'Something went wrong!',
+                      'error'
+                    )
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                console.log(thrownError);
+            }
+        });
+}
+function deleteTicker(deleteBtn,deleteBtnData,token){
+	$.ajax({
+        url: 'ticker/' + deleteBtnData,
+        type: 'POST',
+        data: {
+        	"_token": token,
+        	"_method": "DELETE"
+        },
+        success: function(result) {
+        	if (result == 1) {
+				swal(
+				    'Deleted!',
+				    'Your file has been deleted.',
+				    'success'
+			  	)
+				deleteBtn.parents('tr')[0].remove();
+				retrieveLogsOnDelete()  
+				retrieveTickersOnDelete()          		
+			}else{
+    			swal(
+				  'Oops...',
+				  'Something went wrong!',
+				  'error'
+				)
+    		}
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+        	console.log(thrownError);
+        }
+    });
 }
  
 

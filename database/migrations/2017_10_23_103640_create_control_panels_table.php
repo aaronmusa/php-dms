@@ -13,10 +13,10 @@ class CreateControlPanelsTable extends Migration
      */
     public function up()
     {
-        DB::statement( 'DROP VIEW IF EXISTS control_panels' );
-        DB::statement("create view control_panels as select id, start_time as time, 'Switch to FBLIVE' as returnMessage from time_schedulers union select id, end_time as time,'Switch to DMS' as returnMessage from time_schedulers
+        DB::statement( 'DROP VIEW IF EXISTS control_panel_view' );
+        DB::statement("create view control_panel_view as select id, start_time as time, 'Switch to FBLIVE' as returnMessage,'1' as status,'DMS' as type from time_schedulers union select id, end_time as time,'Switch to DMS' as returnMessage,'2' as status, 'DMS' as type from time_schedulers
                 union all
-                select id,start_time as time,'Show Ticker' as returnMessage from tickers union select id,end_time as time,'End Ticker' as returnMessage from tickers");
+                select id,start_time as time,'Show Ticker' as returnMessage,'1' as status,'Ticker' as type from tickers union select id,end_time as time,'End Ticker' as returnMessage, '2' as status,'Ticker' as type from tickers");
     }
 
     /**
@@ -26,6 +26,6 @@ class CreateControlPanelsTable extends Migration
      */
     public function down()
     {
-         DB::statement( 'DROP VIEW control_panels' );
+         DB::statement( 'DROP VIEW IF EXISTS control_panel_view' );
     }
 }

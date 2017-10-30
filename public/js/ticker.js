@@ -17,36 +17,7 @@ $(function() {
 		  cancelButtonColor: '#d33',
 		  confirmButtonText: 'Yes, delete it!'
 		}).then(function () {
-			$.ajax({
-                url: 'ticker/' + deleteBtnData,
-                type: 'POST',
-                data: {
-                	"_token": token,
-                	"_method": "DELETE"
-                },
-                success: function(result) {
-	            	if (result == 1) {
-						swal(
-						    'Deleted!',
-						    'Your file has been deleted.',
-						    'success'
-					  	)
-	    				deleteBtn.parents('tr')[0].remove();
-	    				retrieveLogsOnDelete()  
-	    				retrieveTickersOnDelete()          		
-	    			}else{
-	        			swal(
-						  'Oops...',
-						  'Something went wrong!',
-						  'error'
-						)
-	        		}
-                },
-                error: function(xhr, ajaxOptions, thrownError) {
-                	console.log(thrownError);
-                }
-            });
+			deleteTicker(deleteBtn,deleteBtnData,token);
 		}).catch(swal.noop)	
     });
-    
 });

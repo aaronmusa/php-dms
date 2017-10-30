@@ -49,5 +49,7 @@ Auth::routes();
 
 	Route::post('add-ticker-in-control-panel', 'TickerController@addTickerInControlPanel');
 
+	Route::delete('delete-by-endtime/{id}','TimeSchedulerController@deleteByEndTime');
+
 
 });

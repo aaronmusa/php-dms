@@ -4,9 +4,71 @@ $(function() {
     integrateDatePicker();
 
     window.setInterval(function(){
+
+        //Check time logs and send to socket
+        $.each(time_sequence, function(index,element){
+            var startTime = JSON.stringify(element.start_time);
+            sendDMSSwitcher(startTime, "FBLIVE");
+
+            var endTime = JSON.stringify(element.end_time);
+            sendDMSSwitcher(endTime, "DMS");
+        });
+
+        //Check tickers and send to socket
+        $.each(tickers, function(index,element){
+            var startTime = JSON.stringify(element.start_time);
+            var message = JSON.stringify(element.message);
+            var startTickerJson = '{"start_ticker":' + message + '}';
+            sendDMSSwitcher(startTime, startTickerJson);
+
+
+            var endTime = JSON.stringify(element.end_time);
+            sendDMSSwitcher(endTime, "END_TICKER");
+        });
+
+        $("label[for='time']").html(showTime())
+
+    }, 1000);
+
+    function deleteEntry(url,deleteBtnData){
+        var token = $("input[name=_token]").val();
+        $.ajax({
+            url:  url + deleteBtnData,
+            type: 'POST',
+            data: {
+                "_token": token,
+                "_method": "DELETE"
+            },
+            success: function(result) {
+                if (result == 1) {
+                    console.log("Deleted Successfully");              
+                }else{
+                    console.log(result.error);
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                console.log(thrownError);
+            }
+        });
+    }
+
+    window.setInterval(function(){
         $(".time").each(function(){
             var scheduledTime = $(this).data("value");
+            var id = $(this).data("id");
+            var status = $(this).data("status");
+            var type = $(this).data("type");
+            var url;
+
             if (scheduledTime < showTime()){
+                if (status == 2 && type == "Ticker"){
+                    url = 'ticker/';
+                    deleteEntry(url,id);
+                }
+              else if (status == 2 && type == "DMS"){
+                    url = 'time-scheduler/';
+                    deleteEntry(url,id);
+                }
                 $(this).parents('tr')[0].remove();
             }
         });

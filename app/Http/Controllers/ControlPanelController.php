@@ -17,7 +17,7 @@ class ControlPanelController extends Controller
      */
     public function index()
     {
-         $controlPanelData =  DB::select('SELECT * FROM control_panels order by time LIMIT 10');
+         $controlPanelData =  DB::select('SELECT * FROM control_panel_view order by time LIMIT 10');
 
 
         $websocketUrl = Config::get('websocket.url');
@@ -57,7 +57,7 @@ class ControlPanelController extends Controller
     }
 
     public function fetchControlPanelView(){
-         $controlPanelData =  DB::select('SELECT * FROM control_panels order by time');
+         $controlPanelData =  DB::select('SELECT * FROM control_panel_view order by time');
 
          return json_encode($controlPanelData);
     }

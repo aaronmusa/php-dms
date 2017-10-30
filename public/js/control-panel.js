@@ -190,9 +190,6 @@ $(function() {
             }
         });
     });
-
-
-
     $('#startBtn').click(function(){
         sendMessage("START");
     });
@@ -213,6 +210,6 @@ $(function() {
 
    $('.setCurrentTime').click(function(){
         setCurrentTime();
+        $('#tickerMessageInput').val($('#tickerInput').val());
    });
-
 });

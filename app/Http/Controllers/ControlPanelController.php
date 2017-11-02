@@ -17,6 +17,7 @@ class ControlPanelController extends Controller
      */
     public function index()
     {
+         $urlStorage = "about:blank";
          $controlPanelData =  DB::select('SELECT * FROM control_panel_view order by time LIMIT 10');
 
 
@@ -30,7 +31,7 @@ class ControlPanelController extends Controller
             $tickerMessage = Storage::get('ticker-message.txt');
             
             if ($tickerMessage == ''){
-                $tickerMessage = "Sample Tocker";
+                $tickerMessage = "Sample Ticker";
             }
             else{
                $tickerMessage = Storage::get('ticker-message.txt'); 

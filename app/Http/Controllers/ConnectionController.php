@@ -85,15 +85,19 @@ class ConnectionController extends Controller
         //
     }
 
-    public function saveConnection($socketId,$macAddress,$time){
+    public function saveConnection(){
         try{
-            $newConnection = new Connection;
-            $newConnection->socket_id = $socketId;
-            $newConnection->mac_address = $macAddress;
-            $newConnection->local_time = "12:13:14";
-            $newConnection->server_time = "13:23:43";
-            $newConnection->status = 1;
-            $newConnection->save();
+            $mac = "1235";
+            $connection = DB::insert("insert into connections (socket_id,mac_address,local_time,server_time) select * from (select 'hsdhaj','samplemacaddress','12:12:13','12:23:24') as tmp where not exists (select mac_address from connections where mac_address = 'samplemacaddress') Limit 1"); 
+
+            $updateConnection = DB::update("update connections set socket_id = '$mac',local_time = '13:13:13',server_time = '14:14:14' where mac_address = 'hello'");
+            // $newConnection = new Connection;
+            // $newConnection->socket_id = $socketId;
+            // $newConnection->mac_address = $macAddress;
+            // $newConnection->local_time = "12:13:14";
+            // $newConnection->server_time = "13:23:43";
+            // $newConnection->status = 1;
+            // $newConnection->save();
              //var_dump($connection[0]->mac_address);
         }catch (\Exception $e) {
              dd($e->getMessage());

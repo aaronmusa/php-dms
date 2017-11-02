@@ -59,8 +59,7 @@ class StartSocketServer extends Command
             $bucket->getSource()->send(json_encode($time_management));
             $bucket->getSource()->send(json_encode($tickers));
             $bucket->getSource()->send(json_encode($liveUrl));
-
-            
+            app('App\Http\Controllers\ConnectionController')->saveConnection();
 
             return;
         });

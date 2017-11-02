@@ -19,6 +19,7 @@ class InsertColumnStatusInConnection extends Migration
             $table->string('mac_address');
             $table->time('local_time');
             $table->time('server_time');
+            $table->dropColumn('id');
         });
     }
 

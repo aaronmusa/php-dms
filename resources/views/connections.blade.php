@@ -26,17 +26,23 @@
 	                        <table class="table table-hover">
 	                            <thead>
 	                                <tr>
-	                                    <th>id#</th>
-	                                    <th>Start Time</th>
-	                                    <th>End Time</th>
+	                                    <th>Socket ID</th>
+	                                    <th>MAC ADDRESS</th>
+	                                    <th>Local Time</th>
+	                                    <th>Server Time</th>
+	                                    <th>Status</th>
 	                                </tr>
 	                            </thead>
 	                            <tbody>
-	                                <tr>
-	                                    <th scope="row">sample</th>
-	                                    <td>sample</td>
-	                                    <td>sample</td>
-	                                </tr>
+	                            	@foreach ($connections as $connection)
+		                                <tr>
+		                                    <th scope="row">{{$connection->socket_id}}</th>
+		                                    <td>{{$connection->mac_address}}</td>
+		                                    <td>{{$connection->local_time}}</td>
+		                                    <td>{{$connection->server_time}}</td>
+		                                    <td>{{$connection->status}}</td>
+		                                </tr>
+	                                @endforeach
 	                            </tbody>
 	                        </table>
 	                    </div>

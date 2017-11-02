@@ -123,7 +123,6 @@ class TimeSchedulerController extends Controller
     }
 
     public function deleteByEndTime(TimeScheduler $timeScheduler){
-        dd($timeScheduler->end_time);
         $timeScheduler = TimeScheduler::find($timeScheduler->end_time);
 
         return ($timeScheduler->delete()) ? "1" : "0";

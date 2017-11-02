@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Connection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ConnectionController extends Controller
 {
@@ -14,7 +15,8 @@ class ConnectionController extends Controller
      */
     public function index()
     {
-        return view('connections');
+        $connections = Connection::all();
+        return view('connections',compact('connections'));
     }
 
     /**
@@ -81,5 +83,22 @@ class ConnectionController extends Controller
     public function destroy(Connection $connection)
     {
         //
+    }
+
+    public function saveConnection($socketId,$macAddress,$time){
+        try{
+            $newConnection = new Connection;
+            $newConnection->socket_id = $socketId;
+            $newConnection->mac_address = $macAddress;
+            $newConnection->local_time = "12:13:14";
+            $newConnection->server_time = "13:23:43";
+            $newConnection->status = 1;
+            $newConnection->save();
+             //var_dump($connection[0]->mac_address);
+        }catch (\Exception $e) {
+             dd($e->getMessage());
+        }
+       
+        return "1";
     }
 }

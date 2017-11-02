@@ -3,12 +3,13 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-
 use App\TimeScheduler;
 use App\Ticker;
 use Config;
 use Illuminate\Support\Facades\Storage;
 
+use App\Http\Controllers\ConnectionController;
+use App\Connection;
 
 class StartSocketServer extends Command
 {
@@ -58,12 +59,19 @@ class StartSocketServer extends Command
             $bucket->getSource()->send(json_encode($time_management));
             $bucket->getSource()->send(json_encode($tickers));
             $bucket->getSource()->send(json_encode($liveUrl));
+
+            
+
             return;
         });
 
         $websocket->on('message', function (\Hoa\Event\Bucket $bucket) {
             $data = $bucket->getData();
             echo 'message: ', $data['message'], "\n";
+            $nodeId = $bucket->getSource()->getConnection()->getCurrentNode()->getId();
+            $macAddress =  json_decode($data['message'])->mac_address;
+            $time =     json_decode($data['message'])->time;
+            app('App\Http\Controllers\ConnectionController')->saveConnection($nodeId,$macAddress,$time);
             $bucket->getSource()->broadcast($data['message']);
 
             return;

@@ -5,10 +5,11 @@ var time_sequence = [];
 fetchTickers();
 fetchTimeLogs();
 reloadControlPanelView();
+reloadConnectionsTable();
 
 function reloadControlPanelView(){
     fetchControlPanelView(function(result){
-        $('#tableBody').empty();
+        $('#controlPanelTable').empty();
          $.each(result, function(index,element){
             var time = JSON.stringify(element.time);
             	time = time.replace(/\"/g, "");
@@ -22,9 +23,42 @@ function reloadControlPanelView(){
             	type = type.replace(/\"/g, "");
 
             if (time > showTime()){
-                    $('#tableBody').append('<tr><td class = "time" align = "center" data-type = "'+ type +'" data-id = "'+ id +'" data-status = "'+status+'" data-value = "'+time+'">'+ time +'</td>' +
+                    $('#controlPanelTable').append('<tr><td class = "time" align = "center" data-type = "'+ type +'" data-id = "'+ id +'" data-status = "'+status+'" data-value = "'+time+'">'+ time +'</td>' +
                                      '<td align = "center">'+ message +'</td><tr>');
             }
+         });
+    });
+}
+
+function reloadConnectionsTable(){
+    fetchConnectionsTable(function(result){
+        $('#connectionTable').empty();
+         $.each(result, function(index,element){
+            var socketId = JSON.stringify(element.socket_id);
+                socketId = socketId.replace(/\"/g, "");
+            var macAddress = JSON.stringify(element.mac_address);
+                macAddress = macAddress.replace(/\"/g, "");
+            var localTime = JSON.stringify(element.local_time);
+                localTime = localTime.replace(/\"/g, "");
+            var serverTime = JSON.stringify(element.server_time);
+                serverTime = serverTime.replace(/\"/g, "");
+            var status = JSON.stringify(element.status);
+                status = status.replace(/\"/g, "");
+            var statusMessage = "";
+            var baseUrl = window.location.origin;
+            if (status == 0){
+                statusMessage = '<img src = "'+ baseUrl +'/images/disconnected.png" width = "25px" height = "25px">';
+            }else{
+                statusMessage = '<img src = "'+ baseUrl +'/images/connected.png" width = "25px" height = "25px">';
+            }
+
+            $('#connectionTable').append('<tr>'+
+                                   '<td align = "center">'+ socketId +'</td>' +
+                                   '<td align = "center">'+ macAddress +'</td>'+
+                                   '<td align = "center">'+ localTime +'</td>'+
+                                   '<td align = "center">'+ serverTime +'</td>'+
+                                   '<td align = "center">'+statusMessage+'</td>'+
+                                   '<tr>');
          });
     });
 }
@@ -174,6 +208,25 @@ function fetchControlPanelView(data){
         },
         success: function(result) {
             data($.parseJSON(result));
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            console.log(thrownError);
+            tickers(thrownError);
+        }
+    });
+}
+
+function fetchConnectionsTable(data){
+    var token = $("input[name=_token]").val();
+    $.ajax({
+        url: 'fetch-connections-table',
+        type: 'GET',
+        data: {
+            "_token": token,
+        },
+        success: function(result) {
+            data($.parseJSON(result));
+            console.log(result);
         },
         error: function(xhr, ajaxOptions, thrownError) {
             console.log(thrownError);

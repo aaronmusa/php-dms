@@ -51,5 +51,7 @@ Auth::routes();
 
 	Route::delete('delete-by-endtime/{id}','TimeSchedulerController@deleteByEndTime');
 
+	Route::get('/fetch-connections-table', 'ConnectionController@fetchConnectionsTable')->name('fetchConnectionsTable');
+
 
 });

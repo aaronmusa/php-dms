@@ -24,6 +24,10 @@ function runWebsocket() {
             if (msg.data == "Connected" || "Connection Opened"){
                 reloadControlPanelView();
             }
+            
+            if(msg.data == "update_connections") {
+                reloadConnectionsTable();
+            }
             console.log(msg.data);
             fetchTickers();
             fetchTimeLogs(); 
@@ -51,5 +55,7 @@ function sendMessage(id) {
 window.setInterval(function(){
     if (this.connected == false) {
         runWebsocket();
+    } else {
+        socket.send("check ids");
     }
-}, 1000);
+}, 5000);

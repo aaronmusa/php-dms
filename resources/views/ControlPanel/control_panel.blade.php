@@ -90,7 +90,7 @@
                                                 <th style = "text-align:center;">Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody id = "tableBody">
+                                        <tbody id = "controlPanelTable">
                                         </tbody>
                                     </table>
                                 </div>

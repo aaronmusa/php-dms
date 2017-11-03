@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Connection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Config;
 
 class ConnectionController extends Controller
 {
@@ -16,7 +17,8 @@ class ConnectionController extends Controller
     public function index()
     {
         $connections = Connection::all();
-        return view('connections',compact('connections'));
+        $websocketUrl = Config::get('websocket.url');
+        return view('connections',compact('connections','websocketUrl'));
     }
 
     /**
@@ -85,12 +87,11 @@ class ConnectionController extends Controller
         //
     }
 
-    public function saveConnection(){
+    public function saveConnection($socketId,$macAddress,$time){
         try{
-            $mac = "1235";
-            $connection = DB::insert("insert into connections (socket_id,mac_address,local_time,server_time) select * from (select 'hsdhaj','samplemacaddress','12:12:13','12:23:24') as tmp where not exists (select mac_address from connections where mac_address = 'samplemacaddress') Limit 1"); 
+            $connection = DB::insert("insert into connections (socket_id,mac_address,local_time,server_time,status) select * from (select '$socketId','$macAddress','12:12:13','12:23:24',1) as tmp where not exists (select mac_address from connections where mac_address = '$macAddress') Limit 1"); 
 
-            $updateConnection = DB::update("update connections set socket_id = '$mac',local_time = '13:13:13',server_time = '14:14:14' where mac_address = 'hello'");
+            $updateConnection = DB::update("update connections set socket_id = '$socketId',local_time = '13:13:13',server_time = '14:14:14',status = 1 where mac_address = '$macAddress'");
             // $newConnection = new Connection;
             // $newConnection->socket_id = $socketId;
             // $newConnection->mac_address = $macAddress;
@@ -104,5 +105,13 @@ class ConnectionController extends Controller
         }
        
         return "1";
+    }
+    public function closedConnection($socketId){
+        $updateConnection = DB::update("update connections set status = 0 where socket_id = '$socketId'");
+    }
+    public function fetchConnectionsTable(){
+        $connections =  DB::select("SELECT * FROM connections where mac_address != ''");
+
+         return json_encode($connections);
     }
 }

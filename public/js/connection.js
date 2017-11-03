@@ -1,7 +1,4 @@
-function sendRestartAction(){
-	sendMessage("hello");
-}
 
-$(function() {
-	sendRestartAction();
-});
+window.setInterval(function(){
+	
+},5000);

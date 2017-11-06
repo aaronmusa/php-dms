@@ -49,11 +49,7 @@ class StartSocketServer extends Command
      * @return mixed
      */
     public function handle()
-    {
-        date_default_timezone_set('Asia/Manila'); // CDT
-
-
-        
+    {   
         $this->websocket = new \Hoa\Websocket\Server(new \Hoa\Socket\Server($this->url));       
 
         $this->websocket->on('open', function (\Hoa\Event\Bucket $bucket) {
@@ -118,17 +114,21 @@ class StartSocketServer extends Command
                     $this->socketIds = [];
 
                 } else {
-                    echo 'message: ', $message, "\n";      
+                    date_default_timezone_set('Asia/Manila'); // CDT
+                    $serverTime = date('H:i:s');
+                    $milliSeconds = substr(round(microtime(),3),2);
+                    echo 'message: ', $message, "\n"; 
+
                     $bucket->getSource()->broadcast($message);     
 
                     $macAddress =  json_decode($message)->mac_address;
                         echo "save connection\n";
-
+                    $serverTime = $serverTime . ':' . $milliSeconds;
                     if ($macAddress) {
                         $nodeId     = $bucket->getSource()->getConnection()->getCurrentNode()->getId();
                         $time       =     json_decode($message)->time;
                         
-                        app('App\Http\Controllers\ConnectionController')->saveConnection($nodeId,$macAddress,$time);
+                        app('App\Http\Controllers\ConnectionController')->saveConnection($nodeId,$macAddress,$time,$serverTime);
                         $bucket->getSource()->broadcast("update_connections");
                     }  
                 }
@@ -157,8 +157,8 @@ class StartSocketServer extends Command
             if (!in_array($nodeId, $this->socketIds)){
                 array_push($this->socketIds, $nodeId);
             }
-            echo $nodeId . "\n";
-           //$bucket->getSource()->broadcast("ping send");
+            var_dump($this->socketIds);
+                       //$bucket->getSource()->broadcast("ping send");
             return;
         });
 

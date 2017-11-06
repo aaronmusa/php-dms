@@ -39,5 +39,24 @@
 	        </div>
 	    </div>
 	</div>
+	<div class="modal fade" id="editPcNameModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="largeModalLabel">EDIT NAME</h4>
+                </div>
+                <form id = "add_ticker_form">
+                    <div class="modal-body">
+                       <label for="message">Name</label>
+                       <input type = "text" class = "form-control" id = "pcNameInput" required/>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" id = "addPcName" class="btn btn-link waves-effect">UPDATE</button>
+                        <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </section>
 @endsection

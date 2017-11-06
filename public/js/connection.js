@@ -1,4 +1,4 @@
-
-window.setInterval(function(){
-	
-},5000);
+function setPcName(){
+	var pcName = $('#pcName').text();
+	$('#pcNameInput').val(pcName.replace('mode_edit',''));
+}

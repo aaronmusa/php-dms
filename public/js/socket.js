@@ -25,9 +25,9 @@ function runWebsocket() {
                 reloadControlPanelView();
             }
             
-            //if(msg.data == "update_connections") {
+            if(msg.data == "update_connections") {
                 reloadConnectionsTable();
-            //}
+            }
             console.log(msg.data);
             fetchTickers();
             fetchTimeLogs(); 

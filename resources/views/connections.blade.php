@@ -22,7 +22,7 @@
 	                        <table class="table table-hover">
 	                            <thead>
 	                                <tr>
-	                                    <th style = "text-align:center;">Name</th>
+	                                    <th>Name</th>
 	                                    <th style = "text-align:center;">MAC ADDRESS</th>
 	                                    <th style = "text-align:center;">Local Time</th>
 	                                    <th style = "text-align:center;">Server Time</th>
@@ -45,7 +45,7 @@
                 <div class="modal-header">
                     <h4 class="modal-title" id="largeModalLabel">EDIT NAME</h4>
                 </div>
-                <form id = "add_ticker_form">
+                <form id = "editPcNameForm">
                     <div class="modal-body">
                        <label for="message">Name</label>
                        <input type = "text" class = "form-control" id = "pcNameInput" required/>

@@ -112,6 +112,8 @@ class StartSocketServer extends Command
 
                     $this->oldSocketIds = $this->socketIds;
                     $this->socketIds = [];
+                    $bucket->getSource()->send("update_connections");
+
 
                 } else {
                     date_default_timezone_set('Asia/Manila'); // CDT

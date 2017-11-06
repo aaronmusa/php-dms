@@ -53,8 +53,8 @@ function reloadConnectionsTable(){
             }
 
             $('#connectionTable').append('<tr>'+
-                                   '<td id = "pcName" align = "center"><a href = "#" data-toggle = "modal" onclick = "return setPcName();" data-target = "#editPcNameModal"><i class="material-icons">mode_edit</i></a>'+ name +'</td>' +
-                                   '<td align = "center">'+ macAddress +'</td>'+
+                                   '<td class = "pcName" data-toggle = "modal" data-target = "#editPcNameModal"><i class="material-icons">mode_edit</i>'+ name +'</td>' +
+                                   '<td id = "macAddress" align = "center">'+ macAddress +'</td>'+
                                    '<td align = "center">'+ localTime +'</td>'+
                                    '<td align = "center">'+ serverTime +'</td>'+
                                    '<td align = "center">'+statusMessage+'</td>'+

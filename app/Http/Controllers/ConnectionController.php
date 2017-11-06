@@ -71,9 +71,12 @@ class ConnectionController extends Controller
      * @param  \App\Connection  $connection
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Connection $connection)
-    {
-        //
+    public function update(Request $request, Connection $connection){
+        $connection = Connection::find($connection->mac_address);
+        $connection->update($request->all());
+        $connection->save();
+
+        return "1";
     }
 
     /**

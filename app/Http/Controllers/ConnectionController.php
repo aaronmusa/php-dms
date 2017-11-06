@@ -89,9 +89,9 @@ class ConnectionController extends Controller
 
     public function saveConnection($socketId,$macAddress,$time){
         try{
-            $connection = DB::insert("insert into connections (socket_id,mac_address,local_time,server_time,status) select * from (select '$socketId','$macAddress','12:12:13','12:23:24',1) as tmp where not exists (select mac_address from connections where mac_address = '$macAddress') Limit 1"); 
+            $connection = DB::insert("insert into connections (socket_id,mac_address,local_time,server_time,name,status) select * from (select '$socketId','$macAddress','$time','12:23:24','PC_NAME',1) as tmp where not exists (select mac_address from connections where mac_address = '$macAddress') Limit 1"); 
 
-            $updateConnection = DB::update("update connections set socket_id = '$socketId',local_time = '13:13:13',server_time = '14:14:14',status = 1 where mac_address = '$macAddress'");
+            $updateConnection = DB::update("update connections set socket_id = '$socketId',local_time = '$time',server_time = '14:14:14',status = 1 where mac_address = '$macAddress'");
             // $newConnection = new Connection;
             // $newConnection->socket_id = $socketId;
             // $newConnection->mac_address = $macAddress;
@@ -108,6 +108,12 @@ class ConnectionController extends Controller
     }
     public function closedConnection($socketId){
         $updateConnection = DB::update("update connections set status = 0 where socket_id = '$socketId'");
+    }
+    public function openConnection($socketId){
+        $updateConnection = DB::update("update connections set status = 1 where socket_id = '$socketId'");
+    }
+    public function closeAllConnections(){
+        $updateConnection = DB::update("update connections set status = 0");
     }
     public function fetchConnectionsTable(){
         $connections =  DB::select("SELECT * FROM connections where mac_address != ''");

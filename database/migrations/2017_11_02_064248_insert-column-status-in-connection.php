@@ -17,9 +17,10 @@ class InsertColumnStatusInConnection extends Migration
             $table->text('socket_id');
             $table->boolean('status')->default(false);
             $table->string('mac_address');
-            $table->time('local_time');
-            $table->time('server_time');
+            $table->string('local_time');
+            $table->string('server_time');
             $table->dropColumn('id');
+            $table->string('name');
         });
     }
 

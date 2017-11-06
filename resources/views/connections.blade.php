@@ -5,13 +5,7 @@
 <section class="content">
 	<div class = "container-fluid" style = "padding-top:20px;">
 		<input type = "hidden" id = "websocketUrl" value = "{{$websocketUrl}}">	
-        <div class='col-sm-1'>
-            <label for="url">Action:</label>
-        </div>
-        <div class='col-sm-5'>
-            <button class = "btn btn-info waves-effect" type = "button" id = "restartConnection" value = "RESTART">RESTART ALL CONNECTIONS</button>
-        </div>
-        
+      	{{ csrf_field() }}
     </div>
 	<div class = "container-fluid" style = "padding-top: 30px;">
 	    <div class="row clearfix">

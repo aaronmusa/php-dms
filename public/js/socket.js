@@ -25,9 +25,9 @@ function runWebsocket() {
                 reloadControlPanelView();
             }
             
-            if(msg.data == "update_connections") {
+            //if(msg.data == "update_connections") {
                 reloadConnectionsTable();
-            }
+            //}
             console.log(msg.data);
             fetchTickers();
             fetchTimeLogs(); 
@@ -36,6 +36,7 @@ function runWebsocket() {
         //Manages the close event within your client code
         socket.onclose = function () {
             console.log('Connection Closed');
+            closeAllConnections();
             connected = false;
             return;
         };

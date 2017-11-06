@@ -53,5 +53,7 @@ Auth::routes();
 
 	Route::get('/fetch-connections-table', 'ConnectionController@fetchConnectionsTable')->name('fetchConnectionsTable');
 
+	Route::patch('close-all-connections','ConnectionController@closeAllConnections');
+
 
 });

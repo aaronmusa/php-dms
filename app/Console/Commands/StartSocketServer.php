@@ -85,18 +85,18 @@ class StartSocketServer extends Command
                     //Check if oldsocketids have data
                     if (count($this->oldSocketIds) > 0) {
                         //Check if oldsocketid still exists in the new socket ids
+                        //var_dump($this->oldSocketIds);
                         foreach ($this->oldSocketIds as $oldSocketId){
                             $isOnline = false; //Default value is false if socket id does not exist in the old oscket id
 
                             //If old socket id exists in new socket id mark is online to true
-                            foreach ($this->socketIds as $socketId){
-                                if($oldSocketId == $socketId){
-                                    $isOnline = true;
-                                }
+                            if (in_array($oldSocketId, $this->socketIds)){
+                                $isOnline = true;
+                                app('App\Http\Controllers\ConnectionController')->openConnection($oldSocketId);
                             }
 
                             //if is online is false push socket id to the socketids array
-                            if (!$isOnline){
+                            if ($isOnline == false){
                                 array_push($socketIds,$oldSocketId);
                             }
                         }
@@ -110,6 +110,7 @@ class StartSocketServer extends Command
                             var_dump($socketIds);
                             echo "update connections after delete\n";
                             $bucket->getSource()->send("update_connections");
+                            $socketIds = [];
                         }
                     }
 
@@ -156,6 +157,7 @@ class StartSocketServer extends Command
             if (!in_array($nodeId, $this->socketIds)){
                 array_push($this->socketIds, $nodeId);
             }
+            echo $nodeId . "\n";
            //$bucket->getSource()->broadcast("ping send");
             return;
         });

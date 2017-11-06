@@ -34,8 +34,8 @@ function reloadConnectionsTable(){
     fetchConnectionsTable(function(result){
         $('#connectionTable').empty();
          $.each(result, function(index,element){
-            var socketId = JSON.stringify(element.socket_id);
-                socketId = socketId.replace(/\"/g, "");
+            var name = JSON.stringify(element.name);
+                name = name.replace(/\"/g, "");
             var macAddress = JSON.stringify(element.mac_address);
                 macAddress = macAddress.replace(/\"/g, "");
             var localTime = JSON.stringify(element.local_time);
@@ -53,7 +53,7 @@ function reloadConnectionsTable(){
             }
 
             $('#connectionTable').append('<tr>'+
-                                   '<td align = "center">'+ socketId +'</td>' +
+                                   '<td align = "center">'+ name +'</td>' +
                                    '<td align = "center">'+ macAddress +'</td>'+
                                    '<td align = "center">'+ localTime +'</td>'+
                                    '<td align = "center">'+ serverTime +'</td>'+
@@ -231,6 +231,23 @@ function fetchConnectionsTable(data){
         error: function(xhr, ajaxOptions, thrownError) {
             console.log(thrownError);
             tickers(thrownError);
+        }
+    });
+}
+function closeAllConnections(){
+    var token = $("input[name=_token]").val();
+    $.ajax({
+        url: 'close-all-connections',
+        type: 'POST',
+        data: {
+            "_token": token,
+            "_method": "PATCH"
+        },
+        success: function(result) {
+            reloadConnectionsTable();
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            console.log(thrownError);
         }
     });
 }

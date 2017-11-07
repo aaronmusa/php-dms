@@ -26,6 +26,7 @@
 	                                    <th style = "text-align:center;">MAC ADDRESS</th>
 	                                    <th style = "text-align:center;">Local Time</th>
 	                                    <th style = "text-align:center;">Server Time</th>
+	                                    <th style = "text-align:center;">Action</th>
 	                                    <th style = "text-align:center;">Status</th>
 	                                </tr>
 	                            </thead>
@@ -46,13 +47,14 @@
                     <h4 class="modal-title" id="largeModalLabel">EDIT NAME</h4>
                 </div>
                 <form id = "editPcNameForm">
-                    <div class="modal-body">
-                       <label for="message">Name</label>
+                    <div class="modal-body" id = "modal-body">
+                       <label for="name">Name</label>
                        <input type = "text" class = "form-control" id = "pcNameInput" required/>
+                       <input type = "hidden" id = "macAddressInput" value = "">
                     </div>
                     <div class="modal-footer">
                         <button type="submit" id = "addPcName" class="btn btn-link waves-effect">UPDATE</button>
-                        <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                        <button type="button" id = "modal-close" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
                     </div>
                 </form>
             </div>

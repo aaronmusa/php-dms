@@ -1,8 +1,30 @@
 $(document).ready(function(){
 	$("#connectionTable").on("click","td",function(){
 		var pcName = $(this).text();
+		var macAddress = $(this).closest("tr").find('td:eq(1)').text();
 		$('#pcNameInput').val(pcName.replace('mode_edit',''));
+		$('#macAddressInput').val(macAddress);
 	});
+$(document).on("click", ".stopBtn",function(){
+	var socketId = $(this).data("value");
+	sendMessage(socketId + '%STOP');
+});
+
+$(document).on("click", ".startBtn",function(){
+	var socketId = $(this).data("value");
+	sendMessage(socketId + '%START');
+});
+
+$(document).on("click", ".startFbliveBtn",function(){
+	var socketId = $(this).data("value");
+	sendMessage(socketId + '%FBLIVE');
+});
+
+$(document).on("click", ".startDmsBtn",function(){
+	var socketId = $(this).data("value");
+	sendMessage(socketId + '%DMS');
+});
+
 
 		// $.each($('.pcName'),function(){
 		// 	var pcName = $(this).text();
@@ -11,25 +33,23 @@ $(document).ready(function(){
 		// });
 		
 
-	$('#editPcName').click(function(e){
+	$('#editPcNameForm').submit(function(e){
 		 e.preventDefault();
 	        var token = $("input[name=_token]").val();
 	        var pcNameInput = $("#pcNameInput").val();
+	        var macAddressInput = $('#macAddressInput').val();
 	        $.ajax({
-	            url: 'connecti',
+	            url: 'connections/'+ macAddressInput,
 	            type: 'POST',
 	            data: {
 	                "_token": token,
-	                "message": message,
-	                "start_time":startTime,
-	                "end_time": endTime
+	                "name": pcNameInput,
+	                "_method": "PATCH"
 	            },
 	            success: function(result) {
 	                if (result == 1) {
-	                    $('#addTickerSequenceModal').modal('toggle');
-	                    reloadControlPanelView();
-	                    fetchTickers();
-	                    fetchTimeLogs();
+	                	$('#editPcNameModal').modal('toggle');
+	                    reloadConnectionsTable();
 	                }else{
 	                    console.log("error");
 	                }

@@ -36,6 +36,8 @@ function reloadConnectionsTable(){
          $.each(result, function(index,element){
             var name = JSON.stringify(element.name);
                 name = name.replace(/\"/g, "");
+            var socketId = JSON.stringify(element.socket_id);
+                socketId = socketId.replace(/\"/g, "");
             var macAddress = JSON.stringify(element.mac_address);
                 macAddress = macAddress.replace(/\"/g, "");
             var localTime = JSON.stringify(element.local_time);
@@ -54,9 +56,15 @@ function reloadConnectionsTable(){
 
             $('#connectionTable').append('<tr>'+
                                    '<td class = "pcName" data-toggle = "modal" data-target = "#editPcNameModal"><i class="material-icons">mode_edit</i>'+ name +'</td>' +
-                                   '<td id = "macAddress" align = "center">'+ macAddress +'</td>'+
+                                   '<td macAddress = '+ macAddress +' align = "center">'+ macAddress +'</td>'+
                                    '<td align = "center">'+ localTime +'</td>'+
                                    '<td align = "center">'+ serverTime +'</td>'+
+                                   '<td align = "center">'+
+                                   '<button data-value = "'+ socketId +'" class = "btn btn-primary waves-effect stopBtn">STOP</button>&nbsp;'+
+                                   '<button data-value = "'+ socketId +'" class = "btn btn-primary waves-effect startBtn">START</button>&nbsp;'+
+                                   '<button data-value = "'+ socketId +'" class = "btn btn-primary waves-effect startFbliveBtn">FBLIVE</button>&nbsp;'+
+                                   '<button data-value = "'+ socketId +'" class = "btn btn-primary waves-effect startDmsBtn">DMS</button>&nbsp;'+
+                                   '</td>'+
                                    '<td align = "center">'+statusMessage+'</td>'+
                                    '<tr>');
          });

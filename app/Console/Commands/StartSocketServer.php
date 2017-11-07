@@ -74,7 +74,7 @@ class StartSocketServer extends Command
             try{
                 $data = $bucket->getData();
                 $message = $data['message'];
-                
+
                 if ($message == "check ids") {
                     $socketIds = []; //Socket ids to be marked as offline in connection table
 
@@ -115,7 +115,20 @@ class StartSocketServer extends Command
                     $bucket->getSource()->send("update_connections");
 
 
-                } else {
+                } 
+
+                else {
+                    $nodes = $bucket->getSource()->getConnection()->getNodes();
+                    $explodedMessage = explode('%',$message);
+                    if (count($explodedMessage) > 1){
+                        foreach($nodes as $node) {
+                            if($node->getID() === $explodedMessage[0]) {
+                                $bucket->getSource()->send($explodedMessage[1], $node);
+                            }
+                        }
+                    }
+
+                    
                     date_default_timezone_set('Asia/Manila'); // CDT
                     $serverTime = date('H:i:s');
                     $milliSeconds = substr(round(microtime(),3),2);

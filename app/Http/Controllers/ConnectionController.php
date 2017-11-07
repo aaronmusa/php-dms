@@ -73,6 +73,7 @@ class ConnectionController extends Controller
      */
     public function update(Request $request, Connection $connection){
         $connection = Connection::find($connection->mac_address);
+        //dd($request->name);
         $connection->update($request->all());
         $connection->save();
 

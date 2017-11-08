@@ -23,8 +23,7 @@ class InsertMacaadressColumnInTickers extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down(){
         Schema::table('tickers', function (Blueprint $table) {
             Schema::dropIfExists('tickers');
         });

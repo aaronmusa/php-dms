@@ -60,7 +60,9 @@ class TimeSchedulerController extends Controller
         //     $timeScheduler->save();
         // }
         $timeScheduler = new TimeScheduler;
-        $timeScheduler = TimeScheduler::create($request->all());
+        $timeScheduler->mac_address = "all";
+        $timeScheduler->start_time = $request->start_time;
+        $timeScheduler->end_time = $request->end_time;
         $timeScheduler->save();
 
         return redirect('/time-scheduler');
@@ -115,6 +117,7 @@ class TimeSchedulerController extends Controller
 
     public function addTimeInControlPanel(Request $request) {
         $timeScheduler = new TimeScheduler;
+        $timeScheduler->mac_address = "all";
         $timeScheduler->start_time = $request->start_time;
         $timeScheduler->end_time = $request->end_time;
         $timeScheduler->save();

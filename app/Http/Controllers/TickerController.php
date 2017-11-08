@@ -49,7 +49,10 @@ class TickerController extends Controller
     public function store(Request $request)
     {
         $ticker = new Ticker;
-        $ticker = Ticker::create($request->all());
+        $ticker->mac_address = "all";
+        $ticker->message = $request->message;
+        $ticker->start_time = $request->start_time;
+        $ticker->end_time = $request->end_time;
         $ticker->save();
 
         return redirect('/ticker');
@@ -107,6 +110,7 @@ class TickerController extends Controller
 
     public function addTickerInControlPanel(Request $request) {
         $ticker = new Ticker;
+        $ticker->mac_address = "all";
         $ticker->message = $request->message;
         $ticker->start_time = $request->start_time;
         $ticker->end_time = $request->end_time;

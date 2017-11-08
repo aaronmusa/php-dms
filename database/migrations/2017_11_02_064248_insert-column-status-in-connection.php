@@ -21,6 +21,8 @@ class InsertColumnStatusInConnection extends Migration
             $table->string('server_time');
             $table->dropColumn('id');
             $table->string('name');
+            $table->text('livestream_url');
+            $table->text('ticker_message');
         });
     }
 

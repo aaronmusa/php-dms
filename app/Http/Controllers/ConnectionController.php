@@ -93,7 +93,7 @@ class ConnectionController extends Controller
 
     public function saveConnection($socketId,$macAddress,$time,$serverTime){
         try{
-            $connection = DB::insert("insert into connections (socket_id,mac_address,local_time,server_time,name,status) select * from (select '$socketId','$macAddress','$time','$serverTime','PC_NAME',1) as tmp where not exists (select mac_address from connections where mac_address = '$macAddress') Limit 1"); 
+            $connection = DB::insert("insert into connections (socket_id,mac_address,local_time,server_time,name,status,livestream_url,ticker_message) select * from (select '$socketId','$macAddress','$time','$serverTime','PC_NAME',1,'about:blank','sample ticker') as tmp where not exists (select mac_address from connections where mac_address = '$macAddress') Limit 1"); 
 
             $updateConnection = DB::update("update connections set socket_id = '$socketId',local_time = '$time',server_time = '$serverTime',status = 1 where mac_address = '$macAddress'");
             // $newConnection = new Connection;
@@ -120,7 +120,7 @@ class ConnectionController extends Controller
         $updateConnection = DB::update("update connections set status = 0");
     }
     public function fetchConnectionsTable(){
-        $connections =  DB::select("SELECT * FROM connections where mac_address != ''");
+        $connections =  DB::select("SELECT * FROM connections where mac_address != '' order by name");
 
          return json_encode($connections);
     }

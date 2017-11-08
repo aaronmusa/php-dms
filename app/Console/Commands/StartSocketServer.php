@@ -77,6 +77,7 @@ class StartSocketServer extends Command
 
                 if ($message == "check ids") {
                     $socketIds = []; //Socket ids to be marked as offline in connection table
+                    echo $message;
 
                     //Check if oldsocketids have data
                     if (count($this->oldSocketIds) > 0) {
@@ -89,24 +90,27 @@ class StartSocketServer extends Command
                             if (in_array($oldSocketId, $this->socketIds)){
                                 $isOnline = true;
                                 app('App\Http\Controllers\ConnectionController')->openConnection($oldSocketId);
+                            }else{
+                                $isOnline = false;
+                                app('App\Http\Controllers\ConnectionController')->closedConnection($oldSocketId);
+                                array_push($socketIds, $oldSocketId);
                             }
 
                             //if is online is false push socket id to the socketids array
-                            if ($isOnline == false){
-                                array_push($socketIds,$oldSocketId);
-                            }
+                            // if ($isOnline == false){
+                            //     array_push($socketIds,$oldSocketId);
+                            // }
                         }
 
                         //Mark socket ids offline in connection table\
-                        foreach($socketIds as $socketId){
-                            app('App\Http\Controllers\ConnectionController')->closedConnection($socketId);
-                        }  
+                        // foreach($socketIds as $socketId){
+                        //     app('App\Http\Controllers\ConnectionController')->closedConnection($socketId);
+                        // }  
 
                         if (count($socketIds) > 0) {
                             var_dump($socketIds);
                             echo "update connections after delete\n";
                             $bucket->getSource()->send("update_connections");
-                            $socketIds = [];
                         }
                     }
 
@@ -172,8 +176,7 @@ class StartSocketServer extends Command
             if (!in_array($nodeId, $this->socketIds)){
                 array_push($this->socketIds, $nodeId);
             }
-            var_dump($this->socketIds);
-                       //$bucket->getSource()->broadcast("ping send");
+            //var_dump($this->socketIds);
             return;
         });
 

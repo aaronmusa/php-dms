@@ -2,8 +2,12 @@ $(document).ready(function(){
 	$("#connectionTable").on("click","td",function(){
 		var pcName = $(this).text();
 		var macAddress = $(this).closest("tr").find('td:eq(1)').text();
+		var livestreamUrl = $(this).closest("tr").find('td:eq(2)').text();
+		var tickerMessage = $(this).closest("tr").find('td:eq(3)').text();
 		$('#pcNameInput').val(pcName.replace('mode_edit',''));
 		$('#macAddressInput').val(macAddress);
+		$('#livestreamUrlInput').val(livestreamUrl);
+		$('#tickerMessageInput').val(tickerMessage);
 	});
 $(document).on("click", ".stopBtn",function(){
 	var socketId = $(this).data("value");
@@ -38,12 +42,16 @@ $(document).on("click", ".startDmsBtn",function(){
 	        var token = $("input[name=_token]").val();
 	        var pcNameInput = $("#pcNameInput").val();
 	        var macAddressInput = $('#macAddressInput').val();
+	        var livestreamUrlInput = $('#livestreamUrlInput').val();
+	        var tickerMessageInput = $('#tickerMessageInput').val();
 	        $.ajax({
 	            url: 'connections/'+ macAddressInput,
 	            type: 'POST',
 	            data: {
 	                "_token": token,
 	                "name": pcNameInput,
+	                "livestream_url": livestreamUrlInput,
+	                "ticker_message": tickerMessageInput,
 	                "_method": "PATCH"
 	            },
 	            success: function(result) {

@@ -24,8 +24,8 @@
 	                                <tr>
 	                                    <th>Name</th>
 	                                    <th style = "text-align:center;">MAC ADDRESS</th>
-	                                    <th style = "text-align:center;">Local Time</th>
-	                                    <th style = "text-align:center;">Server Time</th>
+	                                    <th style = "text-align:center;">Livestream URL</th>
+	                                    <th style = "text-align:center;">Ticker Message</th>
 	                                    <th style = "text-align:center;">Action</th>
 	                                    <th style = "text-align:center;">Status</th>
 	                                </tr>
@@ -41,16 +41,20 @@
 	    </div>
 	</div>
 	<div class="modal fade" id="editPcNameModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-md" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="largeModalLabel">EDIT NAME</h4>
                 </div>
                 <form id = "editPcNameForm">
                     <div class="modal-body" id = "modal-body">
-                       <label for="name">Name</label>
-                       <input type = "text" class = "form-control" id = "pcNameInput" required/>
-                       <input type = "hidden" id = "macAddressInput" value = "">
+	                        <label for="name">Name</label>
+	                        <input type = "text" class = "form-control" id = "pcNameInput" required/>
+	                        <label for="livestreamUrl">Livestream URL</label>
+	                        <input type = "text" class = "form-control" id = "livestreamUrlInput" required/>
+	                        <label for="tickerMessage">Ticker Message</label>
+	                        <input type = "text" class = "form-control" id = "tickerMessageInput" required/>
+	                        <input type = "hidden" id = "macAddressInput" value = "">
                     </div>
                     <div class="modal-footer">
                         <button type="submit" id = "addPcName" class="btn btn-link waves-effect">UPDATE</button>

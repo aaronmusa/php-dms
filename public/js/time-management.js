@@ -46,6 +46,10 @@ function reloadConnectionsTable(){
                 serverTime = serverTime.replace(/\"/g, "");
             var status = JSON.stringify(element.status);
                 status = status.replace(/\"/g, "");
+            var livestreamUrl = JSON.stringify(element.livestream_url);
+                livestreamUrl = livestreamUrl.replace(/\"/g, "");
+            var tickerMessage = JSON.stringify(element.ticker_message);
+                tickerMessage = tickerMessage.replace(/\"/g, "");
             var statusMessage = "";
             var baseUrl = window.location.origin;
             if (status == 0){
@@ -56,9 +60,9 @@ function reloadConnectionsTable(){
 
             $('#connectionTable').append('<tr>'+
                                    '<td class = "pcName" data-toggle = "modal" data-target = "#editPcNameModal"><i class="material-icons">mode_edit</i>'+ name +'</td>' +
-                                   '<td macAddress = '+ macAddress +' align = "center">'+ macAddress +'</td>'+
-                                   '<td align = "center">'+ localTime +'</td>'+
-                                   '<td align = "center">'+ serverTime +'</td>'+
+                                   '<td align = "center">'+ macAddress +'</td>'+
+                                   '<td align = "center">'+ livestreamUrl +'</td>'+
+                                   '<td align = "center">'+ tickerMessage +'</td>'+
                                    '<td align = "center">'+
                                    '<button data-value = "'+ socketId +'" class = "btn btn-primary waves-effect stopBtn">STOP</button>&nbsp;'+
                                    '<button data-value = "'+ socketId +'" class = "btn btn-primary waves-effect startBtn">START</button>&nbsp;'+

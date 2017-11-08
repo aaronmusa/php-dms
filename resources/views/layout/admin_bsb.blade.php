@@ -139,6 +139,7 @@
     @yield('add-ticker-content')
     @yield('edit-ticker-content')
     @yield('control-panel-content')
+    @yield('panel-content')
 
 <!-- Websocket js -->
     <script src="{{ asset('js/socket.js') }}"></script>

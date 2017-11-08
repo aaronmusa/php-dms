@@ -117,7 +117,7 @@ class TimeSchedulerController extends Controller
 
     public function addTimeInControlPanel(Request $request) {
         $timeScheduler = new TimeScheduler;
-        $timeScheduler->mac_address = "all";
+        $timeScheduler->mac_address = $request->mac_address;
         $timeScheduler->start_time = $request->start_time;
         $timeScheduler->end_time = $request->end_time;
         $timeScheduler->save();

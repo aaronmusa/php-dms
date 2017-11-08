@@ -1,12 +1,6 @@
 var tickers = [];
 var time_sequence = [];
 
-
-fetchTickers();
-fetchTimeLogs();
-reloadControlPanelView();
-reloadConnectionsTable();
-
 function reloadControlPanelView(){
     fetchControlPanelView(function(result){
         $('#controlPanelTable').empty();
@@ -59,7 +53,8 @@ function reloadConnectionsTable(){
             }
 
             $('#connectionTable').append('<tr>'+
-                                   '<td class = "pcName" data-toggle = "modal" data-target = "#editPcNameModal"><i class="material-icons">mode_edit</i>'+ name +'</td>' +
+                                   '<td><button data-value = "'+ macAddress +'" class = "editConnectionBtn btn btn-primary waves-effect"><i class="material-icons">mode_edit</i></button>'+
+                                   '<td class = "pcName">'+ name +'</td>' +
                                    '<td align = "center">'+ macAddress +'</td>'+
                                    '<td align = "center">'+ livestreamUrl +'</td>'+
                                    '<td align = "center">'+ tickerMessage +'</td>'+

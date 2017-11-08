@@ -3,6 +3,11 @@ $(function() {
 
     integrateDatePicker();
 
+    fetchTickers();
+    fetchTimeLogs();
+    reloadControlPanelView();
+
+
     window.setInterval(function(){
 
         //Check time logs and send to socket
@@ -142,7 +147,8 @@ $(function() {
             data: {
                 "_token": token,
                 "start_time":startTime,
-                "end_time": endTime
+                "end_time": endTime,
+                "mac_address":"all"
             },
             success: function(result) {
                 if (result == 1) {

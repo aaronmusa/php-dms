@@ -22,6 +22,7 @@
 	                        <table class="table table-hover">
 	                            <thead>
 	                                <tr>
+	                                	<th></th>
 	                                    <th>Name</th>
 	                                    <th style = "text-align:center;">MAC ADDRESS</th>
 	                                    <th style = "text-align:center;">Livestream URL</th>

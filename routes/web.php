@@ -55,5 +55,7 @@ Auth::routes();
 
 	Route::patch('close-all-connections','ConnectionController@closeAllConnections');
 
+	Route::get('connections/{macAddress}','ConnectionPerPcController@show');
+
 
 });

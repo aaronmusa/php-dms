@@ -51,11 +51,11 @@
                                 </thead>
                                 <tbody id = "panelTableBody">
                                 	@foreach ($panelData as $data)
-                                	<tr>
-                                		<td align = "center">{{$data->start_time}}</td>
-                                		<td align = "center">{{$data->end_time}}</td>
-                                		<td align = "center">{{$data->message}}</td>
-                                	</tr>
+	                                	<tr>
+	                                		<td align = "center">{{$data->start_time}}</td>
+	                                		<td align = "center">{{$data->end_time}}</td>
+	                                		<td align = "center">{{$data->message}}</td>
+	                                	</tr>
                                 	@endforeach
                                 </tbody>
                             </table>

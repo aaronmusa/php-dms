@@ -179,7 +179,8 @@ $(function() {
                 "_token": token,
                 "message": message,
                 "start_time":startTime,
-                "end_time": endTime
+                "end_time": endTime,
+                "mac_address":"all"
             },
             success: function(result) {
                 if (result == 1) {

@@ -110,7 +110,7 @@ class TickerController extends Controller
 
     public function addTickerInControlPanel(Request $request) {
         $ticker = new Ticker;
-        $ticker->mac_address = "all";
+        $ticker->mac_address = $request->mac_address;
         $ticker->message = $request->message;
         $ticker->start_time = $request->start_time;
         $ticker->end_time = $request->end_time;

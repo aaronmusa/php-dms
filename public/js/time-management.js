@@ -1,6 +1,7 @@
 var tickers = [];
 var time_sequence = [];
 
+
 function reloadControlPanelView(){
     fetchControlPanelView(function(result){
         $('#controlPanelTable').empty();

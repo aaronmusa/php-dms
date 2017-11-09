@@ -88,4 +88,39 @@ $(document).ready(function(){
             }
         });
     });
+
+    $('#add_ticker_form').submit(function(e){
+        e.preventDefault();
+        var token = $("input[name=_token]").val();
+        var message = $("#messageInput").val();
+        var startTime = $("#startTimeTickerInput").val();
+        var endTime = $("#endTimeTickerInput").val();
+        var pcMacAddress =  $('#pcMacAddress').val();
+        $.ajax({
+            url: '../add-ticker-in-control-panel',
+            type: 'POST',
+            data: {
+                "_token": token,
+                "message": message,
+                "start_time":startTime,
+                "end_time": endTime,
+                "mac_address": pcMacAddress
+            },
+            success: function(result) {
+                if (result == 1) {
+                    $('#addTickerSequenceModal').modal('toggle');
+                     $('#panelTableBody').append('<tr>'+
+                							'<td align = "center">'+ startTime +'</td>'+
+                							'<td align = "center">'+ endTime +'</td>'+
+                							'<td align = "center">'+ message +'</td>'+
+                							'</tr>');
+                }else{
+                    console.log("error");
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                console.log(thrownError);
+            }
+        });
+    });
 });

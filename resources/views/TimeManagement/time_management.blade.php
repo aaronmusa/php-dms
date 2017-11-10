@@ -11,10 +11,6 @@
             </div>
            <input type = "hidden" id = "timeLogs" value = "{{$timeManagement}}">
             <input type = "hidden" id = "websocketUrl" value = "{{$websocketUrl}}">
-             <!-- Logout form -->
-            <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                {{ csrf_field() }}
-            </form> 
             <!-- Time Inputs -->
             <div class = "container-fluid" style = "padding-top: 30px;">
                 <div class="row clearfix">

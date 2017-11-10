@@ -104,8 +104,12 @@
                             <span>Ticker Management</span>
                         </a>
                     </li>
+                    <!-- Logout form -->
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                        {{ csrf_field() }}
+                    </form> 
                     <li>
-                        <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                        <a href="{{url('/')}}/logout" onclick="event.preventDefault();
                                      document.getElementById('logout-form').submit();">
                             <i class="material-icons">exit_to_app</i>
                             <span>Logout</span>

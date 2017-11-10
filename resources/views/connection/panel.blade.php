@@ -35,11 +35,45 @@
         </div>
     </div>
 
+
     <div class = "container-fluid" style = "padding-top: 30px;">
         <div class="row clearfix">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="card">
                     <div class="container-fluid">
+                    	<header><h4>Time Sequence</h4></header>
+                        <div class="body table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th style = "text-align:center;">Start Time</th>
+                                        <th style = "text-align:center;">End Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody id = "panelTableBody">
+                                	@foreach ($panelData as $data)
+	                                	<tr>
+	                                		@if ($data->message == "No Message")
+		                                		<td align = "center">{{$data->start_time}}</td>
+		                                		<td align = "center">{{$data->end_time}}</td>
+	                                		@endif
+	                                	</tr>
+                                	@endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class = "container-fluid" style = "padding-top: 30px;">
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="container-fluid">
+                    	<header><h4>Tickers</h4></header>
                         <div class="body table-responsive">
                             <table class="table table-bordered">
                                 <thead>
@@ -52,9 +86,11 @@
                                 <tbody id = "panelTableBody">
                                 	@foreach ($panelData as $data)
 	                                	<tr>
-	                                		<td align = "center">{{$data->start_time}}</td>
-	                                		<td align = "center">{{$data->end_time}}</td>
-	                                		<td align = "center">{{$data->message}}</td>
+	                                		@if ($data->message != "No Message")
+		                                		<td align = "center">{{$data->start_time}}</td>
+		                                		<td align = "center">{{$data->end_time}}</td>
+		                                		<td align = "center">{{$data->message}}</td>
+	                                		@endif
 	                                	</tr>
                                 	@endforeach
                                 </tbody>

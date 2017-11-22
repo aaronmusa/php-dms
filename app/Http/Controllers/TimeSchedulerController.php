@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\TimeScheduler;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Config;
@@ -23,9 +24,13 @@ class TimeSchedulerController extends Controller
      */
     public function index()
     {
-        $timeLogs = TimeScheduler::all();
+        //$timeLogs = TimeScheduler::all();
+        $timeLogs = DB::table('time_schedulers AS a')
+                    ->select('a.*','socket_id',DB::raw('case when b.name is null then "to all" else b.name end as name'))
+                    ->leftJoin('connections AS b', 'a.mac_address', '=', 'b.mac_address')
+                    ->get();
         $timeManagement = json_encode(array("time_management" => $timeLogs));
-
+        
         $websocketUrl = Config::get('websocket.url');
 
         $exists = Storage::disk('local')->exists('video-streaming-url.txt');
@@ -109,7 +114,10 @@ class TimeSchedulerController extends Controller
         return view('TimeManagement.edit_time', compact('startTime','endTime','id','websocketUrl'));
     }
     public function retrieveLogsOnDelete(){
-        $timeLogs = TimeScheduler::all();
+        $timeLogs = DB::table('time_schedulers AS a')
+                    ->select('a.*','b.socket_id',DB::raw('case when b.name is null then "to all" else b.name end as name'))
+                    ->leftJoin('connections AS b', 'a.mac_address', '=', 'b.mac_address')
+                    ->get();
         $timeManagement = json_encode(array("time_management" => $timeLogs));
 
         return $timeManagement;

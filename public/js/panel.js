@@ -80,7 +80,6 @@ $(document).ready(function(){
                 $('#panelTableBody').append('<tr>'+
                 							'<td align = "center">'+ startTime +'</td>'+
                 							'<td align = "center">'+ endTime +'</td>'+
-                							'<td align = "center">No Message</td>'+
                 							'</tr>');
             },
             error: function(xhr, ajaxOptions, thrownError) {

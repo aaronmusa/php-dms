@@ -13,10 +13,20 @@ $(function() {
         //Check time logs and send to socket
         $.each(time_sequence, function(index,element){
             var startTime = JSON.stringify(element.start_time);
-            sendDMSSwitcher(startTime, "FBLIVE");
-
             var endTime = JSON.stringify(element.end_time);
-            sendDMSSwitcher(endTime, "DMS");
+            var name = JSON.stringify(element.name);
+                name = name.replace(/\"/g, "");
+            var socketId = JSON.stringify(element.socket_id);
+                socketId = socketId.replace(/\"/g, "");
+            if (name == 'to all'){
+                sendDMSSwitcher(startTime, "FBLIVE");
+                sendDMSSwitcher(endTime, "DMS");
+            }
+            else{
+                sendDMSSwitcher(startTime, socketId+"%FBLIVE");
+                sendDMSSwitcher(endTime, socketId+"%DMS");
+            }
+            
         });
 
         //Check tickers and send to socket

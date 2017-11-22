@@ -31,6 +31,7 @@
                                                 <th>Message</th>
                                                 <th>Start Time</th>
                                                 <th>End Time</th>
+                                                <th>Recipient</th>
                                                 <th style = "text-align:center;">Action</th>
                                             </tr>
                                         </thead>
@@ -45,6 +46,7 @@
                                                     <td>{{$ticker->start_time}}</td>
                                                     <input type = "hidden" class = "ticker_end_time" value = "{{$ticker->end_time}}">
                                                     <td>{{$ticker->end_time}}</td>
+                                                    <td>{{$ticker->name}}</td>
                                                     <td align="center">
                                                         <a href = "{{ route('editTickerPage',$ticker->id) }}" ><button type = "submit" name = "editBtn" value = "{{$ticker->id}}" class = "btn btn-info waves-effect"><i class="material-icons">mode_edit</i></button></a>
                                                         <button type = "button" value = "{{ $ticker->id }}" data-id = "{{ $ticker->id }}" class = "deleteBtn btn btn-danger waves-effect"><i class="material-icons">delete</i></button>       

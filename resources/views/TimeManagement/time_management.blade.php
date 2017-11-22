@@ -29,6 +29,7 @@
                                                 <th>id#</th>
                                                 <th>Start Time</th>
                                                 <th>End Time</th>
+                                                <th>Recipient</th>
                                                 <th style = "text-align:center;">Action</th>
                                             </tr>
                                         </thead>
@@ -43,6 +44,7 @@
                                                     <td>{{$log->start_time}}</td>
                                                     <input type = "hidden" class = "endTime" value = "{{$log->end_time}}">
                                                     <td>{{$log->end_time}}</td>
+                                                    <td>{{$log->name}}</td>
                                                     <td align="center">
                                                         <a href = "{{ route('editPage',$log->id) }}" ><button type = "submit" name = "editBtn" value = "{{$log->id}}" class = "btn btn-info waves-effect"><i class="material-icons">mode_edit</i></button></a>
                                                         <button type = "button" value = "{{ $log->id }}" data-id = "{{ $log->id }}" class = "deleteBtn btn btn-danger waves-effect"><i class="material-icons">delete</i></button>       

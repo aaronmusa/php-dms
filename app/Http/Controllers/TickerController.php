@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Ticker;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Config;
 use Illuminate\Support\Facades\Storage;
 
@@ -15,7 +16,11 @@ class TickerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        $tickers = Ticker::all();
+        //$tickers = Ticker::all();
+        $tickers = DB::table('tickers AS a')
+                    ->select('a.*','b.socket_id',DB::raw('case when b.name is null then "to all" else b.name end as name'))
+                    ->leftJoin('connections AS b', 'a.mac_address', '=', 'b.mac_address')
+                    ->get();
         $tickerManagement = json_encode(array("tickers" => $tickers));
 
         $websocketUrl = Config::get('websocket.url');
@@ -102,7 +107,10 @@ class TickerController extends Controller
     }
 
     public function retrieveTickersOnDelete(){
-        $tickerLogs = Ticker::all();
+        $tickerLogs = DB::table('tickers AS a')
+                    ->select('a.*','b.socket_id',DB::raw('case when b.name is null then "to all" else b.name end as name'))
+                    ->leftJoin('connections AS b', 'a.mac_address', '=', 'b.mac_address')
+                    ->get();
         $tickers = json_encode(array("tickers" => $tickerLogs));
 
         return $tickers;

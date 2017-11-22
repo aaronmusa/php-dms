@@ -32,13 +32,24 @@ $(function() {
         //Check tickers and send to socket
         $.each(tickers, function(index,element){
             var startTime = JSON.stringify(element.start_time);
-            var message = JSON.stringify(element.message);
-            var startTickerJson = '{"start_ticker":' + message + '}';
-            sendDMSSwitcher(startTime, startTickerJson);
-
-
             var endTime = JSON.stringify(element.end_time);
-            sendDMSSwitcher(endTime, "END_TICKER");
+            var message = JSON.stringify(element.message);
+            var name = JSON.stringify(element.name);
+                name = name.replace(/\"/g, "");
+            var socketId = JSON.stringify(element.socket_id);
+                socketId = socketId.replace(/\"/g, "");
+            var startTickerJson = '{"start_ticker":' + message + '}';
+            if (name == 'to all'){
+                sendDMSSwitcher(startTime, startTickerJson);
+                sendDMSSwitcher(endTime, "END_TICKER");
+            }
+            else{
+                sendDMSSwitcher(startTime, socketId +'%'+startTickerJson);
+                sendDMSSwitcher(endTime, socketId + "%END_TICKER");
+            }
+
+            
+            
         });
 
         $("label[for='time']").html(showTime())

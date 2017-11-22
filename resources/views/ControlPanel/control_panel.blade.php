@@ -84,6 +84,7 @@
                                             <tr>
                                                 <th style = "text-align:center;">Time</th>
                                                 <th style = "text-align:center;">Action</th>
+                                                <th style = "text-align:center;">Recipient</th>
                                             </tr>
                                         </thead>
                                         <tbody id = "controlPanelTable">

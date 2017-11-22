@@ -16,10 +16,13 @@ function reloadControlPanelView(){
             	id = id.replace(/\"/g, "");
             var type = JSON.stringify(element.type);
             	type = type.replace(/\"/g, "");
+            var name = JSON.stringify(element.name);
+                name = name.replace(/\"/g, "");
 
             if (time > showTime()){
                     $('#controlPanelTable').append('<tr><td class = "time" align = "center" data-type = "'+ type +'" data-id = "'+ id +'" data-status = "'+status+'" data-value = "'+time+'">'+ time +'</td>' +
-                                     '<td align = "center">'+ message +'</td><tr>');
+                                                   '<td align = "center">'+ message +'</td>'+
+                                                   '<td align = "center">'+ name +'</td><tr>');
             }
          });
     });

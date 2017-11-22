@@ -108,7 +108,7 @@ $(document).ready(function(){
             success: function(result) {
                 if (result == 1) {
                     $('#addTickerSequenceModal').modal('toggle');
-                     $('#panelTableBody').append('<tr>'+
+                     $('#tickerPanelTableBody').append('<tr>'+
                 							'<td align = "center">'+ startTime +'</td>'+
                 							'<td align = "center">'+ endTime +'</td>'+
                 							'<td align = "center">'+ message +'</td>'+

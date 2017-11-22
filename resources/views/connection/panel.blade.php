@@ -14,8 +14,8 @@
                 		<input type = "hidden" id = "pcMacAddress" value = "{{$current->mac_address}}">
             		<input type = "hidden" id = "pcTickerMessage" value = "{{$current->ticker_message}}">
                     	TIME SEQUENCE FOR <br>
-                    	<label id = "name">{{$current->name }}</label> -  {{ $current->mac_address }} &nbsp;
-                    	<button class = "btn btn-primary" id = "editPcName" data-toggle = "modal" data-target = "#editPcNameModal"><i class="material-icons">mode_edit</i></button><br>
+                    	<label id = "name">{{$current->name }}</label> -  {{ $current->mac_address }} 
+                    	<button style = "position:absolute; top:0; right:0" class = "btn btn-info" id = "editPcName" data-toggle = "modal" data-target = "#editPcNameModal"><i class="material-icons">mode_edit</i></button><br>
                     	URL: <label id = "url">{{ $current->livestream_url}}</label><br>
                     	Ticker Message: <label id = "tickerMessage">{{ $current->ticker_message}}</label>
                     @endforeach
@@ -102,7 +102,7 @@
                                         <th style = "text-align:center;">Message</th>
                                     </tr>
                                 </thead>
-                                <tbody id = "panelTableBody">
+                                <tbody id = "tickerPanelTableBody">
                                 	@foreach ($panelData as $data)
 	                                	<tr>
 	                                		@if ($data->message != "No Message")

@@ -60,8 +60,6 @@ function reloadConnectionsTable(){
                                    '<td><button data-value = "'+ macAddress +'" class = "editConnectionBtn btn btn-primary waves-effect"><i class="material-icons">mode_edit</i></button>'+
                                    '<td class = "pcName">'+ name +'</td>' +
                                    '<td align = "center">'+ macAddress +'</td>'+
-                                   '<td align = "center">'+ livestreamUrl +'</td>'+
-                                   '<td align = "center">'+ tickerMessage +'</td>'+
                                    '<td align = "center">'+
                                    '<button data-value = "'+ socketId +'" class = "btn btn-primary waves-effect stopBtn">STOP</button>&nbsp;'+
                                    '<button data-value = "'+ socketId +'" class = "btn btn-primary waves-effect startBtn">START</button>&nbsp;'+

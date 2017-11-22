@@ -6,8 +6,9 @@
 		<input type = "hidden" id = "websocketUrl" value = "{{$websocketUrl}}">	
 		<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
             <div class="card">
-                <div class="body bg-light-blue">
+                <div style = "text-overflow:ellipsis; overflow:hidden; white-space:nowrap;" class="body bg-light-blue">
                 	@foreach ($currentConnection as $current)
+                        <input type = "hidden" id = "socketId" value = "{{$current->socket_id}}">
                 		<input type = "hidden" id = "pcName" value = "{{$current->name}}">
                 		<input type = "hidden" id = "pcUrl" value = "{{$current->livestream_url}}">
                 		<input type = "hidden" id = "pcMacAddress" value = "{{$current->mac_address}}">
@@ -32,6 +33,24 @@
             <button class = "btn btn-primary waves-effect setCurrentTime" type = "button" id = "addTimeSequence" data-toggle="modal" data-target="#addTimeSequenceModal">ADD TIME SEQUENCE</button>
             <button class = "btn btn-primary waves-effect setCurrentTime" type = "button" id = "addTicker" data-toggle = "modal" data-target = "#addTickerSequenceModal">ADD TICKER</button>
             <!--  <button class = "btn btn-warning waves-effect" type = "button" id = "restartBtn" value = "RESTART">RESTART</button> -->
+        </div>
+    </div>
+    <div class = "container-fluid" style = "padding-top:20px;">
+        <div class='col-sm-1'>
+            <label for="switcher">Switcher:</label>
+        </div>
+        <div class='col-sm-9'>
+           <button class = "btn btn-info waves-effect" type = "button" id = "fbLiveSwitcher" value = "FBLIVE">VIDEO STREAM</button>
+            <button class = "btn btn-basic waves-effect" type = "button" id = "dmsSwitcher" value = "DMS">DMS</button>
+        </div>
+    </div>
+    <div class = "container-fluid" style = "padding-top:20px;">
+        <div class='col-sm-1'>
+            <label for="url">Ticker:</label>
+        </div>
+        <div class='col-sm-7'>
+            <button type = "button" id = "startTicker" class = "btn btn-success waves-effect">START TICKER</button>
+            <button type = "button" id = "endTicker" class = "btn btn-danger waves-effect">STOP TICKER</button>
         </div>
     </div>
 

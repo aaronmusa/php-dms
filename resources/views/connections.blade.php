@@ -25,8 +25,6 @@
 	                                	<th></th>
 	                                    <th>Name</th>
 	                                    <th style = "text-align:center;">MAC ADDRESS</th>
-	                                    <th style = "text-align:center;">Livestream URL</th>
-	                                    <th style = "text-align:center;">Ticker Message</th>
 	                                    <th style = "text-align:center;">Action</th>
 	                                    <th style = "text-align:center;">Status</th>
 	                                </tr>

@@ -122,4 +122,29 @@ $(document).ready(function(){
             }
         });
     });
+
+    $('#fbLiveSwitcher').click(function(){
+        var url = $('label#url').text();
+        var socketId = $('#socketId').val();
+        sendMessage(socketId + '%{"live_url": "'+ url +'" }');
+        sendMessage(socketId + '%FBLIVE');
+    });
+
+    $('#dmsSwitcher').click(function(){
+        var socketId = $('#socketId').val();
+        sendMessage(socketId + "%DMS");
+    });
+
+    $('#startTicker').click(function(){
+        var socketId = $('#socketId').val();
+        var message = $('label#tickerMessage').text();
+        var jsonMessage = '{"start_ticker":' + '"' + message + '"' + '}';
+        sendMessage(socketId + '%' + jsonMessage)
+        console.log(jsonMessage);
+   });
+
+   $('#endTicker').click(function(){
+        var socketId = $('#socketId').val();
+        sendMessage(socketId + "%END_TICKER");
+   });
 });

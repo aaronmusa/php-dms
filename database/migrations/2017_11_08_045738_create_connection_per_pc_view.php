@@ -24,6 +24,6 @@ class CreateConnectionPerPcView extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('connection_per_pc_view');
+        DB::statement( 'DROP VIEW IF EXISTS connection_per_pc_view' );
     }
 }

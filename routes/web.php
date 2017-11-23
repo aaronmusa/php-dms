@@ -17,45 +17,45 @@ Route::get('/', function() {
 
 Auth::routes();
 
-	Route::group(array('prefix' => '', 'before' => 'auth'), function() {
+	Route::middleware('auth')->group(function(){
 
-	Route::get('add-time', 'TimeSchedulerController@showAddPage')->name('addPage');
+		Route::get('add-time', 'TimeSchedulerController@showAddPage')->name('addPage');
 
-	Route::get('edit-time/{id}', 'TimeSchedulerController@showEditPage')->name('editPage');
+		Route::get('edit-time/{id}', 'TimeSchedulerController@showEditPage')->name('editPage');
 
-	Route::resource('connections', 'ConnectionController', ['only' => ['index','update']]);
+		Route::resource('connections', 'ConnectionController', ['only' => ['index','update']]);
 
-	Route::resource('time-scheduler', 'TimeSchedulerController', ['only' => ['index','store', 'update', 'destroy']]);
+		Route::resource('time-scheduler', 'TimeSchedulerController', ['only' => ['index','store', 'update', 'destroy']]);
 
-	Route::get('/retrieve-logs', 'TimeSchedulerController@retrieveLogsOnDelete')->name('logs');
+		Route::get('/retrieve-logs', 'TimeSchedulerController@retrieveLogsOnDelete')->name('logs');
 
-	Route::post('video-streaming-url','VideoStreamingUrl@setUrl');
+		Route::post('video-streaming-url','VideoStreamingUrl@setUrl');
 
-	Route::post('ticker-message','VideoStreamingUrl@setTickerMessage');
+		Route::post('ticker-message','VideoStreamingUrl@setTickerMessage');
 
-	Route::resource('ticker', 'TickerController', ['only' => ['index','store', 'update', 'destroy']]);
+		Route::resource('ticker', 'TickerController', ['only' => ['index','store', 'update', 'destroy']]);
 
-	Route::get('add-ticker', 'TickerController@showAddTickerPage')->name('addTickerPage');
+		Route::get('add-ticker', 'TickerController@showAddTickerPage')->name('addTickerPage');
 
-	Route::get('edit-ticker/{id}', 'TickerController@showEditTickerPage')->name('editTickerPage');
+		Route::get('edit-ticker/{id}', 'TickerController@showEditTickerPage')->name('editTickerPage');
 
-	Route::get('/retrieve-tickers', 'TickerController@retrieveTickersOnDelete')->name('tickers');
+		Route::get('/retrieve-tickers', 'TickerController@retrieveTickersOnDelete')->name('tickers');
 
-	Route::resource('control-panel', 'ControlPanelController', ['only' => ['index']]);
+		Route::resource('control-panel', 'ControlPanelController', ['only' => ['index']]);
 
-	Route::get('/fetch-control-panel-view', 'ControlPanelController@fetchControlPanelView')->name('fetchControlPanelView');
+		Route::get('/fetch-control-panel-view', 'ControlPanelController@fetchControlPanelView')->name('fetchControlPanelView');
 
-	Route::post('add-time-in-control-panel', 'TimeSchedulerController@addTimeInControlPanel');
+		Route::post('add-time-in-control-panel', 'TimeSchedulerController@addTimeInControlPanel');
 
-	Route::post('add-ticker-in-control-panel', 'TickerController@addTickerInControlPanel');
+		Route::post('add-ticker-in-control-panel', 'TickerController@addTickerInControlPanel');
 
-	Route::delete('delete-by-endtime/{id}','TimeSchedulerController@deleteByEndTime');
+		Route::delete('delete-by-endtime/{id}','TimeSchedulerController@deleteByEndTime');
 
-	Route::get('/fetch-connections-table', 'ConnectionController@fetchConnectionsTable')->name('fetchConnectionsTable');
+		Route::get('/fetch-connections-table', 'ConnectionController@fetchConnectionsTable')->name('fetchConnectionsTable');
 
-	Route::patch('close-all-connections','ConnectionController@closeAllConnections');
+		Route::patch('close-all-connections','ConnectionController@closeAllConnections');
 
-	Route::get('connections/{macAddress}','ConnectionPerPcController@show');
+		Route::get('connections/{macAddress}','ConnectionPerPcController@show');
 
 
 });

@@ -48,7 +48,7 @@ class LoginController extends Controller
 
         $request->session()->invalidate();
 
-        return redirect('/time-scheduler');
+        return redirect('/' . $this->redirectTo);
     }
 
     public function redirectPath(){

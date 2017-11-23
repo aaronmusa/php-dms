@@ -7,6 +7,7 @@ var connected = false;
 var intervalId = 0;
 
 function runWebsocket() {
+    var pathname = window.location.pathname;
     try {
         socket = new WebSocket(host);
         
@@ -15,23 +16,36 @@ function runWebsocket() {
             console.log('Connection Opened');  
             connected = true;
             sendMessage("Connected");
-            fetchTickers();
-            fetchTimeLogs();
+            if (!(pathname.indexOf('connections') !== -1)){
+                fetchTickers();
+                fetchTimeLogs();
+            }
             return;
         };
         //Manages the message event within your client code
         socket.onmessage = function (msg) {
-            if (msg.data == "Connected" || "Connection Opened"){
-                reloadControlPanelView();
+
+            if (!(pathname.indexOf('connections') !== -1)){
+                if (msg.data == "Connected" || "Connection Opened"){
+                    reloadControlPanelView();
+                }
+                fetchTickers();
+                fetchTimeLogs();
             }
+            else{
+                if (pathname == "/connections"){
+                    if(msg.data == "update_connections") {
+                        reloadConnectionsTable();
+                    }
+                } 
+            }  
+       
             console.log(msg.data);
-            fetchTickers();
-            fetchTimeLogs(); 
-            
         };
         //Manages the close event within your client code
         socket.onclose = function () {
             console.log('Connection Closed');
+            closeAllConnections();
             connected = false;
             return;
         };
@@ -51,5 +65,7 @@ function sendMessage(id) {
 window.setInterval(function(){
     if (this.connected == false) {
         runWebsocket();
+    } else {
+        socket.send("check ids");
     }
-}, 1000);
+}, 5000);

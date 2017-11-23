@@ -10,11 +10,7 @@
             <div class="block-header">
                 <h2>Control Panel</h2>
             </div>
-            <input type = "hidden" id = "websocketUrl" value = "{{$websocketUrl}}">
-             <!-- Logout form -->
-            <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                {{ csrf_field() }}
-            </form> 
+            <input type = "hidden" id = "websocketUrl" value = "{{$websocketUrl}}"> 
             <!-- Time display -->
             <div class = "container-fluid" style = "padding-top:20px;">
                 <div class='col-sm-1'>
@@ -88,9 +84,10 @@
                                             <tr>
                                                 <th style = "text-align:center;">Time</th>
                                                 <th style = "text-align:center;">Action</th>
+                                                <th style = "text-align:center;">Recipient</th>
                                             </tr>
                                         </thead>
-                                        <tbody id = "tableBody">
+                                        <tbody id = "controlPanelTable">
                                         </tbody>
                                     </table>
                                 </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\TimeScheduler;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Config;
@@ -23,9 +24,13 @@ class TimeSchedulerController extends Controller
      */
     public function index()
     {
-        $timeLogs = TimeScheduler::all();
+        //$timeLogs = TimeScheduler::all();
+        $timeLogs = DB::table('time_schedulers AS a')
+                    ->select('a.*','socket_id',DB::raw('case when b.name is null then "to all" else b.name end as name'))
+                    ->leftJoin('connections AS b', 'a.mac_address', '=', 'b.mac_address')
+                    ->get();
         $timeManagement = json_encode(array("time_management" => $timeLogs));
-
+        
         $websocketUrl = Config::get('websocket.url');
 
         $exists = Storage::disk('local')->exists('video-streaming-url.txt');
@@ -60,7 +65,9 @@ class TimeSchedulerController extends Controller
         //     $timeScheduler->save();
         // }
         $timeScheduler = new TimeScheduler;
-        $timeScheduler = TimeScheduler::create($request->all());
+        $timeScheduler->mac_address = "all";
+        $timeScheduler->start_time = $request->start_time;
+        $timeScheduler->end_time = $request->end_time;
         $timeScheduler->save();
 
         return redirect('/time-scheduler');
@@ -107,7 +114,10 @@ class TimeSchedulerController extends Controller
         return view('TimeManagement.edit_time', compact('startTime','endTime','id','websocketUrl'));
     }
     public function retrieveLogsOnDelete(){
-        $timeLogs = TimeScheduler::all();
+        $timeLogs = DB::table('time_schedulers AS a')
+                    ->select('a.*','b.socket_id',DB::raw('case when b.name is null then "to all" else b.name end as name'))
+                    ->leftJoin('connections AS b', 'a.mac_address', '=', 'b.mac_address')
+                    ->get();
         $timeManagement = json_encode(array("time_management" => $timeLogs));
 
         return $timeManagement;
@@ -115,6 +125,7 @@ class TimeSchedulerController extends Controller
 
     public function addTimeInControlPanel(Request $request) {
         $timeScheduler = new TimeScheduler;
+        $timeScheduler->mac_address = $request->mac_address;
         $timeScheduler->start_time = $request->start_time;
         $timeScheduler->end_time = $request->end_time;
         $timeScheduler->save();
@@ -123,7 +134,6 @@ class TimeSchedulerController extends Controller
     }
 
     public function deleteByEndTime(TimeScheduler $timeScheduler){
-        dd($timeScheduler->end_time);
         $timeScheduler = TimeScheduler::find($timeScheduler->end_time);
 
         return ($timeScheduler->delete()) ? "1" : "0";

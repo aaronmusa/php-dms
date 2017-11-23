@@ -68,7 +68,7 @@
             <!-- User Info -->
             <div class="user-info">
                 <div class="image">
-                    <!-- <img src="/admin/images/user.png" width="48" height="48" alt="User" /> -->
+                    <img src="{{asset('admin/images/user.png')}}" width="48" height="48" alt="User" />
                 </div>
                 <div class="info-container">
                     <div style = "color: black;" class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</div>
@@ -104,8 +104,12 @@
                             <span>Ticker Management</span>
                         </a>
                     </li>
+                    <!-- Logout form -->
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                        {{ csrf_field() }}
+                    </form> 
                     <li>
-                        <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                        <a href="{{url('/')}}/logout" onclick="event.preventDefault();
                                      document.getElementById('logout-form').submit();">
                             <i class="material-icons">exit_to_app</i>
                             <span>Logout</span>
@@ -139,6 +143,7 @@
     @yield('add-ticker-content')
     @yield('edit-ticker-content')
     @yield('control-panel-content')
+    @yield('panel-content')
 
 <!-- Websocket js -->
     <script src="{{ asset('js/socket.js') }}"></script>

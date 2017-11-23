@@ -4,14 +4,9 @@
 <input type = "hidden" id = "routeName" value = "{{\Route::currentRouteName()}}">
 <section class="content">
 	<div class = "container-fluid" style = "padding-top:20px;">
-                <div class='col-sm-1'>
-                    <label for="url">Action:</label>
-                </div>
-                <div class='col-sm-5'>
-                    <button class = "btn btn-info waves-effect" type = "button" id = "restartConnection" value = "RESTART">RESTART ALL CONNECTIONS</button>
-                </div>
-                
-            </div>
+		<input type = "hidden" id = "websocketUrl" value = "{{$websocketUrl}}">	
+      	{{ csrf_field() }}
+    </div>
 	<div class = "container-fluid" style = "padding-top: 30px;">
 	    <div class="row clearfix">
 	        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -19,6 +14,7 @@
 	                <div class="header">
 	                    <h2>
 	                        CONNECTIONS
+	                       <img src = "{{ asset('images/connected.png') }}" width = "25px" height = "25px">
 	                    </h2>
 	                </div>
 	                <div class="container-fluid">
@@ -26,17 +22,15 @@
 	                        <table class="table table-hover">
 	                            <thead>
 	                                <tr>
-	                                    <th>id#</th>
-	                                    <th>Start Time</th>
-	                                    <th>End Time</th>
+	                                	<th></th>
+	                                    <th>Name</th>
+	                                    <th style = "text-align:center;">MAC ADDRESS</th>
+	                                    <th style = "text-align:center;">Action</th>
+	                                    <th style = "text-align:center;">Status</th>
 	                                </tr>
 	                            </thead>
-	                            <tbody>
-	                                <tr>
-	                                    <th scope="row">sample</th>
-	                                    <td>sample</td>
-	                                    <td>sample</td>
-	                                </tr>
+	                            <tbody id = "connectionTable">
+	                        
 	                            </tbody>
 	                        </table>
 	                    </div>
@@ -45,5 +39,29 @@
 	        </div>
 	    </div>
 	</div>
+	<div class="modal fade" id="editPcNameModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="largeModalLabel">EDIT NAME</h4>
+                </div>
+                <form id = "editPcNameForm">
+                    <div class="modal-body" id = "modal-body">
+	                        <label for="name">Name</label>
+	                        <input type = "text" class = "form-control" id = "pcNameInput" required/>
+	                        <label for="livestreamUrl">Livestream URL</label>
+	                        <input type = "text" class = "form-control" id = "livestreamUrlInput" required/>
+	                        <label for="tickerMessage">Ticker Message</label>
+	                        <input type = "text" class = "form-control" id = "tickerMessageInput" required/>
+	                        <input type = "hidden" id = "macAddressInput" value = "">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" id = "addPcName" class="btn btn-link waves-effect">UPDATE</button>
+                        <button type="button" id = "modal-close" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </section>
 @endsection

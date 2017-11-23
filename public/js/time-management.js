@@ -2,13 +2,9 @@ var tickers = [];
 var time_sequence = [];
 
 
-fetchTickers();
-fetchTimeLogs();
-reloadControlPanelView();
-
 function reloadControlPanelView(){
     fetchControlPanelView(function(result){
-        $('#tableBody').empty();
+        $('#controlPanelTable').empty();
          $.each(result, function(index,element){
             var time = JSON.stringify(element.time);
             	time = time.replace(/\"/g, "");
@@ -20,11 +16,58 @@ function reloadControlPanelView(){
             	id = id.replace(/\"/g, "");
             var type = JSON.stringify(element.type);
             	type = type.replace(/\"/g, "");
+            var name = JSON.stringify(element.name);
+                name = name.replace(/\"/g, "");
 
             if (time > showTime()){
-                    $('#tableBody').append('<tr><td class = "time" align = "center" data-type = "'+ type +'" data-id = "'+ id +'" data-status = "'+status+'" data-value = "'+time+'">'+ time +'</td>' +
-                                     '<td align = "center">'+ message +'</td><tr>');
+                    $('#controlPanelTable').append('<tr><td class = "time" align = "center" data-type = "'+ type +'" data-id = "'+ id +'" data-status = "'+status+'" data-value = "'+time+'">'+ time +'</td>' +
+                                                   '<td align = "center">'+ message +'</td>'+
+                                                   '<td align = "center">'+ name +'</td><tr>');
             }
+         });
+    });
+}
+
+function reloadConnectionsTable(){
+    fetchConnectionsTable(function(result){
+        $('#connectionTable').empty();
+         $.each(result, function(index,element){
+            var name = JSON.stringify(element.name);
+                name = name.replace(/\"/g, "");
+            var socketId = JSON.stringify(element.socket_id);
+                socketId = socketId.replace(/\"/g, "");
+            var macAddress = JSON.stringify(element.mac_address);
+                macAddress = macAddress.replace(/\"/g, "");
+            var localTime = JSON.stringify(element.local_time);
+                localTime = localTime.replace(/\"/g, "");
+            var serverTime = JSON.stringify(element.server_time);
+                serverTime = serverTime.replace(/\"/g, "");
+            var status = JSON.stringify(element.status);
+                status = status.replace(/\"/g, "");
+            var livestreamUrl = JSON.stringify(element.livestream_url);
+                livestreamUrl = livestreamUrl.replace(/\"/g, "");
+            var tickerMessage = JSON.stringify(element.ticker_message);
+                tickerMessage = tickerMessage.replace(/\"/g, "");
+            var statusMessage = "";
+            var baseUrl = window.location.origin;
+            if (status == 0){
+                statusMessage = '<img src = "'+ baseUrl +'/images/disconnected.png" width = "25px" height = "25px">';
+            }else{
+                statusMessage = '<img src = "'+ baseUrl +'/images/connected.png" width = "25px" height = "25px">';
+            }
+
+            $('#connectionTable').append('<tr>'+
+                                   '<td><button data-value = "'+ macAddress +'" class = "editConnectionBtn btn btn-primary waves-effect"><i class="material-icons">mode_edit</i></button>'+
+                                   '<td class = "pcName">'+ name +'</td>' +
+                                   '<td align = "center">'+ macAddress +'</td>'+
+                                   '<td align = "center">'+
+                                   '<button data-value = "'+ socketId +'" class = "btn btn-primary waves-effect stopBtn">STOP</button>&nbsp;'+
+                                   '<button data-value = "'+ socketId +'" class = "btn btn-primary waves-effect startBtn">START</button>&nbsp;'+
+                                   '<button data-value = "'+ socketId +'" class = "btn btn-primary waves-effect startFbliveBtn">FBLIVE</button>&nbsp;'+
+                                   '<button data-value = "'+ socketId +'" class = "btn btn-primary waves-effect startDmsBtn">DMS</button>&nbsp;'+
+                                   '</td>'+
+                                   '<td align = "center">'+statusMessage+'</td>'+
+                                   '<tr>');
          });
     });
 }
@@ -178,6 +221,42 @@ function fetchControlPanelView(data){
         error: function(xhr, ajaxOptions, thrownError) {
             console.log(thrownError);
             tickers(thrownError);
+        }
+    });
+}
+
+function fetchConnectionsTable(data){
+    var token = $("input[name=_token]").val();
+    $.ajax({
+        url: 'fetch-connections-table',
+        type: 'GET',
+        data: {
+            "_token": token,
+        },
+        success: function(result) {
+            data($.parseJSON(result));
+            console.log(result);
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            console.log(thrownError);
+            tickers(thrownError);
+        }
+    });
+}
+function closeAllConnections(){
+    var token = $("input[name=_token]").val();
+    $.ajax({
+        url: 'close-all-connections',
+        type: 'POST',
+        data: {
+            "_token": token,
+            "_method": "PATCH"
+        },
+        success: function(result) {
+            reloadConnectionsTable();
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            console.log(thrownError);
         }
     });
 }

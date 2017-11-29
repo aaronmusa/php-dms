@@ -18,7 +18,6 @@ function reloadControlPanelView(){
             	type = type.replace(/\"/g, "");
             var name = JSON.stringify(element.name);
                 name = name.replace(/\"/g, "");
-
             if (time > showTime()){
                     $('#controlPanelTable').append('<tr><td class = "time" align = "center" data-type = "'+ type +'" data-id = "'+ id +'" data-status = "'+status+'" data-value = "'+time+'">'+ time +'</td>' +
                                                    '<td align = "center">'+ message +'</td>'+
@@ -49,11 +48,12 @@ function reloadConnectionsTable(){
             var tickerMessage = JSON.stringify(element.ticker_message);
                 tickerMessage = tickerMessage.replace(/\"/g, "");
             var statusMessage = "";
-            var baseUrl = window.location.origin;
+            console.log($('#baseurl').val());
+            var baseUrl = $('#baseurl').val();
             if (status == 0){
-                statusMessage = '<img src = "'+ baseUrl +'/images/disconnected.png" width = "25px" height = "25px">';
+                statusMessage = '<img src = "'+ baseUrl +'/disconnected.png" width = "25px" height = "25px">';
             }else{
-                statusMessage = '<img src = "'+ baseUrl +'/images/connected.png" width = "25px" height = "25px">';
+                statusMessage = '<img src = "'+ baseUrl +'/connected.png" width = "25px" height = "25px">';
             }
 
             $('#connectionTable').append('<tr>'+

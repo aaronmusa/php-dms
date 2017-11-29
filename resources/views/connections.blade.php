@@ -18,6 +18,7 @@
 	                    </h2>
 	                </div>
 	                <div class="container-fluid">
+	                	<input type = 'hidden' id = 'baseurl' value = "{{ asset('images') }}">
 	                    <div class="body table-responsive">
 	                        <table class="table table-hover">
 	                            <thead>

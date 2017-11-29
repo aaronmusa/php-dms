@@ -7,9 +7,11 @@ use Config;
 use App\ControlPanel;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use App\Traits\ControlPanelTrait;
 
 class ControlPanelController extends Controller
 {
+    use ControlPanelTrait;
     /**
      * Display a listing of the resource.
      *
@@ -17,8 +19,11 @@ class ControlPanelController extends Controller
      */
     public function index()
     {
+         // dd($this->selectControlPanel());
+
+         $controlPanelData = $this->selectControlPanel();
          $urlStorage = "about:blank";
-         $controlPanelData =  DB::select('SELECT * FROM control_panel_view order by time LIMIT 10');
+         //$controlPanelData =  DB::select('SELECT * FROM control_panel_view order by time LIMIT 10');
 
 
         $websocketUrl = Config::get('websocket.url');

@@ -89,11 +89,11 @@ $(function() {
             if (scheduledTime < showTime()){
                 if (status == 2 && type == "Ticker"){
                     url = 'ticker/';
-                    deleteEntry(url,id);
+                    //deleteEntry(url,id);
                 }
               else if (status == 2 && type == "DMS"){
                     url = 'time-scheduler/';
-                    deleteEntry(url,id);
+                    //deleteEntry(url,id);
                 }
                 $(this).parents('tr')[0].remove();
             }
